@@ -6,312 +6,319 @@ class_name DataModels
 
 ## Result Types ##
 
-class ActionResult
-extends RefCounted
+class ActionResult:
+	extends RefCounted
 
-var success: bool = false
-var new_state: GameState = null
-var effects: Dictionary = {}  # metric_name -> change_amount
-var explanation: String = ""  # human-readable description of what happened
-var cost_paid: int = 0      # campaign funds spent
+	var success: bool = false
+	var new_state: GameState = null
+	var effects: Dictionary = {}  # metric_name -> change_amount
+	var explanation: String = ""  # human-readable description of what happened
+	var cost_paid: int = 0      # campaign funds spent
 
-func _init(p_success: bool = false, p_new_state: GameState = null, p_effects: Dictionary = {}, p_explanation: String = "", p_cost_paid: int = 0):
-	success = p_success
-	new_state = p_new_state
-	effects = p_effects
-	explanation = p_explanation
-	cost_paid = p_cost_paid
+	func _init(p_success: bool = false, p_new_state: GameState = null, p_effects: Dictionary = {}, p_explanation: String = "", p_cost_paid: int = 0):
+		success = p_success
+		new_state = p_new_state
+		effects = p_effects
+		explanation = p_explanation
+		cost_paid = p_cost_paid
 
-class MediaResponse
-extends RefCounted
+class MediaResponse:
+	extends RefCounted
 
-var sentiment_change: float = 0.0     # -1.0 to 1.0 audience reaction
-var reach_multiplier: float = 1.0     # audience reach adjustment
-var poll_effects: Dictionary = {}    # party_id -> poll change
-var explanation: String = ""         # why this response had these effects
+	var sentiment_change: float = 0.0     # -1.0 to 1.0 audience reaction
+	var reach_multiplier: float = 1.0     # audience reach adjustment
+	var poll_effects: Dictionary = {}    # party_id -> poll change
+	var explanation: String = ""         # What happened in this response
 
-func _init(p_sentiment: float = 0.0, p_reach: float = 1.0, p_effects: Dictionary = {}, p_explanation: String = ""):
-	sentiment_change = p_sentiment
-	reach_multiplier = p_reach
-	poll_effects = p_effects
-	explanation = p_explanation
+	func _init(p_sentiment_change: float = 0.0, p_reach_multiplier: float = 1.0, p_poll_effects: Dictionary = {}, p_explanation: String = ""):
+		sentiment_change = p_sentiment_change
+		reach_multiplier = p_reach_multiplier
+		poll_effects = p_poll_effects
+		explanation = p_explanation
 
-class CoalitionCompatibility
-extends RefCounted
+class CoalitionCompatibility:
+	extends RefCounted
 
-var compatibility_score: float = 0.0  # 0.0 to 1.0 compatibility rating
-var policy_conflicts: Array[String] = []  # areas of disagreement
-var shared_positions: Array[String] = []  # areas of agreement
-var explanation: String = ""         # reasoning for score
+	var party_a: String = ""
+	var party_b: String = ""
+	var compatibility_score: float = 0.0  # 0.0 to 1.0
+	var shared_policies: Array[String] = []
+	var conflicting_policies: Array[String] = []
+	var explanation: String = ""
 
-func _init(p_score: float = 0.0, p_conflicts: Array[String] = [], p_shared: Array[String] = [], p_explanation: String = ""):
-	compatibility_score = p_score
-	policy_conflicts = p_conflicts
-	shared_positions = p_shared
-	explanation = p_explanation
+	func _init(p_party_a: String = "", p_party_b: String = "", p_compatibility_score: float = 0.0, p_shared_policies: Array[String] = [], p_conflicting_policies: Array[String] = [], p_explanation: String = ""):
+		party_a = p_party_a
+		party_b = p_party_b
+		compatibility_score = p_compatibility_score
+		shared_policies = p_shared_policies
+		conflicting_policies = p_conflicting_policies
+		explanation = p_explanation
 
-class CoalitionValidation
-extends RefCounted
+class CoalitionValidation:
+	extends RefCounted
 
-var is_feasible: bool = false          # whether coalition can form
-var total_seats: int = 0           # combined seat count
-var majority_status: bool = false      # >= 76 seats
-var stability_score: float = 0.0     # 0.0 to 1.0 predicted stability
-var blocking_issues: Array[String] = []  # red line conflicts
+	var is_valid: bool = false
+	var total_seats: int = 0
+	var has_majority: bool = false
+	var stability_prediction: float = 0.0  # 0.0 to 1.0
+	var potential_issues: Array[String] = []
 
-func _init(p_feasible: bool = false, p_seats: int = 0, p_majority: bool = false, p_stability: float = 0.0, p_blocking: Array[String] = []):
-	is_feasible = p_feasible
-	total_seats = p_seats
-	majority_status = p_majority
-	stability_score = p_stability
-	blocking_issues = p_blocking
+	func _init(p_is_valid: bool = false, p_total_seats: int = 0, p_has_majority: bool = false, p_stability_prediction: float = 0.0, p_potential_issues: Array[String] = []):
+		is_valid = p_is_valid
+		total_seats = p_total_seats
+		has_majority = p_has_majority
+		stability_prediction = p_stability_prediction
+		potential_issues = p_potential_issues
 
-class VotingResult
-extends RefCounted
+class VotingResult:
+	extends RefCounted
 
-var votes_for: int = 0
-var votes_against: int = 0
-var abstentions: int = 0
-var party_votes: Dictionary = {}     # party_id -> vote_choice
-var vote_explanations: Dictionary = {}  # party_id -> reasoning
-var legislation_passed: bool = false
+	var bill_id: String = ""
+	var passed: bool = false
+	var votes_for: int = 0
+	var votes_against: int = 0
+	var abstentions: int = 0
+	var party_votes: Dictionary = {}  # party_id -> vote ("for", "against", "abstain")
 
-func _init(p_for: int = 0, p_against: int = 0, p_abstain: int = 0, p_party_votes: Dictionary = {}, p_explanations: Dictionary = {}, p_passed: bool = false):
-	votes_for = p_for
-	votes_against = p_against
-	abstentions = p_abstain
-	party_votes = p_party_votes
-	vote_explanations = p_explanations
-	legislation_passed = p_passed
+	func _init(p_bill_id: String = "", p_passed: bool = false, p_votes_for: int = 0, p_votes_against: int = 0, p_abstentions: int = 0, p_party_votes: Dictionary = {}):
+		bill_id = p_bill_id
+		passed = p_passed
+		votes_for = p_votes_for
+		votes_against = p_votes_against
+		abstentions = p_abstentions
+		party_votes = p_party_votes
 
-class ElectionAnalysis
-extends RefCounted
+class ElectionAnalysis:
+	extends RefCounted
 
-var seat_changes: Dictionary = {}    # party_id -> seat_difference
-var key_factors: Array[String] = []  # major influences on outcome
-var regional_swings: Dictionary = {} # region_id -> swing_amount
-var campaign_effectiveness: Dictionary = {}  # action_type -> impact_rating
-var what_if_scenarios: Array[String] = []    # alternative outcomes
+	var winner: String = ""
+	var coalition_needed: bool = false
+	var turnout_rate: float = 0.0
 
-class RegionTooltipData
-extends RefCounted
+class RegionTooltipData:
+	extends RefCounted
 
-var region_name: String = ""
-var party_support: Dictionary = {}   # party_id -> support_percentage
-var key_issues: Array[String] = []   # top local concerns
-var demographic_info: Dictionary = {} # age/income/education breakdown
-var turnout_prediction: float = 0.0   # expected voter participation
+	var region_name: String = ""
+	var population: int = 0
 
-class TooltipData
-extends RefCounted
+class TooltipData:
+	extends RefCounted
 
-var title: String = ""              # metric name
-var current_value: String = ""      # formatted current value
-var explanation: String = ""        # simple explanation
-var contributing_factors: Array[String] = []  # what influences this metric
-var trend_direction: String = ""    # "increasing", "decreasing", "stable"
+	var title: String = ""
+	var content: String = ""
+	var explanation: String = ""
 
-class ExplanationPanel
-extends RefCounted
+class ExplanationPanel:
+	extends RefCounted
 
-var calculation_name: String = ""
-var step_by_step: Array[String] = []    # mathematical breakdown
-var input_values: Dictionary = {}       # variable_name -> value
-var assumptions: Array[String] = []     # modeling assumptions made
-var confidence_level: String = ""       # "high", "medium", "low"
+	var title: String = ""
+	var sections: Array[Dictionary] = []
 
-## Core Game Classes ##
+## Core Game Objects ##
 
-class GameState
-extends RefCounted
+class GameState:
+	extends RefCounted
 
-var current_date: String = ""
-var game_phase: String = "campaign"          # "campaign", "election", "coalition", "parliament"
-var active_scenario: String = ""
-var player_party_id: String = ""
-var rng_seed: int = 12345
-var save_version: String = "1.0.0"
-var total_play_time: int = 0
-var parties: Array[Party] = []
-var current_polls: OpinionPoll = null
-var regions: Array[GeographicRegion] = []
-var active_coalitions: Array[Coalition] = []
-var pending_legislation: Array[Legislation] = []
+	# Core game progression
+	var current_day: int = 0
+	var days_until_election: int = 365
+	var phase: String = "campaign"  # campaign, election, results
+	var is_paused: bool = false
 
-func _init():
-	current_date = Time.get_date_string_from_system()
-	current_polls = OpinionPoll.new()
+	# Player party state
+	var player_party_id: String = ""
+	var campaign_funds: int = 1000000  # Starting funds in euros
+	var current_polls: Dictionary = {}  # party_id -> polling_percentage
+	var party_reputation: Dictionary = {}  # category -> score (-100 to 100)
 
-class Party
-extends RefCounted
+	# World state
+	var active_coalitions: Array[Coalition] = []
+	var pending_legislation: Array[Legislation] = []
+	var recent_media_events: Array[MediaEvent] = []
+	var regional_support: Dictionary = {}  # region_id -> {party_id -> support_level}
 
-var id: String = ""
-var display_name: String = ""
-var ideology_position: Vector2 = Vector2.ZERO   # economic_axis, social_axis (-1 to 1)
-var current_polls: float = 0.0        # 0-100 percentage
-var projected_seats: int = 0        # 0-150 seats
-var campaign_funds: int = 100000         # euros available
-var red_lines: Array[String] = []    # non-negotiable policies
-var ministry_preferences: Array[String] = []  # desired cabinet positions
-var compatibility_scores: Dictionary = {}     # party_id -> compatibility
+	func _init():
+		# Initialize with default values
+		pass
 
-func _init(p_id: String = "", p_name: String = "", p_ideology: Vector2 = Vector2.ZERO):
-	id = p_id
-	display_name = p_name
-	ideology_position = p_ideology
+class Party:
+	extends RefCounted
 
-func validate() -> bool:
-	if ideology_position.x < -1.0 or ideology_position.x > 1.0:
-		return false
-	if ideology_position.y < -1.0 or ideology_position.y > 1.0:
-		return false
-	if current_polls < 0.0 or current_polls > 100.0:
-		return false
-	if projected_seats < 0 or projected_seats > 150:
-		return false
-	return true
+	# Basic identification
+	var party_id: String = ""
+	var display_name: String = ""
+	var short_name: String = ""  # Abbreviation like "VVD", "PvdA"
+	var color: Color = Color.BLUE
 
-class CampaignAction
-extends RefCounted
+	# Political positioning
+	var ideology_position: Vector2 = Vector2.ZERO  # x: economic left-right, y: social liberal-conservative
+	var policy_priorities: Dictionary = {}  # policy_area -> importance_weight (0.0-1.0)
+	var current_polls: Dictionary = {}     # region_id -> polling_percentage
 
-var action_type: String = ""         # "rally", "advertisement", "interview", etc.
-var cost: int = 0                  # campaign funds required
-var duration_hours: int = 0        # time investment
-var target_region: String = ""      # optional regional targeting
-var expected_effects: Dictionary = {}  # metric -> expected_change
-var description: String = ""        # localized action description
+	# Campaign resources and status
+	var campaign_funds: int = 0
+	var seat_count: int = 0  # Current seats in parliament
+	var coalition_partners: Array[String] = []  # party_ids
+	var recent_actions: Array[CampaignAction] = []
 
-func _init(p_type: String = "", p_cost: int = 0, p_duration: int = 0, p_description: String = ""):
-	action_type = p_type
-	cost = p_cost
-	duration_hours = p_duration
-	description = p_description
+	# AI behavior parameters (for non-player parties)
+	var ai_strategy: String = "moderate"  # moderate, aggressive, defensive
+	var response_predictability: float = 0.7  # How predictable AI responses are
 
-class OpinionPoll
-extends RefCounted
+	func _init(p_party_id: String = "", p_display_name: String = "", p_short_name: String = ""):
+		party_id = p_party_id
+		display_name = p_display_name
+		short_name = p_short_name
 
-var poll_date: String = ""
-var party_standings: Dictionary = {}    # party_id -> percentage
-var margin_of_error: float = 3.0        # polling uncertainty
-var sample_size: int = 1000              # survey respondents
-var demographic_breakdown: Dictionary = {}  # demographic -> party_preferences
-var issue_salience: Dictionary = {}    # policy_topic -> importance_rating
-var volatility_index: float = 0.5      # likelihood of vote switching
+class CampaignAction:
+	extends RefCounted
 
-func _init():
-	poll_date = Time.get_date_string_from_system()
+	var action_type: String = ""  # rally, advertisement, debate, media_appearance
+	var target_region: String = ""  # specific region or "national"
+	var cost: int = 0
+	var duration_days: int = 1
+	var message_focus: String = ""  # policy area or theme
+	var expected_effects: Dictionary = {}  # metric -> expected_change
 
-class GeographicRegion
-extends RefCounted
+	func _init(p_action_type: String = "", p_target_region: String = "", p_cost: int = 0, p_duration_days: int = 1, p_message_focus: String = "", p_expected_effects: Dictionary = {}):
+		action_type = p_action_type
+		target_region = p_target_region
+		cost = p_cost
+		duration_days = p_duration_days
+		message_focus = p_message_focus
+		expected_effects = p_expected_effects
 
-var region_id: String = ""
-var display_name: String = ""
-var region_type: String = "province"         # "province", "municipality", "constituency"
-var population: int = 0             # eligible voters
-var turnout_rate: float = 0.75         # historical participation
-var party_support: Dictionary = {}   # party_id -> support_percentage
-var key_issues: Array[String] = []   # top local concerns
-var demographic_profile: Dictionary = {}  # age/income/education stats
+class OpinionPoll:
+	extends RefCounted
 
-func _init(p_id: String = "", p_name: String = "", p_type: String = "province"):
-	region_id = p_id
-	display_name = p_name
-	region_type = p_type
+	var poll_date: int = 0  # days since game start
+	var region: String = "national"
+	var sample_size: int = 1000
+	var margin_of_error: float = 3.0
+	var results: Dictionary = {}  # party_id -> percentage
+	var demographic_breakdown: Dictionary = {}  # age/income/education -> {party_id -> percentage}
 
-class MediaEvent
-extends RefCounted
+	func _init(p_poll_date: int = 0, p_region: String = "national", p_sample_size: int = 1000, p_margin_of_error: float = 3.0, p_results: Dictionary = {}, p_demographic_breakdown: Dictionary = {}):
+		poll_date = p_poll_date
+		region = p_region
+		sample_size = p_sample_size
+		margin_of_error = p_margin_of_error
+		results = p_results
+		demographic_breakdown = p_demographic_breakdown
 
-var event_type: String = ""          # "tv_interview", "debate", etc.
-var event_title: String = ""
-var audience_reach: int = 0         # estimated viewers
-var questions: Array[MediaQuestion] = []
-var participant_parties: Array[String] = []  # involved parties
-var base_sentiment: float = 0.0       # starting audience attitude
+class GeographicRegion:
+	extends RefCounted
 
-class MediaQuestion
-extends RefCounted
+	# Basic information
+	var region_id: String = ""
+	var display_name: String = ""
+	var population: int = 0
+	var electoral_seats: int = 0  # number of parliament seats this region elects
 
-var question_text: String = ""
-var response_options: Array[ResponseOption] = []
-var topic_category: String = ""      # policy area
-var difficulty_level: int = 1       # 1-5 impact potential
-var time_limit: int = 30            # seconds for response
+	# Demographics and characteristics
+	var demographics: Dictionary = {}     # age_group/income_level/education -> percentage
+	var economic_indicators: Dictionary = {}  # unemployment_rate, avg_income, etc.
+	var party_support: Dictionary = {}    # party_id -> support_percentage
+	var key_issues: Array[String] = []    # most important issues to voters here
+	var voting_history: Dictionary = {}   # past_election_year -> {party_id -> vote_percentage}
 
-class ResponseOption
-extends RefCounted
+	func _init(p_region_id: String = "", p_display_name: String = "", p_population: int = 0, p_electoral_seats: int = 0):
+		region_id = p_region_id
+		display_name = p_display_name
+		population = p_population
+		electoral_seats = p_electoral_seats
 
-var option_text: String = ""
-var tone: String = ""               # "aggressive", "diplomatic", etc.
-var stance_position: Vector2 = Vector2.ZERO   # ideology positioning
-var audience_appeal: Dictionary = {}  # demographic -> appeal_rating
-var risk_level: float = 0.0         # chance of backfire
+class MediaEvent:
+	extends RefCounted
 
-class Coalition
-extends RefCounted
+	var event_id: String = ""
+	var title: String = ""
+	var description: String = ""
+	var event_type: String = ""  # scandal, policy_announcement, debate, crisis
+	var affected_parties: Array[String] = []  # party_ids that this event impacts
+	var response_deadline: int = 0  # days to respond (0 = immediate)
 
-var member_parties: Array[String] = []  # party IDs
-var total_seats: int = 0
-var majority_status: bool = false         # >= 76 seats
-var policy_agreements: Array[PolicyAgreement] = []
-var ministry_allocations: Dictionary = {}  # ministry -> party_id
-var stability_score: float = 0.0       # survival likelihood
-var formation_date: String = ""
+class MediaQuestion:
+	extends RefCounted
 
-func _init():
-	formation_date = Time.get_date_string_from_system()
+	var question_text: String = ""
+	var context: String = ""
+	var response_options: Array[ResponseOption] = []
 
-func calculate_majority_status():
-	majority_status = total_seats >= 76
+class ResponseOption:
+	extends RefCounted
 
-class PolicyAgreement
-extends RefCounted
+	var option_text: String = ""
+	var stance_type: String = ""  # supportive, critical, neutral, deflect
+	var predicted_effects: Dictionary = {}  # audience_segment -> sentiment_change
 
-var policy_topic: String = ""
-var agreed_position: String = ""      # compromise stance
-var supporting_parties: Array[String] = []
-var implementation_priority: int = 5  # 1-10 urgency
-var public_support: float = 0.5       # polling on this policy
+class Coalition:
+	extends RefCounted
 
-class Legislation
-extends RefCounted
+	var coalition_id: String = ""
+	var member_parties: Array[String] = []  # party_ids
+	var formation_date: int = 0  # day formed
+	var total_seats: int = 0
+	var majority_status: bool = false
+	var policy_agreements: Array[PolicyAgreement] = []
+	var stability_score: float = 1.0  # 0.0 to 1.0, how likely to hold together
+	var public_approval: float = 0.5  # 0.0 to 1.0
 
-var bill_title: String = ""
-var policy_area: String = ""
-var proposing_party: String = ""
-var committee_stage: String = "proposed"     # current legislative stage
-var party_positions: Dictionary = {}  # party_id -> position
-var predicted_vote: VotingResult = null # expected outcome
-var public_opinion: float = 0.5       # polling support
+	func _init(p_coalition_id: String = "", p_member_parties: Array[String] = [], p_formation_date: int = 0):
+		coalition_id = p_coalition_id
+		member_parties = p_member_parties
+		formation_date = p_formation_date
 
-func _init():
-	predicted_vote = VotingResult.new()
+class PolicyAgreement:
+	extends RefCounted
 
-class Election
-extends RefCounted
+	var policy_area: String = ""
+	var agreed_position: String = ""
+	var compromise_level: float = 0.5  # how much each party compromised
+	var implementation_priority: int = 1  # 1-10, higher = more important
 
-var election_date: String = ""
-var final_results: Dictionary = {}    # party_id -> vote_percentage
-var seat_distribution: Dictionary = {}  # party_id -> seats_won
-var turnout_rate: float = 0.0
-var regional_breakdown: Dictionary = {}  # region_id -> results
-var calculation_method: String = "D'Hondt"   # "D'Hondt"
-var coalition_possibilities: Array = []  # viable combinations
+class Legislation:
+	extends RefCounted
 
-class UIState
-extends RefCounted
+	var bill_id: String = ""
+	var title: String = ""
+	var policy_area: String = ""
+	var proposed_by: String = ""  # party_id
+	var status: String = "proposed"  # proposed, committee, voting, passed, rejected
+	var support_level: Dictionary = {}  # party_id -> support_stance ("support", "oppose", "neutral")
+	var public_opinion: float = 0.5  # 0.0 to 1.0
 
-var active_screen: String = "menu" # menu, dashboard, map, media, coalition, parliament, social, results, settings
-var language_setting: String = "en" # english, dutch
-var accessibility_mode: String = "default" # default, high_contrast, large_text
-var tooltip_preferences: Dictionary = {} # which tooltips to show
-var map_filter_state: Dictionary = {} # current map view settings
-var notification_queue: Array = [] # pending UI notifications
+	func _init(p_bill_id: String = "", p_title: String = "", p_policy_area: String = "", p_proposed_by: String = ""):
+		bill_id = p_bill_id
+		title = p_title
+		policy_area = p_policy_area
+		proposed_by = p_proposed_by
 
-class NotificationMessage
-extends RefCounted
+class Election:
+	extends RefCounted
 
-var message_text: String = "" # localized notification content
-var message_type: String = "info" # info, warning, success, error
-var display_duration: float = 3.0 # seconds to show notification
-var action_required: bool = false # whether user must acknowledge
-var related_screen: String = "" # which screen this notification relates to
+	var election_date: int = 0
+	var election_type: String = "general"  # general, local, european
+	var final_results: Dictionary = {}  # party_id -> {votes, seats, percentage}
+	var turnout_rate: float = 0.0
+
+class UIState:
+	extends RefCounted
+
+	var current_screen: String = "main_menu"
+	var previous_screens: Array[String] = []
+	var modal_dialogs: Array[String] = []
+	var selected_region: String = ""
+	var tooltip_target: Control = null
+
+class NotificationMessage:
+	extends RefCounted
+
+	var message_id: String = ""
+	var title: String = ""
+	var content: String = ""
+	var urgency: String = "normal"  # low, normal, high, critical
+	var category: String = "general"  # general, campaign, media, coalition
+	var timestamp: float = 0.0
+	var auto_dismiss: bool = true
+	var dismiss_time: float = 5.0  # seconds
