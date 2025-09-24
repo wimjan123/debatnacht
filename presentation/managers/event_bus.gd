@@ -123,7 +123,7 @@ func get_subscriber_count(event_name: String) -> int:
 	return 0
 
 # Convenience methods for common events
-func publish_game_state_changed(new_state: GameState) -> void:
+func publish_game_state_changed(new_state: DataModels.GameState) -> void:
 	"""Publish game state change event"""
 	publish(GAME_STATE_CHANGED, {"new_state": new_state}, EventCategory.GAME_STATE)
 
@@ -134,14 +134,14 @@ func publish_screen_changed(old_screen: String, new_screen: String) -> void:
 		"new_screen": new_screen
 	}, EventCategory.UI_NAVIGATION)
 
-func publish_campaign_action(action: CampaignAction, result: Dictionary) -> void:
+func publish_campaign_action(action: DataModels.CampaignAction, result: Dictionary) -> void:
 	"""Publish campaign action execution event"""
 	publish(CAMPAIGN_ACTION_EXECUTED, {
 		"action": action,
 		"result": result
 	}, EventCategory.USER_ACTION)
 
-func publish_media_event(event: MediaEvent) -> void:
+func publish_media_event(event: DataModels.MediaEvent) -> void:
 	"""Publish media event trigger"""
 	publish(MEDIA_EVENT_TRIGGERED, {
 		"event": event,

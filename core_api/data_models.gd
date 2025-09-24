@@ -6,7 +6,7 @@ class_name DataModels
 
 ## Result Types ##
 
-class_name ActionResult
+class ActionResult
 extends RefCounted
 
 var success: bool = false
@@ -22,7 +22,7 @@ func _init(p_success: bool = false, p_new_state: GameState = null, p_effects: Di
 	explanation = p_explanation
 	cost_paid = p_cost_paid
 
-class_name MediaResponse
+class MediaResponse
 extends RefCounted
 
 var sentiment_change: float = 0.0     # -1.0 to 1.0 audience reaction
@@ -36,7 +36,7 @@ func _init(p_sentiment: float = 0.0, p_reach: float = 1.0, p_effects: Dictionary
 	poll_effects = p_effects
 	explanation = p_explanation
 
-class_name CoalitionCompatibility
+class CoalitionCompatibility
 extends RefCounted
 
 var compatibility_score: float = 0.0  # 0.0 to 1.0 compatibility rating
@@ -50,7 +50,7 @@ func _init(p_score: float = 0.0, p_conflicts: Array[String] = [], p_shared: Arra
 	shared_positions = p_shared
 	explanation = p_explanation
 
-class_name CoalitionValidation
+class CoalitionValidation
 extends RefCounted
 
 var is_feasible: bool = false          # whether coalition can form
@@ -66,7 +66,7 @@ func _init(p_feasible: bool = false, p_seats: int = 0, p_majority: bool = false,
 	stability_score = p_stability
 	blocking_issues = p_blocking
 
-class_name VotingResult
+class VotingResult
 extends RefCounted
 
 var votes_for: int = 0
@@ -84,7 +84,7 @@ func _init(p_for: int = 0, p_against: int = 0, p_abstain: int = 0, p_party_votes
 	vote_explanations = p_explanations
 	legislation_passed = p_passed
 
-class_name ElectionAnalysis
+class ElectionAnalysis
 extends RefCounted
 
 var seat_changes: Dictionary = {}    # party_id -> seat_difference
@@ -93,7 +93,7 @@ var regional_swings: Dictionary = {} # region_id -> swing_amount
 var campaign_effectiveness: Dictionary = {}  # action_type -> impact_rating
 var what_if_scenarios: Array[String] = []    # alternative outcomes
 
-class_name RegionTooltipData
+class RegionTooltipData
 extends RefCounted
 
 var region_name: String = ""
@@ -102,7 +102,7 @@ var key_issues: Array[String] = []   # top local concerns
 var demographic_info: Dictionary = {} # age/income/education breakdown
 var turnout_prediction: float = 0.0   # expected voter participation
 
-class_name TooltipData
+class TooltipData
 extends RefCounted
 
 var title: String = ""              # metric name
@@ -111,7 +111,7 @@ var explanation: String = ""        # simple explanation
 var contributing_factors: Array[String] = []  # what influences this metric
 var trend_direction: String = ""    # "increasing", "decreasing", "stable"
 
-class_name ExplanationPanel
+class ExplanationPanel
 extends RefCounted
 
 var calculation_name: String = ""
@@ -122,7 +122,7 @@ var confidence_level: String = ""       # "high", "medium", "low"
 
 ## Core Game Classes ##
 
-class_name GameState
+class GameState
 extends RefCounted
 
 var current_date: String = ""
@@ -142,7 +142,7 @@ func _init():
 	current_date = Time.get_date_string_from_system()
 	current_polls = OpinionPoll.new()
 
-class_name Party
+class Party
 extends RefCounted
 
 var id: String = ""
@@ -171,7 +171,7 @@ func validate() -> bool:
 		return false
 	return true
 
-class_name CampaignAction
+class CampaignAction
 extends RefCounted
 
 var action_type: String = ""         # "rally", "advertisement", "interview", etc.
@@ -187,7 +187,7 @@ func _init(p_type: String = "", p_cost: int = 0, p_duration: int = 0, p_descript
 	duration_hours = p_duration
 	description = p_description
 
-class_name OpinionPoll
+class OpinionPoll
 extends RefCounted
 
 var poll_date: String = ""
@@ -201,7 +201,7 @@ var volatility_index: float = 0.5      # likelihood of vote switching
 func _init():
 	poll_date = Time.get_date_string_from_system()
 
-class_name GeographicRegion
+class GeographicRegion
 extends RefCounted
 
 var region_id: String = ""
@@ -218,7 +218,7 @@ func _init(p_id: String = "", p_name: String = "", p_type: String = "province"):
 	display_name = p_name
 	region_type = p_type
 
-class_name MediaEvent
+class MediaEvent
 extends RefCounted
 
 var event_type: String = ""          # "tv_interview", "debate", etc.
@@ -228,7 +228,7 @@ var questions: Array[MediaQuestion] = []
 var participant_parties: Array[String] = []  # involved parties
 var base_sentiment: float = 0.0       # starting audience attitude
 
-class_name MediaQuestion
+class MediaQuestion
 extends RefCounted
 
 var question_text: String = ""
@@ -237,7 +237,7 @@ var topic_category: String = ""      # policy area
 var difficulty_level: int = 1       # 1-5 impact potential
 var time_limit: int = 30            # seconds for response
 
-class_name ResponseOption
+class ResponseOption
 extends RefCounted
 
 var option_text: String = ""
@@ -246,7 +246,7 @@ var stance_position: Vector2 = Vector2.ZERO   # ideology positioning
 var audience_appeal: Dictionary = {}  # demographic -> appeal_rating
 var risk_level: float = 0.0         # chance of backfire
 
-class_name Coalition
+class Coalition
 extends RefCounted
 
 var member_parties: Array[String] = []  # party IDs
@@ -263,7 +263,7 @@ func _init():
 func calculate_majority_status():
 	majority_status = total_seats >= 76
 
-class_name PolicyAgreement
+class PolicyAgreement
 extends RefCounted
 
 var policy_topic: String = ""
@@ -272,7 +272,7 @@ var supporting_parties: Array[String] = []
 var implementation_priority: int = 5  # 1-10 urgency
 var public_support: float = 0.5       # polling on this policy
 
-class_name Legislation
+class Legislation
 extends RefCounted
 
 var bill_title: String = ""
@@ -286,7 +286,7 @@ var public_opinion: float = 0.5       # polling support
 func _init():
 	predicted_vote = VotingResult.new()
 
-class_name Election
+class Election
 extends RefCounted
 
 var election_date: String = ""
@@ -297,7 +297,7 @@ var regional_breakdown: Dictionary = {}  # region_id -> results
 var calculation_method: String = "D'Hondt"   # "D'Hondt"
 var coalition_possibilities: Array = []  # viable combinations
 
-class_name UIState
+class UIState
 extends RefCounted
 
 var active_screen: String = "menu" # menu, dashboard, map, media, coalition, parliament, social, results, settings
@@ -307,7 +307,7 @@ var tooltip_preferences: Dictionary = {} # which tooltips to show
 var map_filter_state: Dictionary = {} # current map view settings
 var notification_queue: Array = [] # pending UI notifications
 
-class_name NotificationMessage
+class NotificationMessage
 extends RefCounted
 
 var message_text: String = "" # localized notification content
