@@ -1,0 +1,274 @@
+{
+  "version": "1.0.0",
+  "description": "Deterministic test data for consistent unit and integration testing",
+  "rng_seeds": {
+    "unit_tests": 12345,
+    "integration_tests": 54321,
+    "ui_tests": 98765,
+    "performance_tests": 11111
+  },
+  "test_parties": [
+    {
+      "id": "test_party_player",
+      "display_name": "Test Player Party",
+      "ideology_position": {"economic_axis": 0.0, "social_axis": 0.0},
+      "base_polls": 15.0,
+      "projected_seats": 23,
+      "campaign_funds": 125000,
+      "expected_outcomes": {
+        "rally_effect": 1.8,
+        "tv_ad_effect": 2.3,
+        "interview_effect": 1.2
+      }
+    },
+    {
+      "id": "test_party_left",
+      "display_name": "Test Left Party",
+      "ideology_position": {"economic_axis": -0.7, "social_axis": 0.4},
+      "base_polls": 18.5,
+      "projected_seats": 28,
+      "campaign_funds": 150000,
+      "compatibility_with_player": 0.6
+    },
+    {
+      "id": "test_party_right",
+      "display_name": "Test Right Party",
+      "ideology_position": {"economic_axis": 0.8, "social_axis": -0.3},
+      "base_polls": 22.3,
+      "projected_seats": 34,
+      "campaign_funds": 200000,
+      "compatibility_with_player": 0.4
+    },
+    {
+      "id": "test_party_center",
+      "display_name": "Test Center Party",
+      "ideology_position": {"economic_axis": 0.1, "social_axis": 0.1},
+      "base_polls": 16.8,
+      "projected_seats": 25,
+      "campaign_funds": 175000,
+      "compatibility_with_player": 0.8
+    }
+  ],
+  "test_regions": [
+    {
+      "id": "test_region_urban",
+      "display_name": "Test Urban Region",
+      "population": 1500000,
+      "eligible_voters": 1200000,
+      "turnout_rate": 0.82,
+      "demographic_profile": {
+        "age_18_34": 0.35,
+        "age_35_54": 0.35,
+        "age_55_plus": 0.30,
+        "higher_education": 0.55,
+        "urban_percentage": 0.95,
+        "immigrant_background": 0.40
+      },
+      "party_support": {
+        "test_party_player": 0.18,
+        "test_party_left": 0.22,
+        "test_party_right": 0.16,
+        "test_party_center": 0.20
+      },
+      "key_issues": ["Housing", "Climate", "Innovation"]
+    },
+    {
+      "id": "test_region_rural",
+      "display_name": "Test Rural Region",
+      "population": 600000,
+      "eligible_voters": 480000,
+      "turnout_rate": 0.78,
+      "demographic_profile": {
+        "age_18_34": 0.25,
+        "age_35_54": 0.32,
+        "age_55_plus": 0.43,
+        "higher_education": 0.35,
+        "urban_percentage": 0.45,
+        "immigrant_background": 0.15
+      },
+      "party_support": {
+        "test_party_player": 0.12,
+        "test_party_left": 0.14,
+        "test_party_right": 0.28,
+        "test_party_center": 0.22
+      },
+      "key_issues": ["Agriculture", "Services", "Infrastructure"]
+    }
+  ],
+  "test_media_events": [
+    {
+      "event_type": "tv_interview",
+      "title": "Test TV Interview",
+      "audience_reach": 1000000,
+      "base_sentiment": 0.0,
+      "questions": [
+        {
+          "question_text": "What is your position on healthcare policy?",
+          "topic_category": "healthcare",
+          "difficulty_level": 3,
+          "response_options": [
+            {
+              "option_text": "We need comprehensive healthcare reform",
+              "tone": "diplomatic",
+              "risk_level": 0.2,
+              "expected_sentiment": 0.3
+            },
+            {
+              "option_text": "Healthcare is fine as it is",
+              "tone": "conservative",
+              "risk_level": 0.4,
+              "expected_sentiment": -0.1
+            },
+            {
+              "option_text": "Radical healthcare overhaul is necessary",
+              "tone": "aggressive",
+              "risk_level": 0.7,
+              "expected_sentiment": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "test_polling_data": [
+    {
+      "poll_date": "2025-01-15",
+      "sample_size": 1200,
+      "margin_of_error": 2.8,
+      "party_standings": {
+        "test_party_player": 15.2,
+        "test_party_left": 18.7,
+        "test_party_right": 22.1,
+        "test_party_center": 16.9,
+        "others": 27.1
+      },
+      "volatility_index": 0.45
+    },
+    {
+      "poll_date": "2025-02-01",
+      "sample_size": 1150,
+      "margin_of_error": 2.9,
+      "party_standings": {
+        "test_party_player": 16.8,
+        "test_party_left": 17.9,
+        "test_party_right": 21.8,
+        "test_party_center": 17.2,
+        "others": 26.3
+      },
+      "volatility_index": 0.42
+    }
+  ],
+  "test_coalition_scenarios": [
+    {
+      "name": "Center-Left Coalition",
+      "parties": ["test_party_player", "test_party_left", "test_party_center"],
+      "total_seats": 76,
+      "majority_status": true,
+      "expected_compatibility": 0.7,
+      "expected_stability": 0.75,
+      "policy_agreements": ["healthcare_expansion", "climate_action", "education_funding"],
+      "blocking_issues": []
+    },
+    {
+      "name": "Incompatible Coalition",
+      "parties": ["test_party_left", "test_party_right"],
+      "total_seats": 62,
+      "majority_status": false,
+      "expected_compatibility": 0.2,
+      "expected_stability": 0.3,
+      "policy_agreements": [],
+      "blocking_issues": ["taxation", "immigration", "social_policy"]
+    }
+  ],
+  "test_legislation": [
+    {
+      "bill_title": "Test Healthcare Reform Bill",
+      "policy_area": "healthcare",
+      "proposing_party": "test_party_left",
+      "public_opinion": 0.62,
+      "expected_votes": {
+        "votes_for": 78,
+        "votes_against": 65,
+        "abstentions": 7,
+        "legislation_passed": true
+      },
+      "party_positions": {
+        "test_party_player": "for",
+        "test_party_left": "for",
+        "test_party_right": "against",
+        "test_party_center": "abstain"
+      }
+    }
+  ],
+  "test_campaign_actions": [
+    {
+      "action_type": "rally",
+      "cost": 5000,
+      "duration_hours": 4,
+      "target_region": "test_region_urban",
+      "expected_effects": {
+        "polls": 1.8,
+        "regional_support": 3.2
+      },
+      "success_probability": 0.75
+    },
+    {
+      "action_type": "advertisement",
+      "cost": 15000,
+      "duration_hours": 2,
+      "expected_effects": {
+        "polls": 2.3,
+        "name_recognition": 4.1
+      },
+      "success_probability": 0.85
+    }
+  ],
+  "test_election_results": {
+    "election_date": "2025-03-15",
+    "turnout_rate": 0.801,
+    "final_results": {
+      "test_party_player": 17.3,
+      "test_party_left": 19.1,
+      "test_party_right": 21.5,
+      "test_party_center": 16.8,
+      "others": 25.3
+    },
+    "seat_distribution": {
+      "test_party_player": 26,
+      "test_party_left": 29,
+      "test_party_right": 32,
+      "test_party_center": 25,
+      "others": 38
+    },
+    "coalition_possibilities": [
+      ["test_party_right", "test_party_center", "test_party_player"],
+      ["test_party_left", "test_party_center", "test_party_player"],
+      ["test_party_right", "test_party_left"]
+    ]
+  },
+  "validation_checksums": {
+    "total_party_seats": 150,
+    "total_party_percentages": 100.0,
+    "coalition_majority_threshold": 76,
+    "deterministic_seed_verification": "12345abc"
+  },
+  "test_explanation_data": {
+    "tooltip_examples": [
+      {
+        "metric_type": "poll_percentage",
+        "metric_value": 17.3,
+        "expected_title": "Poll Percentage",
+        "expected_explanation": "Your party's current polling percentage",
+        "expected_factors": ["Recent rally effects", "Media coverage", "National trends"]
+      }
+    ],
+    "calculation_examples": [
+      {
+        "calculation_type": "seat_projection",
+        "inputs": {"poll_percentage": 17.3, "regional_variation": 0.15},
+        "expected_result": 26,
+        "expected_steps": ["Current poll: 17.3%", "Apply D'Hondt method", "Account for regional variations", "Final seats: 26"]
+      }
+    ]
+  }
+}

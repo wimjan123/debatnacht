@@ -1,50 +1,68 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: 1.0.0 → 1.0.0 (new constitution)
+Modified principles: N/A (new constitution)
+Added sections: All sections (new constitution)
+Removed sections: N/A
+Templates requiring updates:
+  ✅ Updated plan-template.md reference compatibility
+  ✅ Updated spec-template.md compatibility
+  ✅ Updated tasks-template.md compatibility
+Follow-up TODOs: None - all placeholders filled
+-->
+
+# Debatnacht Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Simulation Integrity (NON-NEGOTIABLE)
+All simulation mechanics MUST be deterministic and reproducible. Seeded random number generation MUST be used for all probabilistic calculations including polling, voter behavior, and election outcomes. Every simulation run with identical seed values MUST produce identical results. All core mathematical algorithms (D'Hondt method, coalition formation logic, polling calculations) MUST be validated through comprehensive test suites with known correct outcomes.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+**Rationale**: Political simulation credibility depends on consistent, explainable results that users can trust and verify.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Transparency & Explainability
+Every game mechanic, decision, and outcome MUST be explainable to users. Interactive tooltips MUST provide context for all UI elements, statistics, and game states. Comprehensive logging MUST track all significant game events with clear cause-and-effect relationships. Users MUST be able to understand why specific electoral outcomes occurred and how their actions influenced results.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: Educational value requires users to understand political processes, not just experience them.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. Political Neutrality
+Content MUST maintain strict political neutrality and respect for all democratic viewpoints. Real political figures, parties, or controversial policies MUST NOT be referenced directly. Game mechanics MUST fairly represent diverse political ideologies without bias. All political scenarios MUST be presented as educational tools, not advocacy for specific positions.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Educational effectiveness requires objectivity and respect for democratic pluralism.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Accessibility Excellence
+The game MUST support Dutch and English languages with complete localization. Visual design MUST meet WCAG 2.1 AA standards for contrast and readability. Text scaling MUST be supported from 75% to 200% without UI breakage. All interactive elements MUST be keyboard accessible. Color-blind users MUST be able to distinguish all critical game elements through alternative visual indicators.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: Democratic education tools must be accessible to all citizens regardless of ability or language preference.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Performance Standards
+The 2D UI MUST maintain 60 FPS performance on mid-range hardware (5-year-old systems). Response time for all user interactions MUST be under 100ms. Game startup time MUST be under 10 seconds. Memory usage MUST not exceed 1GB during normal gameplay. All performance targets MUST be validated through automated benchmarking.
+
+**Rationale**: Smooth performance is essential for user engagement and educational effectiveness.
+
+## Technical Standards
+
+### Test-Driven Development (NON-NEGOTIABLE)
+All core mathematical functions (D'Hondt calculations, polling algorithms, coalition formation) MUST follow strict TDD methodology. Tests MUST be written and failing before implementation begins. Unit tests MUST achieve 95%+ coverage for simulation logic. Integration tests MUST verify end-to-end scenarios with known outcomes.
+
+### Data-Driven Configuration
+Game content (parties, policies, scenarios) MUST be defined in JSON configuration files separate from code. All text content MUST support internationalization through separate language files. Game balance parameters MUST be configurable without code changes. Version compatibility MUST be maintained through schema validation.
+
+### Save System Integrity
+Save files MUST include versioning metadata to support backward compatibility. Save data MUST be validated on load with clear error reporting for corruption. Migration paths MUST be provided for save files from previous versions. Save file format MUST be human-readable JSON for debugging and potential modding.
+
+## Quality Assurance
+
+All code MUST pass automated linting and static analysis before merge. Performance profiling MUST be conducted for any changes affecting core simulation loops. Localization testing MUST verify both Dutch and English functionality. Accessibility testing MUST validate keyboard navigation and screen reader compatibility.
+
+**Security**: User-generated content (if any) MUST be validated and sanitized. Save files MUST be validated to prevent code injection attacks. Network communications (if implemented) MUST use secure protocols.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and decisions. All feature implementations and pull requests MUST demonstrate compliance with these principles. Deviations MUST be explicitly justified with documented rationale and stakeholder approval.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Amendment Process**: Constitutional changes require documentation of impact, justification for change, and validation that existing implementations remain compliant. Major principle changes require version increment and migration planning.
+
+**Compliance Review**: All significant features MUST undergo constitutional compliance review before merge. Performance benchmarks MUST be executed for each release. Accessibility audits MUST be conducted quarterly.
+
+**Version**: 1.0.0 | **Ratified**: 2025-09-24 | **Last Amended**: 2025-09-24

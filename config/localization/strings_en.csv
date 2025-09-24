@@ -1,0 +1,38 @@
+key,en
+# Main Menu
+main_menu.title,Dutch Politics Simulation
+main_menu.new_game,New Game
+main_menu.continue_game,Continue Game
+main_menu.scenarios,Scenarios
+main_menu.settings,Settings
+main_menu.credits,Credits
+main_menu.quit,Quit
+
+# Dashboard
+dashboard.title,Campaign Dashboard
+dashboard.poll_percentage,Poll Percentage
+dashboard.projected_seats,Projected Seats
+dashboard.funds,Campaign Funds
+dashboard.days_left,Days Until Election
+dashboard.daily_changes,Daily Changes
+
+# Tooltips
+tooltip.poll_explanation,Your party's current polling percentage based on recent surveys and campaign activities
+tooltip.seats_explanation,Projected seat count in parliament based on current polling using the D'Hondt method
+tooltip.funds_explanation,Available campaign funds for activities like rallies, advertisements, and media appearances
+tooltip.days_explanation,Days remaining in the campaign period until election day
+
+# Settings
+settings.language,Language
+settings.accessibility,Accessibility
+settings.text_scale,Text Scale
+settings.high_contrast,High Contrast Mode
+settings.keyboard_navigation,Keyboard Navigation Help
+
+# Common
+common.ok,OK
+common.cancel,Cancel
+common.help,Help
+common.close,Close
+common.continue,Continue
+common.back,Back

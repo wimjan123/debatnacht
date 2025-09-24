@@ -1,0 +1,229 @@
+[gd_scene load_steps=3 format=3 uid="uid://g7sr3y9rqa6w1e"]
+
+[ext_resource type="Script" path="res://ui/scenes/results/ElectionResults.gd" id="1_results"]
+[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+
+[node name="ElectionResults" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_results")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HeaderContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+
+[node name="ResultsTitle" type="Label" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+text = "results.title"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 28)
+
+[node name="ElectionInfoContainer" type="HBoxContainer" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+
+[node name="ElectionDateLabel" type="Label" parent="MainContainer/HeaderContainer/ElectionInfoContainer"]
+layout_mode = 2
+text = "results.election_date"
+
+[node name="TurnoutLabel" type="Label" parent="MainContainer/HeaderContainer/ElectionInfoContainer"]
+layout_mode = 2
+text = "results.turnout"
+
+[node name="ValidVotesLabel" type="Label" parent="MainContainer/HeaderContainer/ElectionInfoContainer"]
+layout_mode = 2
+text = "results.valid_votes"
+
+[node name="ContentContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="PlayerResultsTitle" type="Label" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+text = "results.your_results"
+add_theme_font_size_override("font_size", 20)
+
+[node name="PlayerResultsPanel" type="Panel" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 200)
+
+[node name="PlayerResultsContent" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
+
+[node name="PartyNameLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent"]
+layout_mode = 2
+text = "results.party_name"
+add_theme_font_size_override("font_size", 18)
+
+[node name="VotesContainer" type="HBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent"]
+layout_mode = 2
+
+[node name="VotesReceivedLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent/VotesContainer"]
+layout_mode = 2
+text = "results.votes_received"
+
+[node name="VotePercentageLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent/VotesContainer"]
+layout_mode = 2
+text = "results.vote_percentage"
+
+[node name="SeatsContainer" type="HBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent"]
+layout_mode = 2
+
+[node name="SeatsWonLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent/SeatsContainer"]
+layout_mode = 2
+text = "results.seats_won"
+add_theme_font_size_override("font_size", 24)
+
+[node name="SeatsChangeLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent/SeatsContainer"]
+layout_mode = 2
+text = "results.seats_change"
+
+[node name="GovernmentStatusLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PlayerResultsPanel/PlayerResultsContent"]
+layout_mode = 2
+text = "results.government_status"
+add_theme_font_size_override("font_size", 16)
+
+[node name="AllResultsTitle" type="Label" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+text = "results.all_parties"
+add_theme_font_size_override("font_size", 18)
+
+[node name="ResultsScrollContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AllResultsList" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/ResultsScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CentralPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+
+[node name="SeatsVisualizationTitle" type="Label" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+text = "results.seats_visualization"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 18)
+
+[node name="ParliamentSeatsPanel" type="Panel" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SeatsVisualization" type="Control" parent="MainContainer/ContentContainer/CentralPanel/ParliamentSeatsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ParliamentStatsContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+
+[node name="MajorityStatusLabel" type="Label" parent="MainContainer/ContentContainer/CentralPanel/ParliamentStatsContainer"]
+layout_mode = 2
+text = "results.majority_status"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 16)
+
+[node name="CoalitionRequiredLabel" type="Label" parent="MainContainer/ContentContainer/CentralPanel/ParliamentStatsContainer"]
+layout_mode = 2
+text = "results.coalition_required"
+horizontal_alignment = 1
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="AnalysisTitle" type="Label" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+text = "results.analysis"
+add_theme_font_size_override("font_size", 18)
+
+[node name="AnalysisScrollContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AnalysisContent" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel/AnalysisScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="KeyTrendsLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/AnalysisScrollContainer/AnalysisContent"]
+layout_mode = 2
+text = "results.key_trends"
+add_theme_font_size_override("font_size", 14)
+
+[node name="TrendsContent" type="RichTextLabel" parent="MainContainer/ContentContainer/RightPanel/AnalysisScrollContainer/AnalysisContent"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+text = "results.trends_content"
+
+[node name="RegionalBreakdownLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/AnalysisScrollContainer/AnalysisContent"]
+layout_mode = 2
+text = "results.regional_breakdown"
+add_theme_font_size_override("font_size", 14)
+
+[node name="RegionalContent" type="RichTextLabel" parent="MainContainer/ContentContainer/RightPanel/AnalysisScrollContainer/AnalysisContent"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+text = "results.regional_content"
+
+[node name="NextStepsLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/AnalysisScrollContainer/AnalysisContent"]
+layout_mode = 2
+text = "results.next_steps"
+add_theme_font_size_override("font_size", 14)
+
+[node name="NextStepsContent" type="RichTextLabel" parent="MainContainer/ContentContainer/RightPanel/AnalysisScrollContainer/AnalysisContent"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+text = "results.next_steps_content"
+
+[node name="ActionContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.back"
+
+[node name="ExportResultsButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "results.export_results"
+
+[node name="CoalitionBuilderButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "results.coalition_builder"
+
+[node name="NewElectionButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "results.new_election"
+
+[node name="HelpButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.help"
+
+[connection signal="pressed" from="MainContainer/ActionContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/ExportResultsButton" to="." method="_on_export_results_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/CoalitionBuilderButton" to="." method="_on_coalition_builder_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/NewElectionButton" to="." method="_on_new_election_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/HelpButton" to="." method="_on_help_button_pressed"]

@@ -1,0 +1,316 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8mp9x4rqp2w1h"]
+
+[ext_resource type="Script" path="res://ui/scenes/map_view/MapView.gd" id="1_mapview"]
+[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+
+[node name="MapView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_mapview")
+
+[node name="MainContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="FilterContainer" type="VBoxContainer" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="FilterTitle" type="Label" parent="MainContainer/LeftPanel/FilterContainer"]
+layout_mode = 2
+text = "map.filters"
+
+[node name="FilterGrid" type="GridContainer" parent="MainContainer/LeftPanel/FilterContainer"]
+layout_mode = 2
+columns = 1
+
+[node name="SupportLevelContainer" type="VBoxContainer" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid"]
+layout_mode = 2
+
+[node name="SupportLevelLabel" type="Label" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer"]
+layout_mode = 2
+text = "map.filter.support_level"
+
+[node name="SupportLevelOptions" type="VBoxContainer" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer"]
+layout_mode = 2
+
+[node name="HighSupportCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer/SupportLevelOptions"]
+layout_mode = 2
+text = "map.filter.high_support"
+
+[node name="MediumSupportCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer/SupportLevelOptions"]
+layout_mode = 2
+text = "map.filter.medium_support"
+
+[node name="LowSupportCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer/SupportLevelOptions"]
+layout_mode = 2
+text = "map.filter.low_support"
+
+[node name="DemographicContainer" type="VBoxContainer" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid"]
+layout_mode = 2
+
+[node name="DemographicLabel" type="Label" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer"]
+layout_mode = 2
+text = "map.filter.demographics"
+
+[node name="DemographicOptions" type="VBoxContainer" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer"]
+layout_mode = 2
+
+[node name="YoungCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions"]
+layout_mode = 2
+text = "map.filter.young_voters"
+
+[node name="ElderlyCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions"]
+layout_mode = 2
+text = "map.filter.elderly_voters"
+
+[node name="HighIncomeCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions"]
+layout_mode = 2
+text = "map.filter.high_income"
+
+[node name="LowIncomeCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions"]
+layout_mode = 2
+text = "map.filter.low_income"
+
+[node name="UrbanizationContainer" type="VBoxContainer" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid"]
+layout_mode = 2
+
+[node name="UrbanizationLabel" type="Label" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer"]
+layout_mode = 2
+text = "map.filter.urbanization"
+
+[node name="UrbanizationOptions" type="VBoxContainer" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer"]
+layout_mode = 2
+
+[node name="UrbanCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer/UrbanizationOptions"]
+layout_mode = 2
+text = "map.filter.urban"
+
+[node name="SuburbanCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer/UrbanizationOptions"]
+layout_mode = 2
+text = "map.filter.suburban"
+
+[node name="RuralCheck" type="CheckBox" parent="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer/UrbanizationOptions"]
+layout_mode = 2
+text = "map.filter.rural"
+
+[node name="FilterButtons" type="HBoxContainer" parent="MainContainer/LeftPanel/FilterContainer"]
+layout_mode = 2
+
+[node name="ApplyFilterButton" type="Button" parent="MainContainer/LeftPanel/FilterContainer/FilterButtons"]
+layout_mode = 2
+text = "map.apply_filter"
+
+[node name="ClearFilterButton" type="Button" parent="MainContainer/LeftPanel/FilterContainer/FilterButtons"]
+layout_mode = 2
+text = "map.clear_filter"
+
+[node name="RegionInfoContainer" type="VBoxContainer" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RegionInfoTitle" type="Label" parent="MainContainer/LeftPanel/RegionInfoContainer"]
+layout_mode = 2
+text = "map.region_info"
+
+[node name="RegionInfoPanel" type="Panel" parent="MainContainer/LeftPanel/RegionInfoContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RegionInfoContent" type="VBoxContainer" parent="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="RegionNameLabel" type="Label" parent="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel/RegionInfoContent"]
+layout_mode = 2
+text = "map.select_region"
+add_theme_font_size_override("font_size", 16)
+
+[node name="SupportLabel" type="Label" parent="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel/RegionInfoContent"]
+layout_mode = 2
+text = "map.support_level"
+
+[node name="TrendLabel" type="Label" parent="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel/RegionInfoContent"]
+layout_mode = 2
+text = "map.trend"
+
+[node name="PriorityLabel" type="Label" parent="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel/RegionInfoContent"]
+layout_mode = 2
+text = "map.priority"
+
+[node name="DemographicsLabel" type="Label" parent="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel/RegionInfoContent"]
+layout_mode = 2
+text = "map.demographics"
+
+[node name="ActionsButton" type="Button" parent="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel/RegionInfoContent"]
+layout_mode = 2
+text = "map.plan_campaign"
+
+[node name="MapContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+
+[node name="MapToolbar" type="HBoxContainer" parent="MainContainer/MapContainer"]
+layout_mode = 2
+
+[node name="ViewModeLabel" type="Label" parent="MainContainer/MapContainer/MapToolbar"]
+layout_mode = 2
+text = "map.view_mode"
+
+[node name="SupportModeButton" type="Button" parent="MainContainer/MapContainer/MapToolbar"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "map.support_view"
+
+[node name="DemographicModeButton" type="Button" parent="MainContainer/MapContainer/MapToolbar"]
+layout_mode = 2
+toggle_mode = true
+text = "map.demographic_view"
+
+[node name="ActivityModeButton" type="Button" parent="MainContainer/MapContainer/MapToolbar"]
+layout_mode = 2
+toggle_mode = true
+text = "map.activity_view"
+
+[node name="LegendButton" type="Button" parent="MainContainer/MapContainer/MapToolbar"]
+layout_mode = 2
+text = "map.show_legend"
+
+[node name="MapDisplayPanel" type="Panel" parent="MainContainer/MapContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MapScrollContainer" type="ScrollContainer" parent="MainContainer/MapContainer/MapDisplayPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MapCanvas" type="Control" parent="MainContainer/MapContainer/MapDisplayPanel/MapScrollContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(800, 600)
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.15
+
+[node name="LegendContainer" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+
+[node name="LegendTitle" type="Label" parent="MainContainer/RightPanel/LegendContainer"]
+layout_mode = 2
+text = "map.legend"
+
+[node name="LegendContent" type="VBoxContainer" parent="MainContainer/RightPanel/LegendContainer"]
+layout_mode = 2
+
+[node name="StrongholdLegend" type="HBoxContainer" parent="MainContainer/RightPanel/LegendContainer/LegendContent"]
+layout_mode = 2
+
+[node name="StrongholdColor" type="ColorRect" parent="MainContainer/RightPanel/LegendContainer/LegendContent/StrongholdLegend"]
+layout_mode = 2
+custom_minimum_size = Vector2(20, 20)
+color = Color.GREEN
+
+[node name="StrongholdLabel" type="Label" parent="MainContainer/RightPanel/LegendContainer/LegendContent/StrongholdLegend"]
+layout_mode = 2
+text = "map.stronghold"
+
+[node name="OpportunityLegend" type="HBoxContainer" parent="MainContainer/RightPanel/LegendContainer/LegendContent"]
+layout_mode = 2
+
+[node name="OpportunityColor" type="ColorRect" parent="MainContainer/RightPanel/LegendContainer/LegendContent/OpportunityLegend"]
+layout_mode = 2
+custom_minimum_size = Vector2(20, 20)
+color = Color.BLUE
+
+[node name="OpportunityLabel" type="Label" parent="MainContainer/RightPanel/LegendContainer/LegendContent/OpportunityLegend"]
+layout_mode = 2
+text = "map.opportunity"
+
+[node name="TargetLegend" type="HBoxContainer" parent="MainContainer/RightPanel/LegendContainer/LegendContent"]
+layout_mode = 2
+
+[node name="TargetColor" type="ColorRect" parent="MainContainer/RightPanel/LegendContainer/LegendContent/TargetLegend"]
+layout_mode = 2
+custom_minimum_size = Vector2(20, 20)
+color = Color.YELLOW
+
+[node name="TargetLabel" type="Label" parent="MainContainer/RightPanel/LegendContainer/LegendContent/TargetLegend"]
+layout_mode = 2
+text = "map.target"
+
+[node name="AtRiskLegend" type="HBoxContainer" parent="MainContainer/RightPanel/LegendContainer/LegendContent"]
+layout_mode = 2
+
+[node name="AtRiskColor" type="ColorRect" parent="MainContainer/RightPanel/LegendContainer/LegendContent/AtRiskLegend"]
+layout_mode = 2
+custom_minimum_size = Vector2(20, 20)
+color = Color.RED
+
+[node name="AtRiskLabel" type="Label" parent="MainContainer/RightPanel/LegendContainer/LegendContent/AtRiskLegend"]
+layout_mode = 2
+text = "map.at_risk"
+
+[node name="StatsContainer" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StatsTitle" type="Label" parent="MainContainer/RightPanel/StatsContainer"]
+layout_mode = 2
+text = "map.statistics"
+
+[node name="StatsContent" type="VBoxContainer" parent="MainContainer/RightPanel/StatsContainer"]
+layout_mode = 2
+
+[node name="TotalRegionsLabel" type="Label" parent="MainContainer/RightPanel/StatsContainer/StatsContent"]
+layout_mode = 2
+text = "map.total_regions"
+
+[node name="AverageSupportLabel" type="Label" parent="MainContainer/RightPanel/StatsContainer/StatsContent"]
+layout_mode = 2
+text = "map.average_support"
+
+[node name="StrongholdsCountLabel" type="Label" parent="MainContainer/RightPanel/StatsContainer/StatsContent"]
+layout_mode = 2
+text = "map.strongholds_count"
+
+[node name="OpportunitiesCountLabel" type="Label" parent="MainContainer/RightPanel/StatsContainer/StatsContent"]
+layout_mode = 2
+text = "map.opportunities_count"
+
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer/SupportLevelOptions/HighSupportCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer/SupportLevelOptions/MediumSupportCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/SupportLevelContainer/SupportLevelOptions/LowSupportCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions/YoungCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions/ElderlyCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions/HighIncomeCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/DemographicContainer/DemographicOptions/LowIncomeCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer/UrbanizationOptions/UrbanCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer/UrbanizationOptions/SuburbanCheck" to="." method="_on_filter_changed"]
+[connection signal="toggled" from="MainContainer/LeftPanel/FilterContainer/FilterGrid/UrbanizationContainer/UrbanizationOptions/RuralCheck" to="." method="_on_filter_changed"]
+[connection signal="pressed" from="MainContainer/LeftPanel/FilterContainer/FilterButtons/ApplyFilterButton" to="." method="_on_apply_filter_pressed"]
+[connection signal="pressed" from="MainContainer/LeftPanel/FilterContainer/FilterButtons/ClearFilterButton" to="." method="_on_clear_filter_pressed"]
+[connection signal="pressed" from="MainContainer/LeftPanel/RegionInfoContainer/RegionInfoPanel/RegionInfoContent/ActionsButton" to="." method="_on_plan_campaign_pressed"]
+[connection signal="pressed" from="MainContainer/MapContainer/MapToolbar/SupportModeButton" to="." method="_on_support_mode_pressed"]
+[connection signal="pressed" from="MainContainer/MapContainer/MapToolbar/DemographicModeButton" to="." method="_on_demographic_mode_pressed"]
+[connection signal="pressed" from="MainContainer/MapContainer/MapToolbar/ActivityModeButton" to="." method="_on_activity_mode_pressed"]
+[connection signal="pressed" from="MainContainer/MapContainer/MapToolbar/LegendButton" to="." method="_on_legend_button_pressed"]

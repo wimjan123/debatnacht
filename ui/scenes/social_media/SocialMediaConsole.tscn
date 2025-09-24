@@ -1,0 +1,220 @@
+[gd_scene load_steps=3 format=3 uid="uid://f6rq2x8rqz5w1s"]
+
+[ext_resource type="Script" path="res://ui/scenes/social_media/SocialMediaConsole.gd" id="1_social"]
+[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+
+[node name="SocialMediaConsole" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_social")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HeaderContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+
+[node name="SocialMediaTitle" type="Label" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+text = "social_media.title"
+add_theme_font_size_override("font_size", 24)
+
+[node name="EngagementMetrics" type="HBoxContainer" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FollowersLabel" type="Label" parent="MainContainer/HeaderContainer/EngagementMetrics"]
+layout_mode = 2
+text = "social_media.followers"
+
+[node name="ReachLabel" type="Label" parent="MainContainer/HeaderContainer/EngagementMetrics"]
+layout_mode = 2
+text = "social_media.reach"
+
+[node name="EngagementLabel" type="Label" parent="MainContainer/HeaderContainer/EngagementMetrics"]
+layout_mode = 2
+text = "social_media.engagement"
+
+[node name="ContentContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="PostCreationTitle" type="Label" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+text = "social_media.create_post"
+add_theme_font_size_override("font_size", 18)
+
+[node name="PostCreationPanel" type="Panel" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PostCreationContent" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="PostTypeContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent"]
+layout_mode = 2
+
+[node name="PostTypeLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/PostTypeContainer"]
+layout_mode = 2
+text = "social_media.post_type"
+
+[node name="PostTypeOption" type="OptionButton" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/PostTypeContainer"]
+layout_mode = 2
+
+[node name="MessageContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MessageLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/MessageContainer"]
+layout_mode = 2
+text = "social_media.message"
+
+[node name="MessageInput" type="TextEdit" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/MessageContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "social_media.message_placeholder"
+
+[node name="CharacterCountLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/MessageContainer"]
+layout_mode = 2
+text = "social_media.character_count"
+horizontal_alignment = 2
+
+[node name="SchedulingContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent"]
+layout_mode = 2
+
+[node name="SchedulePostCheck" type="CheckBox" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/SchedulingContainer"]
+layout_mode = 2
+text = "social_media.schedule_post"
+
+[node name="PostButtonsContainer" type="HBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent"]
+layout_mode = 2
+
+[node name="PreviewButton" type="Button" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/PostButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "social_media.preview"
+
+[node name="PostButton" type="Button" parent="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/PostButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "social_media.post"
+
+[node name="CentralPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="FeedTitle" type="Label" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+text = "social_media.feed"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 18)
+
+[node name="FeedScrollContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SocialMediaFeed" type="VBoxContainer" parent="MainContainer/ContentContainer/CentralPanel/FeedScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="TrendingTitle" type="Label" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+text = "social_media.trending"
+add_theme_font_size_override("font_size", 18)
+
+[node name="TrendingScrollContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 200)
+
+[node name="TrendingList" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel/TrendingScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AnalyticsContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AnalyticsTitle" type="Label" parent="MainContainer/ContentContainer/RightPanel/AnalyticsContainer"]
+layout_mode = 2
+text = "social_media.analytics"
+add_theme_font_size_override("font_size", 16)
+
+[node name="AnalyticsPanel" type="Panel" parent="MainContainer/ContentContainer/RightPanel/AnalyticsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AnalyticsContent" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel/AnalyticsContainer/AnalyticsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="PostPerformanceLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/AnalyticsContainer/AnalyticsPanel/AnalyticsContent"]
+layout_mode = 2
+text = "social_media.post_performance"
+
+[node name="SentimentLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/AnalyticsContainer/AnalyticsPanel/AnalyticsContent"]
+layout_mode = 2
+text = "social_media.sentiment"
+
+[node name="DemographicsLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/AnalyticsContainer/AnalyticsPanel/AnalyticsContent"]
+layout_mode = 2
+text = "social_media.demographics"
+
+[node name="ActionContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.back"
+
+[node name="ScheduledPostsButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "social_media.scheduled_posts"
+
+[node name="CampaignBoostButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "social_media.campaign_boost"
+
+[node name="HelpButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.help"
+
+[connection signal="item_selected" from="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/PostTypeContainer/PostTypeOption" to="." method="_on_post_type_selected"]
+[connection signal="text_changed" from="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/MessageContainer/MessageInput" to="." method="_on_message_text_changed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/PostButtonsContainer/PreviewButton" to="." method="_on_preview_button_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/LeftPanel/PostCreationPanel/PostCreationContent/PostButtonsContainer/PostButton" to="." method="_on_post_button_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/ScheduledPostsButton" to="." method="_on_scheduled_posts_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/CampaignBoostButton" to="." method="_on_campaign_boost_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/HelpButton" to="." method="_on_help_button_pressed"]

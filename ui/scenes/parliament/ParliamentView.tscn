@@ -1,0 +1,224 @@
+[gd_scene load_steps=3 format=3 uid="uid://e5qp1x7rqy4w1p"]
+
+[ext_resource type="Script" path="res://ui/scenes/parliament/ParliamentView.gd" id="1_parliament"]
+[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+
+[node name="ParliamentView" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_parliament")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HeaderContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 100)
+
+[node name="ParliamentTitle" type="Label" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+text = "parliament.title"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 24)
+
+[node name="SessionInfoContainer" type="HBoxContainer" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+
+[node name="SessionStatusLabel" type="Label" parent="MainContainer/HeaderContainer/SessionInfoContainer"]
+layout_mode = 2
+text = "parliament.session_status"
+
+[node name="GovernmentStatusLabel" type="Label" parent="MainContainer/HeaderContainer/SessionInfoContainer"]
+layout_mode = 2
+text = "parliament.government_status"
+
+[node name="ContentContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="ProposedLegislationTitle" type="Label" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+text = "parliament.proposed_legislation"
+add_theme_font_size_override("font_size", 18)
+
+[node name="LegislationScrollContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LegislationList" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/LegislationScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LegislationInfoPanel" type="Panel" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 150)
+
+[node name="LegislationInfoContent" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel/LegislationInfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="LegislationTitleLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/LegislationInfoPanel/LegislationInfoContent"]
+layout_mode = 2
+text = "parliament.select_legislation"
+add_theme_font_size_override("font_size", 14)
+
+[node name="LegislationDescriptionLabel" type="RichTextLabel" parent="MainContainer/ContentContainer/LeftPanel/LegislationInfoPanel/LegislationInfoContent"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "parliament.legislation_description"
+
+[node name="SponsorLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/LegislationInfoPanel/LegislationInfoContent"]
+layout_mode = 2
+text = "parliament.sponsor"
+
+[node name="CentralPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="ParliamentFloorTitle" type="Label" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+text = "parliament.floor_title"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 18)
+
+[node name="ParliamentSeatingPanel" type="Panel" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 300)
+
+[node name="SeatingArea" type="Control" parent="MainContainer/ContentContainer/CentralPanel/ParliamentSeatingPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VotingControlsContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/CentralPanel"]
+layout_mode = 2
+
+[node name="CurrentVoteTitle" type="Label" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer"]
+layout_mode = 2
+text = "parliament.current_vote"
+add_theme_font_size_override("font_size", 16)
+
+[node name="VoteButtonsContainer" type="HBoxContainer" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer"]
+layout_mode = 2
+
+[node name="VoteForButton" type="Button" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "parliament.vote_for"
+
+[node name="VoteAgainstButton" type="Button" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "parliament.vote_against"
+
+[node name="AbstainButton" type="Button" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "parliament.abstain"
+
+[node name="VoteResultContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer"]
+layout_mode = 2
+
+[node name="VoteProgressLabel" type="Label" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteResultContainer"]
+layout_mode = 2
+text = "parliament.vote_progress"
+
+[node name="VoteCountsContainer" type="HBoxContainer" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteResultContainer"]
+layout_mode = 2
+
+[node name="ForCountLabel" type="Label" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteResultContainer/VoteCountsContainer"]
+layout_mode = 2
+text = "parliament.for_count"
+add_theme_color_override("font_color", Color.GREEN)
+
+[node name="AgainstCountLabel" type="Label" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteResultContainer/VoteCountsContainer"]
+layout_mode = 2
+text = "parliament.against_count"
+add_theme_color_override("font_color", Color.RED)
+
+[node name="AbstainCountLabel" type="Label" parent="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteResultContainer/VoteCountsContainer"]
+layout_mode = 2
+text = "parliament.abstain_count"
+add_theme_color_override("font_color", Color.GRAY)
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="PartyPositionsTitle" type="Label" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+text = "parliament.party_positions"
+add_theme_font_size_override("font_size", 18)
+
+[node name="PartyPositionsScrollContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PartyPositionsList" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel/PartyPositionsScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VotingHistoryContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VotingHistoryTitle" type="Label" parent="MainContainer/ContentContainer/RightPanel/VotingHistoryContainer"]
+layout_mode = 2
+text = "parliament.voting_history"
+add_theme_font_size_override("font_size", 16)
+
+[node name="HistoryScrollContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/RightPanel/VotingHistoryContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VotingHistoryList" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel/VotingHistoryContainer/HistoryScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ActionContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.back"
+
+[node name="ProposeLegislationButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "parliament.propose_legislation"
+
+[node name="ViewDebateButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "parliament.view_debate"
+
+[node name="HelpButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.help"
+
+[connection signal="pressed" from="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteButtonsContainer/VoteForButton" to="." method="_on_vote_for_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteButtonsContainer/VoteAgainstButton" to="." method="_on_vote_against_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/CentralPanel/VotingControlsContainer/VoteButtonsContainer/AbstainButton" to="." method="_on_abstain_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/ProposeLegislationButton" to="." method="_on_propose_legislation_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/ViewDebateButton" to="." method="_on_view_debate_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/HelpButton" to="." method="_on_help_button_pressed"]

@@ -1,0 +1,193 @@
+{
+  "version": "1.0.0",
+  "description": "Sample Dutch political parties with diverse ideological spectrum",
+  "parties": [
+    {
+      "id": "vvd",
+      "display_name": "VVD (Volkspartij voor Vrijheid en Democratie)",
+      "display_name_en": "People's Party for Freedom and Democracy",
+      "display_name_nl": "Volkspartij voor Vrijheid en Democratie",
+      "ideology_position": {
+        "economic_axis": 0.7,
+        "social_axis": 0.2
+      },
+      "color": "#0066CC",
+      "base_support": 22.0,
+      "campaign_funds_base": 180000,
+      "red_lines": ["eu_exit", "wealth_tax", "minimum_wage_doubling"],
+      "ministry_preferences": ["Prime Minister", "Finance", "Economic Affairs", "Infrastructure"],
+      "key_policies": {
+        "economy": "pro_business",
+        "taxation": "lower_taxes",
+        "immigration": "selective",
+        "environment": "market_solutions"
+      }
+    },
+    {
+      "id": "pvda",
+      "display_name": "PvdA (Partij van de Arbeid)",
+      "display_name_en": "Labour Party",
+      "display_name_nl": "Partij van de Arbeid",
+      "ideology_position": {
+        "economic_axis": -0.6,
+        "social_axis": 0.4
+      },
+      "color": "#DC143C",
+      "base_support": 18.5,
+      "campaign_funds_base": 150000,
+      "red_lines": ["pension_cuts", "healthcare_privatization", "education_cuts"],
+      "ministry_preferences": ["Social Affairs", "Health", "Education", "Justice"],
+      "key_policies": {
+        "economy": "worker_protection",
+        "taxation": "progressive",
+        "immigration": "humanitarian",
+        "environment": "green_transition"
+      }
+    },
+    {
+      "id": "d66",
+      "display_name": "D66 (Democraten 66)",
+      "display_name_en": "Democrats 66",
+      "display_name_nl": "Democraten 66",
+      "ideology_position": {
+        "economic_axis": 0.2,
+        "social_axis": 0.8
+      },
+      "color": "#32CD32",
+      "base_support": 15.2,
+      "campaign_funds_base": 120000,
+      "red_lines": ["drug_criminalization", "surveillance_expansion", "religious_exemptions"],
+      "ministry_preferences": ["Education", "Interior", "Foreign Affairs", "Climate"],
+      "key_policies": {
+        "economy": "innovation_focused",
+        "taxation": "environmental_taxes",
+        "immigration": "integration_focused",
+        "environment": "ambitious_climate"
+      }
+    },
+    {
+      "id": "cda",
+      "display_name": "CDA (Christen-Democratisch Appèl)",
+      "display_name_en": "Christian Democratic Appeal",
+      "display_name_nl": "Christen-Democratisch Appèl",
+      "ideology_position": {
+        "economic_axis": 0.3,
+        "social_axis": -0.4
+      },
+      "color": "#228B22",
+      "base_support": 12.8,
+      "campaign_funds_base": 110000,
+      "red_lines": ["euthanasia_expansion", "drug_legalization", "sunday_commerce"],
+      "ministry_preferences": ["Agriculture", "Interior", "Justice", "Development"],
+      "key_policies": {
+        "economy": "balanced_approach",
+        "taxation": "family_support",
+        "immigration": "controlled",
+        "environment": "sustainable_farming"
+      }
+    },
+    {
+      "id": "pvv",
+      "display_name": "PVV (Partij voor de Vrijheid)",
+      "display_name_en": "Party for Freedom",
+      "display_name_nl": "Partij voor de Vrijheid",
+      "ideology_position": {
+        "economic_axis": 0.1,
+        "social_axis": -0.8
+      },
+      "color": "#FFD700",
+      "base_support": 11.2,
+      "campaign_funds_base": 95000,
+      "red_lines": ["eu_expansion", "immigration_increase", "islam_accommodation"],
+      "ministry_preferences": ["Interior", "Justice", "Defense", "Immigration"],
+      "key_policies": {
+        "economy": "dutch_first",
+        "taxation": "middle_class_cuts",
+        "immigration": "strict_limits",
+        "environment": "skeptical"
+      }
+    },
+    {
+      "id": "sp",
+      "display_name": "SP (Socialistische Partij)",
+      "display_name_en": "Socialist Party",
+      "display_name_nl": "Socialistische Partij",
+      "ideology_position": {
+        "economic_axis": -0.8,
+        "social_axis": 0.2
+      },
+      "color": "#DC143C",
+      "base_support": 8.9,
+      "campaign_funds_base": 80000,
+      "red_lines": ["privatization", "eu_fiscal_compact", "pension_age_increase"],
+      "ministry_preferences": ["Health", "Social Affairs", "Housing", "Transport"],
+      "key_policies": {
+        "economy": "anti_austerity",
+        "taxation": "wealth_tax",
+        "immigration": "worker_protection",
+        "environment": "just_transition"
+      }
+    },
+    {
+      "id": "gl",
+      "display_name": "GroenLinks",
+      "display_name_en": "GreenLeft",
+      "display_name_nl": "GroenLinks",
+      "ideology_position": {
+        "economic_axis": -0.5,
+        "social_axis": 0.7
+      },
+      "color": "#32CD32",
+      "base_support": 7.3,
+      "campaign_funds_base": 75000,
+      "red_lines": ["nuclear_expansion", "fossil_fuel_subsidies", "inequality_increase"],
+      "ministry_preferences": ["Climate", "Environment", "Development", "Culture"],
+      "key_policies": {
+        "economy": "circular_economy",
+        "taxation": "carbon_tax",
+        "immigration": "open_borders",
+        "environment": "climate_emergency"
+      }
+    },
+    {
+      "id": "fvd",
+      "display_name": "FvD (Forum voor Democratie)",
+      "display_name_en": "Forum for Democracy",
+      "display_name_nl": "Forum voor Democratie",
+      "ideology_position": {
+        "economic_axis": 0.4,
+        "social_axis": -0.6
+      },
+      "color": "#8B0000",
+      "base_support": 4.8,
+      "campaign_funds_base": 60000,
+      "red_lines": ["climate_regulations", "eu_integration", "mass_immigration"],
+      "ministry_preferences": ["Education", "Culture", "Agriculture", "Defense"],
+      "key_policies": {
+        "economy": "deregulation",
+        "taxation": "flat_tax",
+        "immigration": "cultural_compatibility",
+        "environment": "adaptation_over_mitigation"
+      }
+    }
+  ],
+  "coalitions_historical": [
+    {
+      "name": "Rutte III",
+      "parties": ["vvd", "cda", "d66", "cu"],
+      "years": "2017-2021",
+      "stability_score": 0.7
+    },
+    {
+      "name": "Purple Coalition",
+      "parties": ["pvda", "vvd", "d66"],
+      "years": "1994-2002",
+      "stability_score": 0.8
+    }
+  ],
+  "electoral_thresholds": {
+    "seats_for_1_percent": 1.5,
+    "total_seats": 150,
+    "majority_threshold": 76
+  }
+}

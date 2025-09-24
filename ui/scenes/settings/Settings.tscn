@@ -1,0 +1,338 @@
+[gd_scene load_steps=3 format=3 uid="uid://h8ts4z0rqb7w1f"]
+
+[ext_resource type="Script" path="res://ui/scenes/settings/Settings.gd" id="1_settings"]
+[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_settings")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HeaderContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
+
+[node name="SettingsTitle" type="Label" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+text = "settings.title"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 24)
+
+[node name="ContentContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TabsContainer" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="TabButtonsContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/TabsContainer"]
+layout_mode = 2
+
+[node name="GeneralTabButton" type="Button" parent="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer"]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "settings.general"
+
+[node name="AccessibilityTabButton" type="Button" parent="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "settings.accessibility"
+
+[node name="GameplayTabButton" type="Button" parent="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "settings.gameplay"
+
+[node name="AdvancedTabButton" type="Button" parent="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "settings.advanced"
+
+[node name="SettingsPanel" type="Panel" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SettingsContent" type="Control" parent="MainContainer/ContentContainer/SettingsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GeneralSettings" type="ScrollContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="GeneralContent" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GeneralTitle" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent"]
+layout_mode = 2
+text = "settings.general_settings"
+add_theme_font_size_override("font_size", 18)
+
+[node name="LanguageContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent"]
+layout_mode = 2
+
+[node name="LanguageLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/LanguageContainer"]
+layout_mode = 2
+text = "settings.language"
+
+[node name="LanguageOption" type="OptionButton" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/LanguageContainer"]
+layout_mode = 2
+
+[node name="VolumeContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent"]
+layout_mode = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/VolumeContainer"]
+layout_mode = 2
+text = "settings.master_volume"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/VolumeContainer"]
+layout_mode = 2
+max_value = 100.0
+value = 80.0
+
+[node name="SoundEffectsLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/VolumeContainer"]
+layout_mode = 2
+text = "settings.sound_effects"
+
+[node name="SoundEffectsSlider" type="HSlider" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/VolumeContainer"]
+layout_mode = 2
+max_value = 100.0
+value = 70.0
+
+[node name="NotificationsContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent"]
+layout_mode = 2
+
+[node name="NotificationsLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/NotificationsContainer"]
+layout_mode = 2
+text = "settings.notifications"
+
+[node name="NotificationsEnabledCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/NotificationsContainer"]
+layout_mode = 2
+button_pressed = true
+text = "settings.enable_notifications"
+
+[node name="AccessibilitySettings" type="ScrollContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+
+[node name="AccessibilityContent" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AccessibilityTitle" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent"]
+layout_mode = 2
+text = "settings.accessibility_settings"
+add_theme_font_size_override("font_size", 18)
+
+[node name="TextScalingContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent"]
+layout_mode = 2
+
+[node name="TextScalingLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/TextScalingContainer"]
+layout_mode = 2
+text = "settings.text_scaling"
+
+[node name="TextScalingSlider" type="HSlider" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/TextScalingContainer"]
+layout_mode = 2
+min_value = 0.75
+max_value = 2.0
+step = 0.25
+value = 1.0
+
+[node name="TextScalingValueLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/TextScalingContainer"]
+layout_mode = 2
+text = "settings.text_scale_value"
+
+[node name="ThemeContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent"]
+layout_mode = 2
+
+[node name="HighContrastLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/ThemeContainer"]
+layout_mode = 2
+text = "settings.high_contrast"
+
+[node name="HighContrastCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/ThemeContainer"]
+layout_mode = 2
+text = "settings.enable_high_contrast"
+
+[node name="KeyboardNavContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent"]
+layout_mode = 2
+
+[node name="KeyboardNavLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/KeyboardNavContainer"]
+layout_mode = 2
+text = "settings.keyboard_navigation"
+
+[node name="FocusIndicatorsCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/KeyboardNavContainer"]
+layout_mode = 2
+button_pressed = true
+text = "settings.focus_indicators"
+
+[node name="ReducedMotionCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/KeyboardNavContainer"]
+layout_mode = 2
+text = "settings.reduced_motion"
+
+[node name="GameplaySettings" type="ScrollContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+
+[node name="GameplayContent" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameplayTitle" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent"]
+layout_mode = 2
+text = "settings.gameplay_settings"
+add_theme_font_size_override("font_size", 18)
+
+[node name="DifficultyContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent"]
+layout_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/DifficultyContainer"]
+layout_mode = 2
+text = "settings.difficulty"
+
+[node name="DifficultyOption" type="OptionButton" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/DifficultyContainer"]
+layout_mode = 2
+
+[node name="TutorialContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent"]
+layout_mode = 2
+
+[node name="ShowTutorialsCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/TutorialContainer"]
+layout_mode = 2
+button_pressed = true
+text = "settings.show_tutorials"
+
+[node name="AutosaveContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent"]
+layout_mode = 2
+
+[node name="AutosaveLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/AutosaveContainer"]
+layout_mode = 2
+text = "settings.autosave"
+
+[node name="AutosaveEnabledCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/AutosaveContainer"]
+layout_mode = 2
+button_pressed = true
+text = "settings.enable_autosave"
+
+[node name="AutosaveIntervalSlider" type="HSlider" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/AutosaveContainer"]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 5.0
+
+[node name="AutosaveIntervalLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/AutosaveContainer"]
+layout_mode = 2
+text = "settings.autosave_interval"
+
+[node name="AdvancedSettings" type="ScrollContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+
+[node name="AdvancedContent" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AdvancedTitle" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent"]
+layout_mode = 2
+text = "settings.advanced_settings"
+add_theme_font_size_override("font_size", 18)
+
+[node name="DebugContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent"]
+layout_mode = 2
+
+[node name="DebugModeCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DebugContainer"]
+layout_mode = 2
+text = "settings.debug_mode"
+
+[node name="ShowFPSCheck" type="CheckBox" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DebugContainer"]
+layout_mode = 2
+text = "settings.show_fps"
+
+[node name="LoggingContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent"]
+layout_mode = 2
+
+[node name="LoggingLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/LoggingContainer"]
+layout_mode = 2
+text = "settings.logging"
+
+[node name="LogLevelOption" type="OptionButton" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/LoggingContainer"]
+layout_mode = 2
+
+[node name="DataContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent"]
+layout_mode = 2
+
+[node name="DataLabel" type="Label" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DataContainer"]
+layout_mode = 2
+text = "settings.data_management"
+
+[node name="ExportDataButton" type="Button" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DataContainer"]
+layout_mode = 2
+text = "settings.export_data"
+
+[node name="ImportDataButton" type="Button" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DataContainer"]
+layout_mode = 2
+text = "settings.import_data"
+
+[node name="ClearDataButton" type="Button" parent="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DataContainer"]
+layout_mode = 2
+text = "settings.clear_data"
+
+[node name="ActionContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.back"
+
+[node name="ResetToDefaultsButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "settings.reset_defaults"
+
+[node name="ApplyButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "settings.apply"
+
+[node name="HelpButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.help"
+
+[connection signal="pressed" from="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer/GeneralTabButton" to="." method="_on_general_tab_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer/AccessibilityTabButton" to="." method="_on_accessibility_tab_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer/GameplayTabButton" to="." method="_on_gameplay_tab_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/TabsContainer/TabButtonsContainer/AdvancedTabButton" to="." method="_on_advanced_tab_pressed"]
+[connection signal="item_selected" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/LanguageContainer/LanguageOption" to="." method="_on_language_selected"]
+[connection signal="value_changed" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GeneralSettings/GeneralContent/VolumeContainer/MasterVolumeSlider" to="." method="_on_master_volume_changed"]
+[connection signal="value_changed" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/TextScalingContainer/TextScalingSlider" to="." method="_on_text_scaling_changed"]
+[connection signal="toggled" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AccessibilitySettings/AccessibilityContent/ThemeContainer/HighContrastCheck" to="." method="_on_high_contrast_toggled"]
+[connection signal="item_selected" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/GameplaySettings/GameplayContent/DifficultyContainer/DifficultyOption" to="." method="_on_difficulty_selected"]
+[connection signal="pressed" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DataContainer/ExportDataButton" to="." method="_on_export_data_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DataContainer/ImportDataButton" to="." method="_on_import_data_pressed"]
+[connection signal="pressed" from="MainContainer/ContentContainer/SettingsPanel/SettingsContent/AdvancedSettings/AdvancedContent/DataContainer/ClearDataButton" to="." method="_on_clear_data_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/ResetToDefaultsButton" to="." method="_on_reset_defaults_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/HelpButton" to="." method="_on_help_button_pressed"]

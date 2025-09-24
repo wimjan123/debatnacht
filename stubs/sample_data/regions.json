@@ -1,0 +1,366 @@
+{
+  "version": "1.0.0",
+  "description": "Dutch provinces and key municipalities with electoral characteristics",
+  "provinces": [
+    {
+      "id": "noord-holland",
+      "display_name": "Noord-Holland",
+      "display_name_en": "North Holland",
+      "display_name_nl": "Noord-Holland",
+      "population": 2877909,
+      "eligible_voters": 2234567,
+      "historical_turnout": 0.823,
+      "economic_profile": "urban_advanced",
+      "political_lean": "liberal",
+      "key_cities": ["Amsterdam", "Haarlem", "Alkmaar"],
+      "key_issues": ["Housing shortage", "Climate change", "Infrastructure"],
+      "demographics": {
+        "age_18_34": 0.28,
+        "age_35_54": 0.32,
+        "age_55_plus": 0.40,
+        "higher_education": 0.52,
+        "urban_percentage": 0.89,
+        "immigrant_background": 0.35
+      },
+      "voting_history": {
+        "vvd": 0.24,
+        "d66": 0.19,
+        "pvda": 0.15,
+        "gl": 0.12,
+        "sp": 0.08,
+        "others": 0.22
+      }
+    },
+    {
+      "id": "zuid-holland",
+      "display_name": "Zuid-Holland",
+      "display_name_en": "South Holland",
+      "display_name_nl": "Zuid-Holland",
+      "population": 3705395,
+      "eligible_voters": 2890123,
+      "historical_turnout": 0.801,
+      "economic_profile": "mixed_urban_industrial",
+      "political_lean": "centrist",
+      "key_cities": ["Den Haag", "Rotterdam", "Leiden", "Delft"],
+      "key_issues": ["Port economy", "Integration", "Security"],
+      "demographics": {
+        "age_18_34": 0.26,
+        "age_35_54": 0.33,
+        "age_55_plus": 0.41,
+        "higher_education": 0.48,
+        "urban_percentage": 0.85,
+        "immigrant_background": 0.32
+      },
+      "voting_history": {
+        "vvd": 0.22,
+        "pvda": 0.16,
+        "d66": 0.14,
+        "pvv": 0.13,
+        "cda": 0.11,
+        "others": 0.24
+      }
+    },
+    {
+      "id": "utrecht",
+      "display_name": "Utrecht",
+      "display_name_en": "Utrecht",
+      "display_name_nl": "Utrecht",
+      "population": 1353596,
+      "eligible_voters": 1045789,
+      "historical_turnout": 0.834,
+      "economic_profile": "knowledge_economy",
+      "political_lean": "progressive",
+      "key_cities": ["Utrecht", "Amersfoort", "Nieuwegein"],
+      "key_issues": ["Innovation", "Sustainability", "Quality of life"],
+      "demographics": {
+        "age_18_34": 0.31,
+        "age_35_54": 0.35,
+        "age_55_plus": 0.34,
+        "higher_education": 0.56,
+        "urban_percentage": 0.78,
+        "immigrant_background": 0.27
+      },
+      "voting_history": {
+        "d66": 0.21,
+        "vvd": 0.19,
+        "gl": 0.15,
+        "cda": 0.13,
+        "pvda": 0.12,
+        "others": 0.20
+      }
+    },
+    {
+      "id": "gelderland",
+      "display_name": "Gelderland",
+      "display_name_en": "Gelderland",
+      "display_name_nl": "Gelderland",
+      "population": 2084478,
+      "eligible_voters": 1634567,
+      "historical_turnout": 0.787,
+      "economic_profile": "mixed_rural_urban",
+      "political_lean": "center_right",
+      "key_cities": ["Arnhem", "Nijmegen", "Apeldoorn"],
+      "key_issues": ["Agriculture", "Nature conservation", "Regional development"],
+      "demographics": {
+        "age_18_34": 0.24,
+        "age_35_54": 0.32,
+        "age_55_plus": 0.44,
+        "higher_education": 0.41,
+        "urban_percentage": 0.58,
+        "immigrant_background": 0.19
+      },
+      "voting_history": {
+        "cda": 0.18,
+        "vvd": 0.17,
+        "pvv": 0.14,
+        "d66": 0.13,
+        "sp": 0.11,
+        "others": 0.27
+      }
+    },
+    {
+      "id": "noord-brabant",
+      "display_name": "Noord-Brabant",
+      "display_name_en": "North Brabant",
+      "display_name_nl": "Noord-Brabant",
+      "population": 2562566,
+      "eligible_voters": 2001234,
+      "historical_turnout": 0.798,
+      "economic_profile": "industrial_services",
+      "political_lean": "catholic_centrist",
+      "key_cities": ["Eindhoven", "'s-Hertogenbosch", "Tilburg", "Breda"],
+      "key_issues": ["High-tech industry", "PFAS pollution", "Cultural identity"],
+      "demographics": {
+        "age_18_34": 0.25,
+        "age_35_54": 0.33,
+        "age_55_plus": 0.42,
+        "higher_education": 0.43,
+        "urban_percentage": 0.71,
+        "immigrant_background": 0.22
+      },
+      "voting_history": {
+        "vvd": 0.19,
+        "cda": 0.17,
+        "pvv": 0.15,
+        "d66": 0.12,
+        "sp": 0.10,
+        "others": 0.27
+      }
+    },
+    {
+      "id": "limburg",
+      "display_name": "Limburg",
+      "display_name_en": "Limburg",
+      "display_name_nl": "Limburg",
+      "population": 1118223,
+      "eligible_voters": 890567,
+      "historical_turnout": 0.772,
+      "economic_profile": "transitional_industrial",
+      "political_lean": "populist_vulnerable",
+      "key_cities": ["Maastricht", "Heerlen", "Sittard"],
+      "key_issues": ["Coal transition", "Cross-border cooperation", "Economic decline"],
+      "demographics": {
+        "age_18_34": 0.22,
+        "age_35_54": 0.31,
+        "age_55_plus": 0.47,
+        "higher_education": 0.36,
+        "urban_percentage": 0.62,
+        "immigrant_background": 0.18
+      },
+      "voting_history": {
+        "pvv": 0.21,
+        "cda": 0.16,
+        "vvd": 0.14,
+        "sp": 0.13,
+        "fvd": 0.09,
+        "others": 0.27
+      }
+    },
+    {
+      "id": "overijssel",
+      "display_name": "Overijssel",
+      "display_name_en": "Overijssel",
+      "display_name_nl": "Overijssel",
+      "population": 1162013,
+      "eligible_voters": 908765,
+      "historical_turnout": 0.809,
+      "economic_profile": "mixed_industrial",
+      "political_lean": "conservative",
+      "key_cities": ["Enschede", "Zwolle", "Deventer"],
+      "key_issues": ["Manufacturing", "Education", "Connectivity"],
+      "demographics": {
+        "age_18_34": 0.26,
+        "age_35_54": 0.32,
+        "age_55_plus": 0.42,
+        "higher_education": 0.39,
+        "urban_percentage": 0.64,
+        "immigrant_background": 0.16
+      },
+      "voting_history": {
+        "cda": 0.19,
+        "vvd": 0.17,
+        "pvv": 0.13,
+        "d66": 0.11,
+        "sgp": 0.08,
+        "others": 0.32
+      }
+    },
+    {
+      "id": "friesland",
+      "display_name": "Fryslân",
+      "display_name_en": "Friesland",
+      "display_name_nl": "Fryslân/Friesland",
+      "population": 649957,
+      "eligible_voters": 512345,
+      "historical_turnout": 0.813,
+      "economic_profile": "agricultural_tourism",
+      "political_lean": "regional_conservative",
+      "key_cities": ["Leeuwarden", "Sneek", "Heerenveen"],
+      "key_issues": ["Frisian language", "Agriculture", "Water management"],
+      "demographics": {
+        "age_18_34": 0.23,
+        "age_35_54": 0.31,
+        "age_55_plus": 0.46,
+        "higher_education": 0.34,
+        "urban_percentage": 0.51,
+        "immigrant_background": 0.12
+      },
+      "voting_history": {
+        "cda": 0.21,
+        "vvd": 0.16,
+        "fp": 0.14,
+        "pvv": 0.12,
+        "d66": 0.09,
+        "others": 0.28
+      }
+    },
+    {
+      "id": "groningen",
+      "display_name": "Groningen",
+      "display_name_en": "Groningen",
+      "display_name_nl": "Groningen",
+      "population": 585881,
+      "eligible_voters": 456789,
+      "historical_turnout": 0.791,
+      "economic_profile": "energy_education",
+      "political_lean": "left_leaning",
+      "key_cities": ["Groningen", "Delfzijl", "Winschoten"],
+      "key_issues": ["Gas extraction damage", "Energy transition", "Demographics"],
+      "demographics": {
+        "age_18_34": 0.29,
+        "age_35_54": 0.30,
+        "age_55_plus": 0.41,
+        "higher_education": 0.47,
+        "urban_percentage": 0.58,
+        "immigrant_background": 0.15
+      },
+      "voting_history": {
+        "pvda": 0.18,
+        "sp": 0.16,
+        "d66": 0.14,
+        "gl": 0.13,
+        "vvd": 0.12,
+        "others": 0.27
+      }
+    },
+    {
+      "id": "drenthe",
+      "display_name": "Drenthe",
+      "display_name_en": "Drenthe",
+      "display_name_nl": "Drenthe",
+      "population": 493682,
+      "eligible_voters": 389012,
+      "historical_turnout": 0.805,
+      "economic_profile": "rural_traditional",
+      "political_lean": "conservative_rural",
+      "key_cities": ["Assen", "Emmen", "Hoogeveen"],
+      "key_issues": ["Rural services", "Agriculture", "Population decline"],
+      "demographics": {
+        "age_18_34": 0.21,
+        "age_35_54": 0.30,
+        "age_55_plus": 0.49,
+        "higher_education": 0.32,
+        "urban_percentage": 0.48,
+        "immigrant_background": 0.10
+      },
+      "voting_history": {
+        "cda": 0.22,
+        "pvv": 0.16,
+        "vvd": 0.15,
+        "sp": 0.12,
+        "fvd": 0.09,
+        "others": 0.26
+      }
+    },
+    {
+      "id": "flevoland",
+      "display_name": "Flevoland",
+      "display_name_en": "Flevoland",
+      "display_name_nl": "Flevoland",
+      "population": 422202,
+      "eligible_voters": 323456,
+      "historical_turnout": 0.764,
+      "economic_profile": "new_suburban",
+      "political_lean": "volatile_populist",
+      "key_cities": ["Almere", "Lelystad", "Emmeloord"],
+      "key_issues": ["Urban development", "Transport links", "Community building"],
+      "demographics": {
+        "age_18_34": 0.28,
+        "age_35_54": 0.38,
+        "age_55_plus": 0.34,
+        "higher_education": 0.38,
+        "urban_percentage": 0.74,
+        "immigrant_background": 0.31
+      },
+      "voting_history": {
+        "pvv": 0.19,
+        "vvd": 0.17,
+        "fvd": 0.12,
+        "pvda": 0.11,
+        "d66": 0.10,
+        "others": 0.31
+      }
+    },
+    {
+      "id": "zeeland",
+      "display_name": "Zeeland",
+      "display_name_en": "Zeeland",
+      "display_name_nl": "Zeeland",
+      "population": 383689,
+      "eligible_voters": 304567,
+      "historical_turnout": 0.798,
+      "economic_profile": "maritime_agricultural",
+      "political_lean": "traditional_conservative",
+      "key_cities": ["Middelburg", "Vlissingen", "Goes"],
+      "key_issues": ["Sea level rise", "Port activities", "Tourism"],
+      "demographics": {
+        "age_18_34": 0.20,
+        "age_35_54": 0.30,
+        "age_55_plus": 0.50,
+        "higher_education": 0.31,
+        "urban_percentage": 0.54,
+        "immigrant_background": 0.08
+      },
+      "voting_history": {
+        "cda": 0.23,
+        "vvd": 0.18,
+        "pvv": 0.14,
+        "sgp": 0.11,
+        "d66": 0.09,
+        "others": 0.25
+      }
+    }
+  ],
+  "electoral_system": {
+    "total_constituencies": 150,
+    "calculation_method": "D'Hondt",
+    "threshold_percentage": 0.67,
+    "preference_votes_enabled": true
+  },
+  "regional_characteristics": {
+    "bible_belt": ["overijssel", "gelderland", "zeeland"],
+    "randstad": ["noord-holland", "zuid-holland", "utrecht", "flevoland"],
+    "peripheral_regions": ["groningen", "friesland", "drenthe", "limburg"],
+    "catholic_regions": ["noord-brabant", "limburg"]
+  }
+}

@@ -1,0 +1,191 @@
+[gd_scene load_steps=3 format=3 uid="uid://d9ne7x5rqz3w1k"]
+
+[ext_resource type="Script" path="res://ui/scenes/media_events/MediaEvent.gd" id="1_mediaevent"]
+[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+
+[node name="MediaEvent" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_mediaevent")
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HeaderContainer" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+
+[node name="EventTitle" type="Label" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+text = "media.event_title"
+add_theme_font_size_override("font_size", 24)
+
+[node name="EventTypeUrgency" type="HBoxContainer" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+
+[node name="EventTypeLabel" type="Label" parent="MainContainer/HeaderContainer/EventTypeUrgency"]
+layout_mode = 2
+text = "media.event_type"
+
+[node name="UrgencyLabel" type="Label" parent="MainContainer/HeaderContainer/EventTypeUrgency"]
+layout_mode = 2
+text = "media.urgency_high"
+add_theme_color_override("font_color", Color.RED)
+
+[node name="TimePressureContainer" type="HBoxContainer" parent="MainContainer/HeaderContainer"]
+layout_mode = 2
+
+[node name="TimePressureIcon" type="Label" parent="MainContainer/HeaderContainer/TimePressureContainer"]
+layout_mode = 2
+text = "⏰"
+
+[node name="TimePressureLabel" type="Label" parent="MainContainer/HeaderContainer/TimePressureContainer"]
+layout_mode = 2
+text = "media.time_pressure"
+
+[node name="ContentContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="EventDescriptionTitle" type="Label" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+text = "media.event_description"
+add_theme_font_size_override("font_size", 18)
+
+[node name="EventDescriptionPanel" type="Panel" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EventDescription" type="RichTextLabel" parent="MainContainer/ContentContainer/LeftPanel/EventDescriptionPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+text = "media.event_description_placeholder"
+
+[node name="SentimentContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/LeftPanel"]
+layout_mode = 2
+
+[node name="SentimentTitle" type="Label" parent="MainContainer/ContentContainer/LeftPanel/SentimentContainer"]
+layout_mode = 2
+text = "media.current_sentiment"
+
+[node name="SentimentMeter" type="Panel" parent="MainContainer/ContentContainer/LeftPanel/SentimentContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+
+[node name="SentimentBar" type="ProgressBar" parent="MainContainer/ContentContainer/LeftPanel/SentimentContainer/SentimentMeter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+value = 50.0
+
+[node name="SentimentLabel" type="Label" parent="MainContainer/ContentContainer/LeftPanel/SentimentContainer/SentimentMeter"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -10.0
+offset_right = 25.0
+offset_bottom = 10.0
+text = "Neutral"
+horizontal_alignment = 1
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer/ContentContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="ResponseOptionsTitle" type="Label" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+text = "media.response_options"
+add_theme_font_size_override("font_size", 18)
+
+[node name="ResponseOptionsContainer" type="ScrollContainer" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResponseOptionsList" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel/ResponseOptionsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ResponsePreviewContainer" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel"]
+layout_mode = 2
+
+[node name="ResponsePreviewTitle" type="Label" parent="MainContainer/ContentContainer/RightPanel/ResponsePreviewContainer"]
+layout_mode = 2
+text = "media.response_preview"
+
+[node name="ResponsePreviewPanel" type="Panel" parent="MainContainer/ContentContainer/RightPanel/ResponsePreviewContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+
+[node name="ResponsePreviewContent" type="VBoxContainer" parent="MainContainer/ContentContainer/RightPanel/ResponsePreviewContainer/ResponsePreviewPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="PreviewText" type="RichTextLabel" parent="MainContainer/ContentContainer/RightPanel/ResponsePreviewContainer/ResponsePreviewPanel/ResponsePreviewContent"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "media.select_response_preview"
+
+[node name="ImpactContainer" type="HBoxContainer" parent="MainContainer/ContentContainer/RightPanel/ResponsePreviewContainer/ResponsePreviewPanel/ResponsePreviewContent"]
+layout_mode = 2
+
+[node name="SentimentImpactLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/ResponsePreviewContainer/ResponsePreviewPanel/ResponsePreviewContent/ImpactContainer"]
+layout_mode = 2
+text = "media.sentiment_impact"
+
+[node name="RiskLevelLabel" type="Label" parent="MainContainer/ContentContainer/RightPanel/ResponsePreviewContainer/ResponsePreviewPanel/ResponsePreviewContent/ImpactContainer"]
+layout_mode = 2
+text = "media.risk_level"
+
+[node name="ActionContainer" type="HBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "common.back"
+
+[node name="SubmitResponseButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "media.submit_response"
+disabled = true
+
+[node name="RequestHelpButton" type="Button" parent="MainContainer/ActionContainer"]
+layout_mode = 2
+text = "media.request_help"
+
+[connection signal="pressed" from="MainContainer/ActionContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/SubmitResponseButton" to="." method="_on_submit_response_pressed"]
+[connection signal="pressed" from="MainContainer/ActionContainer/RequestHelpButton" to="." method="_on_request_help_pressed"]

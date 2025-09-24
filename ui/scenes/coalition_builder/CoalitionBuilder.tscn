@@ -1,0 +1,225 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4oa8x6rqp4w1m"]
+
+[ext_resource type="Script" path="res://ui/scenes/coalition_builder/CoalitionBuilder.gd" id="1_coalition"]
+[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+
+[node name="CoalitionBuilder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource("2_theme")
+script = ExtResource("1_coalition")
+
+[node name="MainContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LeftPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="AvailablePartiesTitle" type="Label" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+text = "coalition.available_parties"
+add_theme_font_size_override("font_size", 18)
+
+[node name="PartiesScrollContainer" type="ScrollContainer" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AvailablePartiesList" type="VBoxContainer" parent="MainContainer/LeftPanel/PartiesScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PartyInfoPanel" type="Panel" parent="MainContainer/LeftPanel"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 200)
+
+[node name="PartyInfoContent" type="VBoxContainer" parent="MainContainer/LeftPanel/PartyInfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="PartyInfoTitle" type="Label" parent="MainContainer/LeftPanel/PartyInfoPanel/PartyInfoContent"]
+layout_mode = 2
+text = "coalition.party_info"
+add_theme_font_size_override("font_size", 16)
+
+[node name="PartyNameLabel" type="Label" parent="MainContainer/LeftPanel/PartyInfoPanel/PartyInfoContent"]
+layout_mode = 2
+text = "coalition.select_party"
+
+[node name="PartySeatsLabel" type="Label" parent="MainContainer/LeftPanel/PartyInfoPanel/PartyInfoContent"]
+layout_mode = 2
+text = "coalition.party_seats"
+
+[node name="PartyIdeologyLabel" type="Label" parent="MainContainer/LeftPanel/PartyInfoPanel/PartyInfoContent"]
+layout_mode = 2
+text = "coalition.party_ideology"
+
+[node name="CompatibilityLabel" type="Label" parent="MainContainer/LeftPanel/PartyInfoPanel/PartyInfoContent"]
+layout_mode = 2
+text = "coalition.compatibility"
+
+[node name="CentralPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="CoalitionBuilderTitle" type="Label" parent="MainContainer/CentralPanel"]
+layout_mode = 2
+text = "coalition.builder_title"
+horizontal_alignment = 1
+add_theme_font_size_override("font_size", 20)
+
+[node name="CoalitionStatusContainer" type="VBoxContainer" parent="MainContainer/CentralPanel"]
+layout_mode = 2
+
+[node name="StatusLabelsContainer" type="HBoxContainer" parent="MainContainer/CentralPanel/CoalitionStatusContainer"]
+layout_mode = 2
+
+[node name="TotalSeatsLabel" type="Label" parent="MainContainer/CentralPanel/CoalitionStatusContainer/StatusLabelsContainer"]
+layout_mode = 2
+text = "coalition.total_seats"
+
+[node name="MajorityStatusLabel" type="Label" parent="MainContainer/CentralPanel/CoalitionStatusContainer/StatusLabelsContainer"]
+layout_mode = 2
+text = "coalition.majority_status"
+
+[node name="StabilityLabel" type="Label" parent="MainContainer/CentralPanel/CoalitionStatusContainer/StatusLabelsContainer"]
+layout_mode = 2
+text = "coalition.stability"
+
+[node name="CoalitionDropZone" type="Panel" parent="MainContainer/CentralPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+custom_minimum_size = Vector2(0, 300)
+
+[node name="DropZoneLabel" type="Label" parent="MainContainer/CentralPanel/CoalitionDropZone"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+text = "coalition.drop_parties_here"
+horizontal_alignment = 1
+
+[node name="CoalitionPartiesList" type="VBoxContainer" parent="MainContainer/CentralPanel/CoalitionDropZone"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="ActionButtonsContainer" type="HBoxContainer" parent="MainContainer/CentralPanel"]
+layout_mode = 2
+
+[node name="ValidateCoalitionButton" type="Button" parent="MainContainer/CentralPanel/ActionButtonsContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "coalition.validate"
+
+[node name="ClearCoalitionButton" type="Button" parent="MainContainer/CentralPanel/ActionButtonsContainer"]
+layout_mode = 2
+text = "coalition.clear"
+
+[node name="RightPanel" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="ValidationResultsTitle" type="Label" parent="MainContainer/RightPanel"]
+layout_mode = 2
+text = "coalition.validation_results"
+add_theme_font_size_override("font_size", 18)
+
+[node name="ValidationResultsPanel" type="Panel" parent="MainContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ValidationContent" type="VBoxContainer" parent="MainContainer/RightPanel/ValidationResultsPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+
+[node name="FeasibilityLabel" type="Label" parent="MainContainer/RightPanel/ValidationResultsPanel/ValidationContent"]
+layout_mode = 2
+text = "coalition.feasibility"
+
+[node name="BlockingIssuesList" type="VBoxContainer" parent="MainContainer/RightPanel/ValidationResultsPanel/ValidationContent"]
+layout_mode = 2
+
+[node name="BlockingIssuesTitle" type="Label" parent="MainContainer/RightPanel/ValidationResultsPanel/ValidationContent/BlockingIssuesList"]
+layout_mode = 2
+text = "coalition.blocking_issues"
+
+[node name="PolicyAgreementsContainer" type="VBoxContainer" parent="MainContainer/RightPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PolicyAgreementsTitle" type="Label" parent="MainContainer/RightPanel/PolicyAgreementsContainer"]
+layout_mode = 2
+text = "coalition.policy_agreements"
+add_theme_font_size_override("font_size", 16)
+
+[node name="PolicyScrollContainer" type="ScrollContainer" parent="MainContainer/RightPanel/PolicyAgreementsContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PolicyAgreementsList" type="VBoxContainer" parent="MainContainer/RightPanel/PolicyAgreementsContainer/PolicyScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BottomActionsContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 1024.0
+
+[node name="BackButton" type="Button" parent="BottomActionsContainer"]
+layout_mode = 2
+text = "common.back"
+
+[node name="SimulateNegotiationsButton" type="Button" parent="BottomActionsContainer"]
+layout_mode = 2
+text = "coalition.simulate_negotiations"
+
+[node name="FinalizeCoalitionButton" type="Button" parent="BottomActionsContainer"]
+layout_mode = 2
+text = "coalition.finalize"
+disabled = true
+
+[node name="HelpButton" type="Button" parent="BottomActionsContainer"]
+layout_mode = 2
+text = "common.help"
+
+[connection signal="pressed" from="MainContainer/CentralPanel/ActionButtonsContainer/ValidateCoalitionButton" to="." method="_on_validate_coalition_pressed"]
+[connection signal="pressed" from="MainContainer/CentralPanel/ActionButtonsContainer/ClearCoalitionButton" to="." method="_on_clear_coalition_pressed"]
+[connection signal="pressed" from="BottomActionsContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="BottomActionsContainer/SimulateNegotiationsButton" to="." method="_on_simulate_negotiations_pressed"]
+[connection signal="pressed" from="BottomActionsContainer/FinalizeCoalitionButton" to="." method="_on_finalize_coalition_pressed"]
+[connection signal="pressed" from="BottomActionsContainer/HelpButton" to="." method="_on_help_button_pressed"]

@@ -1,0 +1,385 @@
+{
+  "version": "1.0.0",
+  "description": "Pre-configured election scenarios for Dutch politics simulation",
+  "scenarios": [
+    {
+      "id": "standard_2025",
+      "name": "Standard Election 2025",
+      "name_nl": "Standaard Verkiezingen 2025",
+      "description": "A typical Dutch general election with current party landscape",
+      "description_nl": "Een typische Nederlandse Tweede Kamerverkiezing met het huidige partijlandschap",
+      "difficulty": "normal",
+      "campaign_duration_days": 60,
+      "starting_date": "2025-01-15",
+      "election_date": "2025-03-15",
+      "player_party": {
+        "id": "new_party",
+        "display_name": "New Democratic Party",
+        "display_name_nl": "Nieuwe Democratische Partij",
+        "ideology_position": {"economic_axis": 0.0, "social_axis": 0.0},
+        "starting_funds": 125000,
+        "starting_polls": 8.5,
+        "projected_seats": 12
+      },
+      "victory_conditions": {
+        "seats_for_victory": 25,
+        "coalition_leader_seats": 35,
+        "acceptable_coalition_partners": ["vvd", "d66", "cda", "pvda"],
+        "time_limit_days": 60
+      },
+      "special_events": [
+        {
+          "day": 15,
+          "type": "economic_crisis",
+          "title": "Housing Crisis Peaks",
+          "description": "Major housing shortage scandal affects voter priorities",
+          "effects": {
+            "housing_issue_salience": 0.3,
+            "incumbent_penalty": -2.0
+          }
+        },
+        {
+          "day": 30,
+          "type": "debate",
+          "title": "Prime Minister Debate",
+          "description": "Mandatory participation in prime time debate",
+          "mandatory": true,
+          "audience_reach": 2500000
+        },
+        {
+          "day": 45,
+          "type": "policy_leak",
+          "title": "Coalition Document Leak",
+          "description": "Previous government coalition documents leaked to press",
+          "effects": {
+            "transparency_issue_salience": 0.2,
+            "anti_establishment_boost": 1.5
+          }
+        }
+      ],
+      "ai_difficulty": {
+        "opponent_reaction_speed": "normal",
+        "media_scrutiny": "normal",
+        "voter_volatility": 0.4
+      }
+    },
+    {
+      "id": "coalition_crisis",
+      "name": "Coalition Crisis Scenario",
+      "name_nl": "Coalitiecrisis Scenario",
+      "description": "Start during a government crisis with snap elections",
+      "description_nl": "Begin tijdens een regeringscrisis met vervroegde verkiezingen",
+      "difficulty": "hard",
+      "campaign_duration_days": 30,
+      "starting_date": "2025-02-01",
+      "election_date": "2025-03-02",
+      "player_party": {
+        "id": "protest_party",
+        "display_name": "Citizens' Movement",
+        "display_name_nl": "Burgerbeweging",
+        "ideology_position": {"economic_axis": -0.2, "social_axis": 0.3},
+        "starting_funds": 75000,
+        "starting_polls": 12.0,
+        "projected_seats": 18
+      },
+      "victory_conditions": {
+        "seats_for_victory": 30,
+        "coalition_leader_seats": 40,
+        "must_avoid_parties": ["establishment_parties"],
+        "time_limit_days": 30
+      },
+      "initial_conditions": {
+        "government_approval": 0.28,
+        "economic_confidence": 0.35,
+        "political_trust": 0.41,
+        "voter_anger": 0.68
+      },
+      "special_events": [
+        {
+          "day": 5,
+          "type": "scandal_revelation",
+          "title": "Minister Resignation",
+          "description": "Governing party minister resigns over ethics scandal",
+          "effects": {
+            "incumbent_penalty": -3.5,
+            "trust_issue_salience": 0.4
+          }
+        },
+        {
+          "day": 15,
+          "type": "emergency_debate",
+          "title": "Crisis Debate",
+          "description": "Emergency parliamentary debate broadcast live",
+          "mandatory": true,
+          "audience_reach": 3200000
+        },
+        {
+          "day": 25,
+          "type": "last_minute_revelation",
+          "title": "Opposition Research Leak",
+          "description": "Damaging information about major party surfaces",
+          "random_target": true,
+          "effects": {
+            "target_party_penalty": -5.0
+          }
+        }
+      ],
+      "ai_difficulty": {
+        "opponent_reaction_speed": "fast",
+        "media_scrutiny": "high",
+        "voter_volatility": 0.7
+      }
+    },
+    {
+      "id": "newcomer_challenge",
+      "name": "Political Newcomer Challenge",
+      "name_nl": "Politieke Nieuwkomer Uitdaging",
+      "description": "Start as complete unknown with minimal resources",
+      "description_nl": "Begin als complete onbekende met minimale middelen",
+      "difficulty": "very_hard",
+      "campaign_duration_days": 90,
+      "starting_date": "2024-12-15",
+      "election_date": "2025-03-15",
+      "player_party": {
+        "id": "startup_party",
+        "display_name": "Fresh Start Party",
+        "display_name_nl": "Frisse Start Partij",
+        "ideology_position": {"economic_axis": 0.1, "social_axis": 0.5},
+        "starting_funds": 45000,
+        "starting_polls": 2.1,
+        "projected_seats": 3,
+        "name_recognition": 0.15
+      },
+      "victory_conditions": {
+        "seats_for_victory": 15,
+        "coalition_relevance_seats": 8,
+        "must_exceed_threshold": true,
+        "time_limit_days": 90
+      },
+      "challenges": [
+        "media_attention_threshold",
+        "debate_participation_polls",
+        "funding_limitations",
+        "volunteer_recruitment"
+      ],
+      "special_events": [
+        {
+          "day": 20,
+          "type": "media_breakthrough",
+          "title": "Viral Moment Opportunity",
+          "description": "Chance for unexpected media attention",
+          "success_conditions": {
+            "social_media_score": 0.6,
+            "authenticity_rating": 0.7
+          },
+          "success_effects": {
+            "name_recognition": 0.3,
+            "media_interest": 0.4
+          }
+        },
+        {
+          "day": 45,
+          "type": "debate_threshold",
+          "title": "Debate Participation Decision",
+          "description": "TV networks decide on debate participation",
+          "requirement": {
+            "minimum_polls": 4.0
+          }
+        },
+        {
+          "day": 75,
+          "type": "funding_crisis",
+          "title": "Campaign Finance Challenge",
+          "description": "Major expense threatens campaign viability",
+          "challenge_amount": 35000,
+          "failure_effects": {
+            "campaign_capacity": -0.4
+          }
+        }
+      ],
+      "ai_difficulty": {
+        "opponent_reaction_speed": "normal",
+        "media_scrutiny": "low_initially",
+        "voter_volatility": 0.3,
+        "establishment_resistance": "high"
+      }
+    },
+    {
+      "id": "climate_election",
+      "name": "Climate Crisis Election",
+      "name_nl": "Klimaatcrisis Verkiezingen",
+      "description": "Election dominated by environmental crisis and climate policy",
+      "description_nl": "Verkiezingen gedomineerd door milieucrisis en klimaatbeleid",
+      "difficulty": "normal",
+      "campaign_duration_days": 75,
+      "starting_date": "2024-12-31",
+      "election_date": "2025-03-15",
+      "player_party": {
+        "id": "green_alliance",
+        "display_name": "Green Alliance",
+        "display_name_nl": "Groene Alliantie",
+        "ideology_position": {"economic_axis": -0.3, "social_axis": 0.6},
+        "starting_funds": 95000,
+        "starting_polls": 6.8,
+        "projected_seats": 10
+      },
+      "victory_conditions": {
+        "seats_for_victory": 20,
+        "environmental_coalition": true,
+        "climate_policy_implemented": true,
+        "time_limit_days": 75
+      },
+      "scenario_modifiers": {
+        "climate_issue_salience": 0.8,
+        "environmental_awareness": 0.9,
+        "green_vote_potential": 0.35,
+        "fossil_fuel_resistance": 0.6
+      },
+      "special_events": [
+        {
+          "day": 10,
+          "type": "environmental_disaster",
+          "title": "Extreme Weather Event",
+          "description": "Major flooding demonstrates climate vulnerability",
+          "effects": {
+            "climate_urgency": 0.4,
+            "green_party_boost": 2.5,
+            "infrastructure_salience": 0.3
+          }
+        },
+        {
+          "day": 35,
+          "type": "industry_pushback",
+          "title": "Business Coalition Resistance",
+          "description": "Major industries launch anti-green regulation campaign",
+          "effects": {
+            "economic_fear": 0.3,
+            "job_security_concern": 0.4
+          }
+        },
+        {
+          "day": 55,
+          "type": "youth_climate_strike",
+          "title": "Student Climate Action",
+          "description": "Massive youth climate strikes across the country",
+          "effects": {
+            "young_voter_mobilization": 0.5,
+            "climate_urgency": 0.2
+          }
+        }
+      ],
+      "ai_difficulty": {
+        "opponent_reaction_speed": "normal",
+        "media_scrutiny": "environmental_focus",
+        "voter_volatility": 0.5,
+        "special_interests": "fossil_fuel_lobby"
+      }
+    },
+    {
+      "id": "tutorial_scenario",
+      "name": "Tutorial: Learn the Basics",
+      "name_nl": "Handleiding: Leer de Basis",
+      "description": "Guided introduction to Dutch politics and campaign mechanics",
+      "description_nl": "Begeleide introductie tot Nederlandse politiek en campagnemechaniek",
+      "difficulty": "tutorial",
+      "campaign_duration_days": 45,
+      "starting_date": "2025-01-30",
+      "election_date": "2025-03-15",
+      "player_party": {
+        "id": "learning_party",
+        "display_name": "Democratic Learning Party",
+        "display_name_nl": "Democratische Leerpartij",
+        "ideology_position": {"economic_axis": 0.0, "social_axis": 0.0},
+        "starting_funds": 100000,
+        "starting_polls": 10.0,
+        "projected_seats": 15
+      },
+      "victory_conditions": {
+        "seats_for_victory": 18,
+        "learn_all_mechanics": true,
+        "complete_tutorials": true,
+        "time_limit_days": 45
+      },
+      "tutorial_features": {
+        "guided_actions": true,
+        "explanation_overlays": true,
+        "simplified_ai": true,
+        "step_by_step_help": true,
+        "mistake_recovery": true
+      },
+      "tutorial_progression": [
+        {
+          "day": 5,
+          "lesson": "campaign_actions",
+          "title": "Campaign Activities",
+          "content": "Learn about rallies, advertisements, and media interviews"
+        },
+        {
+          "day": 15,
+          "lesson": "regional_strategy",
+          "title": "Regional Targeting",
+          "content": "Understand how different regions vote and why"
+        },
+        {
+          "day": 25,
+          "lesson": "media_management",
+          "title": "Media Relations",
+          "content": "Master media interviews and public communication"
+        },
+        {
+          "day": 35,
+          "lesson": "coalition_planning",
+          "title": "Coalition Building",
+          "content": "Plan post-election government formation"
+        }
+      ],
+      "special_events": [
+        {
+          "day": 10,
+          "type": "tutorial_challenge",
+          "title": "First Media Interview",
+          "description": "Practice handling media questions with guidance",
+          "tutorial": true,
+          "guidance_available": true
+        },
+        {
+          "day": 30,
+          "type": "tutorial_challenge",
+          "title": "Coalition Strategy",
+          "description": "Learn to evaluate potential government partners",
+          "tutorial": true,
+          "guidance_available": true
+        }
+      ],
+      "ai_difficulty": {
+        "opponent_reaction_speed": "slow",
+        "media_scrutiny": "gentle",
+        "voter_volatility": 0.2,
+        "help_available": true
+      }
+    }
+  ],
+  "scenario_categories": {
+    "difficulty_levels": {
+      "tutorial": "Learn game mechanics with guidance",
+      "easy": "Favorable conditions for victory",
+      "normal": "Balanced and realistic challenge",
+      "hard": "Difficult conditions requiring skill",
+      "very_hard": "Expert-level challenge"
+    },
+    "themes": {
+      "standard": "Typical Dutch election dynamics",
+      "crisis": "Extraordinary political circumstances",
+      "issue_focused": "Election dominated by specific policy area",
+      "newcomer": "Starting with minimal political capital",
+      "coalition": "Focus on government formation challenges"
+    }
+  },
+  "game_balance": {
+    "base_poll_volatility": 0.4,
+    "media_impact_multiplier": 1.0,
+    "regional_variation": 0.3,
+    "campaign_effectiveness": 0.7,
+    "ai_adaptation_speed": 0.6
+  }
+}

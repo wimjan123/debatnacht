@@ -1,0 +1,38 @@
+key,nl
+# Main Menu
+main_menu.title,Nederlandse Politiek Simulatie
+main_menu.new_game,Nieuw Spel
+main_menu.continue_game,Verdergaan
+main_menu.scenarios,Scenario's
+main_menu.settings,Instellingen
+main_menu.credits,Credits
+main_menu.quit,Afsluiten
+
+# Dashboard
+dashboard.title,Campagne Dashboard
+dashboard.poll_percentage,Peiling Percentage
+dashboard.projected_seats,Verwachte Zetels
+dashboard.funds,Campagnefonds
+dashboard.days_left,Dagen Tot Verkiezingen
+dashboard.daily_changes,Dagelijkse Veranderingen
+
+# Tooltips
+tooltip.poll_explanation,Het huidige peilingspercentage van uw partij op basis van recente enquêtes en campagneactiviteiten
+tooltip.seats_explanation,Verwacht aantal zetels in het parlement gebaseerd op huidige peilingen volgens de D'Hondt methode
+tooltip.funds_explanation,Beschikbaar campagnefonds voor activiteiten zoals rally's, advertenties en media-optredens
+tooltip.days_explanation,Dagen resterend in de campagneperiode tot de verkiezingsdag
+
+# Settings
+settings.language,Taal
+settings.accessibility,Toegankelijkheid
+settings.text_scale,Tekstgrootte
+settings.high_contrast,Hoog Contrast Modus
+settings.keyboard_navigation,Toetsenbord Navigatie Help
+
+# Common
+common.ok,OK
+common.cancel,Annuleren
+common.help,Help
+common.close,Sluiten
+common.continue,Verdergaan
+common.back,Terug
