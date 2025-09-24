@@ -9,6 +9,7 @@ config/description="Educational political simulation demonstrating democratic pr
 run/main_scene="res://ui/scenes/main_menu/MainMenu.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://ui/icon.svg"
+compatibility_version="4.5"
 
 [autoload]
 
