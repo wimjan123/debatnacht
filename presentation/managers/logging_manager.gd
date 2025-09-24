@@ -1,5 +1,4 @@
 extends Node
-class_name LoggingManager
 
 # Comprehensive logging system for debugging and constitutional transparency
 # Ensures all actions are traceable for educational and audit purposes

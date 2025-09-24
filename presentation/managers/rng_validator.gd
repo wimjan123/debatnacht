@@ -1,5 +1,4 @@
 extends Node
-class_name RNGValidator
 
 # Seeded RNG validation and display system for simulation integrity
 # Ensures reproducible results and constitutional transparency in random events

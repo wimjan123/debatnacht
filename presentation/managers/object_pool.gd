@@ -1,5 +1,4 @@
 extends Node
-class_name ObjectPool
 
 # Object pooling system for performance optimization
 # Manages reusable UI elements like tooltips, notifications, and temporary components

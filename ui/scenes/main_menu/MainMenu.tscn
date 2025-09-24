@@ -1,13 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://bh1yt8rqkxw1f"]
 
-[ext_resource type="Script" path="res://ui/scenes/main_menu/MainMenu.gd" id="1_kbxsj"]
-[ext_resource type="Theme" path="res://ui/themes/default_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://bwab4piqx3i4" path="res://ui/scenes/main_menu/MainMenu.gd" id="1_kbxsj"]
+[ext_resource type="Theme" uid="uid://cj7d5h5t5g8rk" path="res://ui/themes/default_theme.tres" id="2_theme"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_kbxsj")
 
@@ -16,6 +18,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -28,6 +32,8 @@ offset_left = -200.0
 offset_top = -250.0
 offset_right = 200.0
 offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
@@ -35,8 +41,8 @@ text = "main_menu.title"
 horizontal_alignment = 1
 
 [node name="Spacer1" type="Control" parent="VBoxContainer"]
-layout_mode = 2
 custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 
 [node name="MenuButtons" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -63,8 +69,8 @@ layout_mode = 2
 text = "main_menu.quit"
 
 [node name="Spacer2" type="Control" parent="VBoxContainer"]
-layout_mode = 2
 custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
 
 [node name="VersionLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2

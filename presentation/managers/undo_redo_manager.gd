@@ -1,5 +1,4 @@
 extends Node
-class_name UndoRedoManager
 
 # Advanced undo/redo system for safe user actions
 # Provides granular state management with action grouping and selective undo

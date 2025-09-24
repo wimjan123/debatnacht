@@ -1,5 +1,4 @@
 extends Node
-class_name GameStateManager
 
 # Global game state management singleton
 # Maintains game state, handles save/load operations, manages state transitions

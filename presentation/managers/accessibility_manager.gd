@@ -1,5 +1,4 @@
 extends Control
-class_name AccessibilityManager
 
 # Accessibility manager for WCAG 2.1 AA compliance
 # Handles theme switching, text scaling, and accessibility features

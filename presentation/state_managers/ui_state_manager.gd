@@ -1,5 +1,4 @@
 extends Node
-class_name UIStateManager
 
 # UI-specific state management
 # Handles screen-specific state, UI preferences, navigation history

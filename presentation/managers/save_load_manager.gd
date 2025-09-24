@@ -1,5 +1,4 @@
 extends Node
-class_name SaveLoadManager
 
 # Advanced save/load system with JSON serialization, version validation, and integrity checks
 # Handles multiple save slots, compression, and data validation

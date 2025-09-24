@@ -1,5 +1,4 @@
 extends Node
-class_name SceneManager
 
 # Scene loading optimization with preloading and caching for 60 FPS performance
 # Handles scene transitions, preloading, and memory management for smooth UI experience

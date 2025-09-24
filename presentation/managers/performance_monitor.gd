@@ -1,5 +1,4 @@
 extends Node
-class_name PerformanceMonitor
 
 # Performance monitoring system for maintaining 60 FPS target
 # Tracks frame rates, memory usage, and system performance metrics
