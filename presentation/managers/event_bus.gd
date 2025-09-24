@@ -1,11 +1,8 @@
 extends Node
-class_name EventBus
 
 # Global event bus system for loose coupling between components
 # Enables publish-subscribe pattern for system-wide communication
-
-# Singleton instance
-static var _instance: EventBus
+# Note: This is an autoload singleton, so no class_name declaration needed
 
 # Event subscribers storage
 var subscribers: Dictionary = {}  # event_name -> Array[Callable]
@@ -51,23 +48,9 @@ const DEBUG_LOG = "debug_log"
 const PERFORMANCE_WARNING = "performance_warning"
 
 func _ready() -> void:
-	# Initialize singleton
-	if _instance == null:
-		_instance = self
-		process_mode = Node.PROCESS_MODE_ALWAYS
-		print("EventBus: Initialized")
-	else:
-		queue_free()
-
-static func get_instance() -> EventBus:
-	"""Get singleton instance of EventBus"""
-	if _instance == null:
-		# Create instance if it doesn't exist
-		var scene_tree = Engine.get_main_loop() as SceneTree
-		if scene_tree:
-			_instance = EventBus.new()
-			scene_tree.root.add_child(_instance)
-	return _instance
+	# Initialize autoload singleton
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	print("EventBus: Initialized as autoload singleton")
 
 # Core event system
 func subscribe(event_name: String, callback: Callable) -> void:
@@ -358,8 +341,6 @@ func _exit_tree() -> void:
 	event_history.clear()
 	_performance_warnings.clear()
 	
-	# Clear singleton reference
-	if _instance == self:
-		_instance = null
+	# Autoload cleanup handled by Godot
 	
 	print("EventBus: Cleaned up")
