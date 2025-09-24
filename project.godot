@@ -2,6 +2,9 @@
 ; It's best edited using the editor UI and not directly,
 ; unless you know what you are doing.
 
+_global_script_classes=[  ]
+_global_script_class_icons={  }
+
 [application]
 
 config/name="Dutch Politics Simulation"
@@ -9,7 +12,11 @@ config/description="Educational political simulation demonstrating democratic pr
 run/main_scene="res://ui/scenes/main_menu/MainMenu.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://ui/icon.svg"
-compatibility_version="4.5"
+config/compatibility_version="4.5"
+
+[editor]
+
+version/compatibility_version="4.5"
 
 [autoload]
 
