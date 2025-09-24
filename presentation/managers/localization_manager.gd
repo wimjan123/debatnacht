@@ -216,12 +216,12 @@ func get_constitutional_text(requirement: String) -> String:
 
 # Integration with UI state
 
-func apply_to_ui_state(ui_state: UIState) -> void:
+func apply_to_ui_state(ui_state: DataModels.UIState) -> void:
 	# Update UI state with current language setting
 	if ui_state != null:
 		ui_state.language_setting = current_language
 
-func load_from_ui_state(ui_state: UIState) -> void:
+func load_from_ui_state(ui_state: DataModels.UIState) -> void:
 	# Load language setting from UI state
 	if ui_state != null and ui_state.language_setting in supported_languages:
 		set_language(ui_state.language_setting)

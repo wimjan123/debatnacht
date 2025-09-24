@@ -3,7 +3,7 @@ extends Control
 # Accessibility manager for WCAG 2.1 AA compliance
 # Handles theme switching, text scaling, and accessibility features
 
-var localization_manager: LocalizationManager
+var localization_manager: Node  # Reference to autoload
 var current_theme: Theme
 var default_theme: Theme
 var high_contrast_theme: Theme
@@ -12,7 +12,7 @@ var high_contrast_enabled: bool = false
 
 signal accessibility_changed(feature: String, enabled: bool)
 signal text_scale_changed(scale: float)
-signal theme_changed(high_contrast: bool)
+signal accessibility_theme_changed(high_contrast: bool)  # Renamed to avoid Control conflict
 
 func _ready():
 	# Load themes
@@ -100,7 +100,7 @@ func announce_to_screen_reader(text: String) -> void:
 	# For now, we'll use notifications as a fallback
 	print("Screen reader announcement: " + text)
 
-func get_accessibility_description(element_name: String) -> String:
+func get_element_accessibility_description(element_name: String) -> String:
 	"""Get accessibility description for UI element"""
 	return localization_manager.get_accessibility_text(element_name) if localization_manager else ""
 
@@ -131,7 +131,7 @@ func create_accessible_button(text: String, callback: Callable) -> Button:
 	button.pressed.connect(callback)
 
 	# Add accessibility metadata
-	button.tooltip_text = get_accessibility_description(text.to_lower())
+	button.tooltip_text = get_element_accessibility_description(text.to_lower())
 
 	return button
 

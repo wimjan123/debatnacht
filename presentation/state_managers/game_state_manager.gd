@@ -3,11 +3,8 @@ extends Node
 # Global game state management singleton
 # Maintains game state, handles save/load operations, manages state transitions
 
-# Singleton instance
-static var _instance: GameStateManager
-
-# Game State
-var current_game_state: GameState
+# Game State (no static singleton needed for autoloads)
+var current_game_state: DataModels.GameState
 var simulation_api: SimulationAPI
 var is_game_initialized: bool = false
 var save_version: String = "1.0.0"
@@ -25,16 +22,15 @@ const AUTO_SAVE_PATH: String = "user://auto_save.json"
 const BACKUP_SAVE_PATH: String = "user://game_save_backup.json"
 
 # State change signals
-signal game_state_changed(new_state: GameState)
-signal game_initialized(game_state: GameState)
+signal game_state_changed(new_state: DataModels.GameState)
+signal game_initialized(game_state: DataModels.GameState)
 signal save_completed(success: bool, file_path: String)
-signal load_completed(success: bool, game_state: GameState)
+signal load_completed(success: bool, game_state: DataModels.GameState)
 signal auto_save_triggered()
 
 func _ready() -> void:
 	# Initialize singleton
-	if _instance == null:
-		_instance = self
+	# Autoload initialization
 		process_mode = Node.PROCESS_MODE_ALWAYS
 		
 		# Initialize simulation API connection
@@ -45,15 +41,7 @@ func _ready() -> void:
 	else:
 		queue_free()
 
-static func get_instance() -> GameStateManager:
-	"""Get singleton instance of GameStateManager"""
-	if _instance == null:
-		# Create instance if it doesn't exist
-		var scene_tree = Engine.get_main_loop() as SceneTree
-		if scene_tree:
-			_instance = GameStateManager.new()
-			scene_tree.root.add_child(_instance)
-	return _instance
+# No static singleton needed - Godot autoloads handle this
 
 func _initialize_simulation_api() -> void:
 	"""Initialize connection to simulation API"""
@@ -101,11 +89,11 @@ func initialize_new_game(scenario_config: Dictionary = {}) -> void:
 	
 	print("GameStateManager: New game initialized successfully")
 
-func get_current_state() -> GameState:
+func get_current_state() -> DataModels.GameState:
 	"""Get current game state"""
 	return current_game_state
 
-func update_game_state(new_state: GameState, description: String = "State Updated") -> void:
+func update_game_state(new_state: DataModels.GameState, description: String = "State Updated") -> void:
 	"""Update the current game state with change tracking"""
 	if not is_game_initialized:
 		print("Warning: Attempting to update game state before initialization")
@@ -126,7 +114,7 @@ func update_game_state(new_state: GameState, description: String = "State Update
 	
 	print("GameStateManager: State updated - ", description)
 
-func apply_campaign_action(action: CampaignAction) -> bool:
+func apply_campaign_action(action: DataModels.CampaignAction) -> bool:
 	"""Apply a campaign action to the game state"""
 	if not is_game_initialized or not simulation_api:
 		return false
@@ -411,5 +399,4 @@ func _exit_tree() -> void:
 		save_game(AUTO_SAVE_PATH, false)
 	
 	# Clear singleton reference
-	if _instance == self:
-		_instance = null
+	# Autoload cleanup handled by Godot
