@@ -41,7 +41,6 @@ window/stretch/aspect="expand"
 [gui]
 
 theme/custom="res://ui/themes/default_theme.tres"
-theme/custom_font="res://ui/fonts/OpenSans-Regular.ttf"
 common/drop_mouse_on_gui_input_disabled=true
 
 [input]

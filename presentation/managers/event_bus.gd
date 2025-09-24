@@ -106,13 +106,11 @@ func publish(event_name: String, data: Dictionary = {}, category: EventCategory 
 		var callbacks = subscribers[event_name] as Array
 		for callback in callbacks:
 			if callback.is_valid():
-				try:
-					if data.is_empty():
-						callback.call()
-					else:
-						callback.call(data)
-				except error:
-					print("EventBus: Error calling callback for ", event_name, ": ", error)
+				# GDScript doesn't have try/except - use direct call with validation
+				if data.is_empty():
+					callback.call()
+				else:
+					callback.call(data)
 			else:
 				print("EventBus: Invalid callback found for ", event_name, ", removing...")
 				callbacks.erase(callback)
