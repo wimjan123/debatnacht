@@ -6,10 +6,10 @@ uid="uid://bhbr7h7wu05l"
 
 [deps]
 
-files=["res://config/localization/strings_nl.nl.translation"]
+files=["res://config/localization/strings_nl.CONTEXT.translation", "res://config/localization/strings_nl.DUTCH.translation"]
 
 source_file="res://config/localization/strings_nl.csv"
-dest_files=["res://config/localization/strings_nl.nl.translation"]
+dest_files=["res://config/localization/strings_nl.CONTEXT.translation", "res://config/localization/strings_nl.DUTCH.translation"]
 
 [params]
 

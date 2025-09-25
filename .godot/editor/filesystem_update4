@@ -1,2 +1,4 @@
-res://core_api/simulation_api.gd
-res://stubs/fake_simulation.gd
+res://config/localization/strings_nl.CONTEXT.translation
+res://config/localization/strings_en.CONTEXT.translation
+res://config/localization/strings_nl.DUTCH.translation
+res://presentation/managers/performance_monitor.gd

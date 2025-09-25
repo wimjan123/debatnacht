@@ -14,11 +14,11 @@ var screen_scenes: Dictionary = {
 	"main_menu": "res://ui/scenes/main_menu/MainMenu.tscn",
 	"dashboard": "res://ui/scenes/dashboard/Dashboard.tscn",
 	"map": "res://ui/scenes/map_view/MapView.tscn",
-	"media": "res://ui/scenes/media_events/MediaEvent.tscn",
+	"media": "res://ui/scenes/media_events/DataModels.MediaEvent.tscn",
 	"coalition": "res://ui/scenes/coalition_builder/CoalitionBuilder.tscn",
 	"parliament": "res://ui/scenes/parliament/ParliamentView.tscn",
 	"social": "res://ui/scenes/social_media/SocialMediaConsole.tscn",
-	"results": "res://ui/scenes/results/ElectionResults.tscn",
+	"results": "res://ui/scenes/results/DataModels.ElectionResults.tscn",
 	"settings": "res://ui/scenes/settings/Settings.tscn"
 }
 
@@ -237,7 +237,7 @@ func navigate_to_map(filter_type: String = "", filter_value: String = "") -> voi
 		data["filter_value"] = filter_value
 	navigate_to_screen("map", data)
 
-func navigate_to_media_event(event: MediaEvent) -> void:
+func navigate_to_media_event(event: DataModels.MediaEvent) -> void:
 	"""Navigate to media event screen"""
 	var data = {"media_event": event}
 	navigate_to_screen("media", data)
@@ -249,7 +249,7 @@ func navigate_to_coalition_builder(available_parties: Array = []) -> void:
 		data["available_parties"] = available_parties
 	navigate_to_screen("coalition", data)
 
-func navigate_to_election_results(election: Election) -> void:
+func navigate_to_election_results(election: DataModels.Election) -> void:
 	"""Navigate to election results screen"""
 	var data = {"election": election}
 	navigate_to_screen("results", data)
@@ -320,7 +320,7 @@ func get_navigation_help() -> String:
 
 # Integration with game state
 
-func update_from_game_state(game_state: GameState) -> void:
+func update_from_game_state(game_state: DataModels.GameState) -> void:
 	"""Update navigation based on current game state"""
 	if not game_state:
 		return
@@ -342,7 +342,7 @@ func update_from_game_state(game_state: GameState) -> void:
 		screen_states["parliament"] = true
 
 	elif game_state.game_phase == "election":
-		# Election results available
+		# DataModels.Election results available
 		screen_states["results"] = true
 
 # Screen state persistence

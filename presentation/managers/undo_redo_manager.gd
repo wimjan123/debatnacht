@@ -7,7 +7,7 @@ extends Node
 static var _instance: UndoRedoManager
 
 # Dependencies
-var game_state_manager: DataModels.GameStateManager
+var game_state_manager: GameStateManager
 var event_bus: EventBus
 
 # Undo/Redo State
@@ -92,7 +92,7 @@ static func get_instance() -> UndoRedoManager:
 
 func _initialize_dependencies() -> void:
 	"""Initialize references to required managers"""
-	game_state_manager = DataModels.GameStateManager.get_instance()
+	game_state_manager = GameStateManager.get_instance()
 	event_bus = EventBus.get_instance()
 	
 	print("UndoRedoManager: Dependencies initialized")

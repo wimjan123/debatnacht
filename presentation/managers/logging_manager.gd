@@ -386,7 +386,7 @@ func log_performance_metric(metric_name: String, value: float, threshold: float 
 	log_message(level, LogCategory.PERFORMANCE, "Performance metric: %s = %s%s" % [metric_name, value, unit], context)
 
 # Event bus integration
-func _on_event_bus_message(event_type: EventBus.EventType, data: Dictionary, category: EventBus.EventCategory) -> void:
+func _on_event_bus_message(event_type: String, data: Dictionary, category: EventBus.EventCategory) -> void:
 	"""Handle events from event bus for logging"""
 	var log_category = _map_event_category_to_log_category(category)
 	var context = data.duplicate(true)
