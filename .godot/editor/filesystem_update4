@@ -2,3 +2,6 @@ res://config/localization/strings_nl.CONTEXT.translation
 res://config/localization/strings_en.CONTEXT.translation
 res://config/localization/strings_nl.DUTCH.translation
 res://presentation/managers/performance_monitor.gd
+res://presentation/controllers/navigation_controller.gd
+res://presentation/managers/logging_manager.gd
+res://presentation/managers/undo_redo_manager.gd
