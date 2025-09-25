@@ -222,7 +222,7 @@ func load_game(slot_name: String) -> bool:
 		return false
 	
 	# Deserialize game state
-	var game_state = GameState.new()
+	var game_state = DataModels.GameState.new()
 	var deserialize_success = game_state.deserialize(save_data.game_state)
 	
 	if not deserialize_success:
@@ -459,7 +459,7 @@ func _restore_ui_state(ui_state: Dictionary) -> void:
 	
 	# Don't restore navigation history or current screen - let the UI flow naturally
 
-func _create_save_metadata(description: String, game_state: GameState) -> Dictionary:
+func _create_save_metadata(description: String, game_state: DataModels.GameState) -> Dictionary:
 	"""Create metadata for save file"""
 	return {
 		"description": description,

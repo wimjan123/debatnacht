@@ -1,5 +1,5 @@
 extends Control
-class_name MainMenu
+# class_name MainMenu  # Removed to avoid potential autoload conflict
 
 # Main menu screen with keyboard navigation and accessibility support
 # Entry point for new campaigns, loading saves, tutorial, and settings
@@ -14,7 +14,7 @@ class_name MainMenu
 
 var accessibility_manager: AccessibilityManager
 var navigation_controller: NavigationController
-var save_system: SaveSystem
+var save_load_manager: SaveLoadManager
 
 signal campaign_start_requested()
 signal campaign_load_requested()

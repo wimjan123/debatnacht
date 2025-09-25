@@ -206,14 +206,14 @@ func _on_performance_sample() -> void:
 func _collect_detailed_metrics() -> void:
 	"""Collect detailed performance metrics"""
 	# Get render server information
-	current_metrics.render_time = RenderingServer.get_rendering_info(RenderingServer.RENDERING_INFO_TYPE_VISIBLE, RenderingServer.RENDERING_INFO_DRAW_CALLS_IN_FRAME)
+	current_metrics.render_time = Performance.get_monitor(Performance.RENDER_2D_DRAW_CALLS_IN_FRAME)
 	
 	# Note: Some metrics might not be available in all Godot versions
 	# This is a simplified implementation
 
 func _get_memory_usage() -> int:
 	"""Get current memory usage in bytes"""
-	return OS.get_static_memory_usage(false)
+	return OS.get_static_memory_usage()
 
 func _get_peak_memory_usage() -> int:
 	"""Get peak memory usage in bytes"""

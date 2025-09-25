@@ -7,7 +7,7 @@ extends Node
 static var _instance: UndoRedoManager
 
 # Dependencies
-var game_state_manager: GameStateManager
+var game_state_manager: DataModels.GameStateManager
 var event_bus: EventBus
 
 # Undo/Redo State
@@ -92,7 +92,7 @@ static func get_instance() -> UndoRedoManager:
 
 func _initialize_dependencies() -> void:
 	"""Initialize references to required managers"""
-	game_state_manager = GameStateManager.get_instance()
+	game_state_manager = DataModels.GameStateManager.get_instance()
 	event_bus = EventBus.get_instance()
 	
 	print("UndoRedoManager: Dependencies initialized")
@@ -108,7 +108,7 @@ func _setup_event_listeners() -> void:
 		event_bus.subscribe(EventBus.CAMPAIGN_ACTION_EXECUTED, _on_campaign_action_executed)
 
 # Core undo/redo functionality
-func record_action(description: String, action_type: String, before_state: GameState, after_state: GameState, metadata: Dictionary = {}) -> String:
+func record_action(description: String, action_type: String, before_state: DataModels.GameState, after_state: DataModels.GameState, metadata: Dictionary = {}) -> String:
 	"""Record an action for potential undo/redo"""
 	var action = ActionEntry.new()
 	action.id = _generate_action_id()
@@ -190,7 +190,7 @@ func _undo_single_action(action: ActionEntry) -> bool:
 	"""Undo a single action"""
 	# Restore previous state
 	if action.before_state.size() > 0:
-		var previous_state = GameState.new()
+		var previous_state = DataModels.GameState.new()
 		if previous_state.deserialize(action.before_state):
 			# Temporarily disable action recording to avoid recording the undo itself
 			var original_position = current_position
@@ -215,7 +215,7 @@ func _redo_single_action(action: ActionEntry) -> bool:
 	"""Redo a single action"""
 	# Restore next state
 	if action.after_state.size() > 0:
-		var next_state = GameState.new()
+		var next_state = DataModels.GameState.new()
 		if next_state.deserialize(action.after_state):
 			# Temporarily adjust position
 			current_position += 1
@@ -241,7 +241,7 @@ func _undo_action_group(group_id: String) -> bool:
 	# Find the first action in the group to get the before state
 	var first_action = group_actions[0]
 	if first_action.before_state.size() > 0:
-		var previous_state = GameState.new()
+		var previous_state = DataModels.GameState.new()
 		if previous_state.deserialize(first_action.before_state):
 			# Move position back by the number of actions in the group
 			current_position -= group_actions.size()
@@ -268,7 +268,7 @@ func _redo_action_group(group_id: String) -> bool:
 	# Find the last action in the group to get the after state
 	var last_action = group_actions[-1]
 	if last_action.after_state.size() > 0:
-		var next_state = GameState.new()
+		var next_state = DataModels.GameState.new()
 		if next_state.deserialize(last_action.after_state):
 			# Move position forward by the number of actions in the group
 			current_position += group_actions.size()
@@ -409,8 +409,8 @@ func _generate_group_id(description: String) -> String:
 	return "group_" + description.to_snake_case() + "_" + str(Time.get_unix_time_from_system())
 
 # Event handlers
-func _on_game_state_changed(new_state: GameState) -> void:
-	"""Handle game state changes from GameStateManager"""
+func _on_game_state_changed(new_state: DataModels.GameState) -> void:
+	"""Handle game state changes from DataModels.GameStateManager"""
 	# This is called after the state has already changed
 	# We rely on explicit calls to record_action for better control
 	pass
@@ -418,7 +418,7 @@ func _on_game_state_changed(new_state: GameState) -> void:
 func _on_campaign_action_executed(data: Dictionary) -> void:
 	"""Handle campaign action execution events"""
 	if data.has("action") and data.has("result"):
-		var action = data.action as CampaignAction
+		var action = data.action as DataModels.CampaignAction
 		var result = data.result as Dictionary
 		
 		# Record the action if it was successful and has before/after states

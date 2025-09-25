@@ -477,17 +477,18 @@ func _cleanup_pool(pool_name: String) -> void:
 	var pool_data = pools[pool_name] as PoolData
 	var initial_size = pool_data.config.initial_size
 	var available_count = pool_data.available_objects.size()
-	
+	var to_remove = 0
+
 	# If we have more than initial size + 50%, remove excess
 	var excess_threshold = initial_size + (initial_size / 2)
 	if available_count > excess_threshold:
-		var to_remove = available_count - initial_size
+		to_remove = available_count - initial_size
 		for i in range(to_remove):
 			if pool_data.available_objects.size() > 0:
 				var obj = pool_data.available_objects.pop_back()
 				_destroy_object(obj, pool_name)
 				pool_stats[pool_name].destroys += 1
-	
+
 	if enable_debug_logging and to_remove > 0:
 		print("ObjectPool: Cleaned up ", to_remove, " objects from pool: ", pool_name)
 

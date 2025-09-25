@@ -17,7 +17,12 @@ enum EventCategory {
 	SIMULATION,
 	AUDIO,
 	ACCESSIBILITY,
-	DEBUG
+	DEBUG,
+	SYSTEM,
+	INPUT,
+	GAME,
+	AUDIT,
+	UI
 }
 
 # Common event names as constants

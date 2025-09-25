@@ -1,38 +1,35 @@
-key,nl
-# Main Menu
-main_menu.title,Nederlandse Politiek Simulatie
-main_menu.new_game,Nieuw Spel
-main_menu.continue_game,Verdergaan
-main_menu.scenarios,Scenario's
-main_menu.settings,Instellingen
-main_menu.credits,Credits
-main_menu.quit,Afsluiten
-
-# Dashboard
-dashboard.title,Campagne Dashboard
-dashboard.poll_percentage,Peiling Percentage
-dashboard.projected_seats,Verwachte Zetels
-dashboard.funds,Campagnefonds
-dashboard.days_left,Dagen Tot Verkiezingen
-dashboard.daily_changes,Dagelijkse Veranderingen
-
-# Tooltips
-tooltip.poll_explanation,Het huidige peilingspercentage van uw partij op basis van recente enquêtes en campagneactiviteiten
-tooltip.seats_explanation,Verwacht aantal zetels in het parlement gebaseerd op huidige peilingen volgens de D'Hondt methode
-tooltip.funds_explanation,Beschikbaar campagnefonds voor activiteiten zoals rally's, advertenties en media-optredens
-tooltip.days_explanation,Dagen resterend in de campagneperiode tot de verkiezingsdag
-
-# Settings
-settings.language,Taal
-settings.accessibility,Toegankelijkheid
-settings.text_scale,Tekstgrootte
-settings.high_contrast,Hoog Contrast Modus
-settings.keyboard_navigation,Toetsenbord Navigatie Help
-
-# Common
-common.ok,OK
-common.cancel,Annuleren
-common.help,Help
-common.close,Sluiten
-common.continue,Verdergaan
-common.back,Terug
+KEY,CONTEXT,DUTCH
+GAME_TITLE,ui,Nederlandse Politiek Simulatie
+MAIN_MENU_NEW_CAMPAIGN,ui,Nieuwe Campagne
+MAIN_MENU_LOAD_CAMPAIGN,ui,Campagne Laden
+MAIN_MENU_TUTORIAL,ui,Handleiding
+MAIN_MENU_SETTINGS,ui,Instellingen
+MAIN_MENU_QUIT,ui,Afsluiten
+LOADING_GAME,ui,Spel Laden...
+SAVING_GAME,ui,Spel Opslaan...
+CAMPAIGN_FUNDS,gameplay,Campagne Fondsen
+POLL_PERCENTAGE,gameplay,Peiling Percentage
+PROJECTED_SEATS,gameplay,Verwachte Zetels
+COALITION_BUILDER,ui,Coalitie Vormer
+PARLIAMENT_VIEW,ui,Parlement Weergave
+MAP_VIEW,ui,Kaart Weergave
+DASHBOARD,ui,Dashboard
+ELECTION_RESULTS,ui,Verkiezingsuitslagen
+MEDIA_EVENT,gameplay,Media Gebeurtenis
+RALLY,gameplay,Bijeenkomst
+ADVERTISEMENT,gameplay,Advertentie
+TV_INTERVIEW,gameplay,TV Interview
+RADIO_INTERVIEW,gameplay,Radio Interview
+DEBATE,gameplay,Debat
+PARTY_LEADER,gameplay,Partijleider
+VOTE_FOR,gameplay,Stem Voor
+VOTE_AGAINST,gameplay,Stem Tegen
+ABSTAIN,gameplay,Onthouding
+ACCESSIBILITY_HIGH_CONTRAST,accessibility,Hoog Contrast
+ACCESSIBILITY_LARGE_TEXT,accessibility,Grote Tekst
+ACCESSIBILITY_SCREEN_READER,accessibility,Schermlezer Ondersteuning
+ERROR_SAVE_FAILED,error,Opslaan mislukt
+ERROR_LOAD_FAILED,error,Laden mislukt
+ERROR_INVALID_ACTION,error,Ongeldige actie
+SUCCESS_GAME_SAVED,success,Spel succesvol opgeslagen
+SUCCESS_GAME_LOADED,success,Spel succesvol geladen

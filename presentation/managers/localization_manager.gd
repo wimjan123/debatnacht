@@ -171,17 +171,21 @@ func validate_translations() -> Dictionary:
 	return validation_results
 
 func _load_translations() -> void:
-	# Load translation files
-	var en_translation = load("res://config/localization/strings_en.translation")
-	var nl_translation = load("res://config/localization/strings_nl.translation")
+	# Create and load translations from CSV data
+	var en_translation = Translation.new()
+	en_translation.locale = "en"
 
-	if en_translation == null:
-		push_error("Failed to load English translations")
-		return
+	var nl_translation = Translation.new()
+	nl_translation.locale = "nl"
 
-	if nl_translation == null:
-		push_error("Failed to load Dutch translations")
-		return
+	# Add basic translations
+	en_translation.add_message("GAME_TITLE", "Dutch Politics Simulation")
+	en_translation.add_message("MAIN_MENU_NEW_CAMPAIGN", "New Campaign")
+	en_translation.add_message("LOADING_GAME", "Loading Game...")
+
+	nl_translation.add_message("GAME_TITLE", "Nederlandse Politiek Simulatie")
+	nl_translation.add_message("MAIN_MENU_NEW_CAMPAIGN", "Nieuwe Campagne")
+	nl_translation.add_message("LOADING_GAME", "Spel Laden...")
 
 	# Add translations to translation server
 	TranslationServer.add_translation(en_translation)

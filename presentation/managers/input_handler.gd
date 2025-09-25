@@ -1,5 +1,5 @@
 extends Node
-class_name InputHandler
+# class_name InputHandler  # Removed to avoid autoload conflict
 
 # Comprehensive keyboard shortcuts and input handling system
 # Provides accessibility-compliant navigation and customizable shortcuts for the simulation

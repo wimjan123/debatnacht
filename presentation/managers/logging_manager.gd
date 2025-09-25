@@ -58,7 +58,7 @@ class LogEntry:
 		session_id = ""
 		user_action = false
 
-	func to_string() -> String:
+	func to_log_string() -> String:
 		var level_str = _level_to_string(level)
 		var category_str = _category_to_string(category)
 		var time_str = Time.get_datetime_string_from_unix_time(timestamp)
@@ -162,7 +162,7 @@ func _ready() -> void:
 		_setup_file_logging()
 
 		# Log system startup
-		log(LogLevel.INFO, LogCategory.SYSTEM, "LoggingManager initialized - constitutional transparency enabled")
+		log_message(LogLevel.INFO, LogCategory.SYSTEM, "LoggingManager initialized - constitutional transparency enabled")
 	else:
 		queue_free()
 
@@ -225,7 +225,7 @@ func _setup_file_logging() -> void:
 		current_audit_file.flush()
 
 # Core logging functionality
-func log(level: LogLevel, category: LogCategory, message: String, context: Dictionary = {}, user_initiated: bool = false) -> void:
+func log_message(level: LogLevel, category: LogCategory, message: String, context: Dictionary = {}, user_initiated: bool = false) -> void:
 	"""Main logging function with full context"""
 	if not logging_enabled or level < min_log_level:
 		return
@@ -320,27 +320,27 @@ func _write_audit_entry(entry: LogEntry) -> void:
 # Convenience logging functions
 func trace(category: LogCategory, message: String, context: Dictionary = {}) -> void:
 	"""Log trace level message"""
-	log(LogLevel.TRACE, category, message, context)
+	log_message(LogLevel.TRACE, category, message, context)
 
 func debug(category: LogCategory, message: String, context: Dictionary = {}) -> void:
 	"""Log debug level message"""
-	log(LogLevel.DEBUG, category, message, context)
+	log_message(LogLevel.DEBUG, category, message, context)
 
 func info(category: LogCategory, message: String, context: Dictionary = {}) -> void:
 	"""Log info level message"""
-	log(LogLevel.INFO, category, message, context)
+	log_message(LogLevel.INFO, category, message, context)
 
 func warning(category: LogCategory, message: String, context: Dictionary = {}) -> void:
 	"""Log warning level message"""
-	log(LogLevel.WARNING, category, message, context)
+	log_message(LogLevel.WARNING, category, message, context)
 
 func error(category: LogCategory, message: String, context: Dictionary = {}) -> void:
 	"""Log error level message"""
-	log(LogLevel.ERROR, category, message, context)
+	log_message(LogLevel.ERROR, category, message, context)
 
 func critical(category: LogCategory, message: String, context: Dictionary = {}) -> void:
 	"""Log critical level message"""
-	log(LogLevel.CRITICAL, category, message, context)
+	log_message(LogLevel.CRITICAL, category, message, context)
 
 # User action logging for constitutional transparency
 func log_user_action(action: String, details: Dictionary = {}) -> void:
@@ -350,7 +350,7 @@ func log_user_action(action: String, details: Dictionary = {}) -> void:
 	context["transparency"] = "constitutional_requirement"
 	context["educational_purpose"] = "democratic_simulation"
 
-	log(LogLevel.INFO, LogCategory.AUDIT, "User action: " + action, context, true)
+	log_message(LogLevel.INFO, LogCategory.AUDIT, "User action: " + action, context, true)
 
 func log_simulation_decision(decision: String, rationale: String, data: Dictionary = {}) -> void:
 	"""Log simulation decision for educational transparency"""
@@ -359,7 +359,7 @@ func log_simulation_decision(decision: String, rationale: String, data: Dictiona
 	context["transparency_level"] = "full"
 	context["educational_value"] = "demonstrate_political_process"
 
-	log(LogLevel.INFO, LogCategory.SIMULATION, "Simulation decision: " + decision, context)
+	log_message(LogLevel.INFO, LogCategory.SIMULATION, "Simulation decision: " + decision, context)
 
 func log_system_state_change(component: String, old_state: String, new_state: String, reason: String) -> void:
 	"""Log system state changes for debugging"""
@@ -370,7 +370,7 @@ func log_system_state_change(component: String, old_state: String, new_state: St
 		"change_reason": reason
 	}
 
-	log(LogLevel.DEBUG, LogCategory.SYSTEM, "State change in " + component, context)
+	log_message(LogLevel.DEBUG, LogCategory.SYSTEM, "State change in " + component, context)
 
 func log_performance_metric(metric_name: String, value: float, threshold: float = 0.0, unit: String = "") -> void:
 	"""Log performance metrics"""
@@ -383,7 +383,7 @@ func log_performance_metric(metric_name: String, value: float, threshold: float 
 	}
 
 	var level = LogLevel.WARNING if context.exceeded else LogLevel.DEBUG
-	log(level, LogCategory.PERFORMANCE, "Performance metric: %s = %s%s" % [metric_name, value, unit], context)
+	log_message(level, LogCategory.PERFORMANCE, "Performance metric: %s = %s%s" % [metric_name, value, unit], context)
 
 # Event bus integration
 func _on_event_bus_message(event_type: EventBus.EventType, data: Dictionary, category: EventBus.EventCategory) -> void:
@@ -407,7 +407,7 @@ func _on_event_bus_message(event_type: EventBus.EventType, data: Dictionary, cat
 		EventBus.DEBUG_INFO:
 			level = LogLevel.DEBUG
 
-	log(level, log_category, message, context, user_initiated)
+	log_message(level, log_category, message, context, user_initiated)
 
 func _map_event_category_to_log_category(event_category: EventBus.EventCategory) -> LogCategory:
 	"""Map event bus categories to logging categories"""
@@ -467,7 +467,7 @@ func _cleanup_old_log_files() -> void:
 	while files.size() > max_log_files:
 		var file_to_remove = files.pop_back()
 		dir.remove(file_to_remove)
-		log(LogLevel.INFO, LogCategory.SYSTEM, "Removed old log file: " + file_to_remove)
+		log_message(LogLevel.INFO, LogCategory.SYSTEM, "Removed old log file: " + file_to_remove)
 
 func _compare_file_times(a: String, b: String) -> bool:
 	"""Compare file modification times for sorting"""
@@ -477,8 +477,8 @@ func _compare_file_times(a: String, b: String) -> bool:
 	if not file_a or not file_b:
 		return false
 
-	var time_a = file_a.get_modified_time()
-	var time_b = file_b.get_modified_time()
+	var time_a = FileAccess.get_modified_time(file_a.get_path())
+	var time_b = FileAccess.get_modified_time(file_b.get_path())
 
 	file_a.close()
 	file_b.close()
@@ -518,7 +518,7 @@ func get_logs_by_level(level: LogLevel, max_count: int = 100) -> Array[LogEntry]
 
 	return result
 
-func get_user_action_log() -> Array[LogEntry]:
+func get_user_action_log_message() -> Array[LogEntry]:
 	"""Get all user-initiated actions for audit trail"""
 	var result: Array[LogEntry] = []
 
@@ -581,7 +581,7 @@ func export_audit_report() -> String:
 		report += key + ": " + str(stats[key]) + "\n"
 
 	report += "\n=== User Actions (Constitutional Requirement) ===\n"
-	var user_actions = get_user_action_log()
+	var user_actions = get_user_action_log_message()
 	for action in user_actions:
 		report += action.to_string() + "\n"
 
@@ -601,7 +601,7 @@ func export_audit_report() -> String:
 func set_log_level(level: LogLevel) -> void:
 	"""Set minimum log level"""
 	min_log_level = level
-	log(LogLevel.INFO, LogCategory.SYSTEM, "Log level changed to: " + str(level))
+	log_message(LogLevel.INFO, LogCategory.SYSTEM, "Log level changed to: " + str(level))
 
 func set_console_level(level: LogLevel) -> void:
 	"""Set console log level"""
@@ -614,12 +614,12 @@ func set_file_level(level: LogLevel) -> void:
 func enable_category_logging(category: LogCategory, enabled: bool) -> void:
 	"""Enable/disable logging for specific category"""
 	# Would implement category-specific filtering
-	log(LogLevel.INFO, LogCategory.SYSTEM, "Category logging changed: " + str(category) + " = " + str(enabled))
+	log_message(LogLevel.INFO, LogCategory.SYSTEM, "Category logging changed: " + str(category) + " = " + str(enabled))
 
 func set_transparency_mode(enabled: bool) -> void:
 	"""Enable/disable constitutional transparency mode"""
 	transparency_mode = enabled
-	log(LogLevel.INFO, LogCategory.SYSTEM, "Constitutional transparency mode: " + str(enabled))
+	log_message(LogLevel.INFO, LogCategory.SYSTEM, "Constitutional transparency mode: " + str(enabled))
 
 # Utility functions
 func _generate_session_id() -> String:
@@ -666,7 +666,7 @@ func print_logging_status() -> void:
 func _exit_tree() -> void:
 	"""Cleanup logging system on shutdown"""
 	# Log shutdown
-	log(LogLevel.INFO, LogCategory.SYSTEM, "LoggingManager shutting down - session ending")
+	log_message(LogLevel.INFO, LogCategory.SYSTEM, "LoggingManager shutting down - session ending")
 
 	# Export final audit report
 	if audit_logging:

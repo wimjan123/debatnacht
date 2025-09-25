@@ -269,7 +269,7 @@ func _switch_to_scene(new_scene: Node, scene_path: String) -> void:
 		event_bus.publish(EventBus.SCENE_CHANGED, {
 			"old_scene": old_scene_path,
 			"new_scene": scene_path
-		}, EventBus.EventCategory.UI)
+		}, EventBus.EventCategory.SYSTEM)
 
 # Cache management
 func _cache_scene(scene_path: String, scene: Node) -> void:
@@ -365,7 +365,7 @@ func _evict_oldest_cached_scenes(count: int) -> void:
 # Utility functions
 func _get_memory_usage() -> int:
 	"""Get current memory usage"""
-	return OS.get_static_memory_usage(false)
+	return OS.get_static_memory_usage()
 
 func _estimate_cache_memory_usage() -> int:
 	"""Estimate memory usage of cached scenes"""

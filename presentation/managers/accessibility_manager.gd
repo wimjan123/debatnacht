@@ -208,7 +208,7 @@ func _apply_text_scaling() -> void:
 
 # Integration with UI systems
 
-func apply_to_tooltip_manager(tooltip_manager: TooltipManager) -> void:
+func apply_to_tooltip_manager(tooltip_manager: Control) -> void:
 	"""Apply accessibility settings to tooltip manager"""
 	if tooltip_manager:
 		# Ensure tooltips work with keyboard navigation

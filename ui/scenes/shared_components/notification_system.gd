@@ -91,7 +91,7 @@ func clear_all_notifications() -> void:
 			_animate_toast_out(toast)
 	active_toasts.clear()
 
-func show_campaign_notification(action_result: ActionResult) -> void:
+func show_campaign_notification(action_result: DataModels.ActionResult) -> void:
 	"""Show notification for campaign action results"""
 	var message = ""
 	var type = "info"
@@ -111,7 +111,7 @@ func show_campaign_notification(action_result: ActionResult) -> void:
 
 	show_notification(message, type, 5.0)
 
-func show_media_response_notification(response: MediaResponse) -> void:
+func show_media_response_notification(response: DataModels.MediaResponse) -> void:
 	"""Show notification for media event responses"""
 	var message = ""
 	var type = "info"
@@ -128,7 +128,7 @@ func show_media_response_notification(response: MediaResponse) -> void:
 	message += " " + response.explanation
 	show_notification(message, type, 4.0)
 
-func show_coalition_notification(validation: CoalitionValidation) -> void:
+func show_coalition_notification(validation: DataModels.CoalitionValidation) -> void:
 	"""Show notification for coalition validation results"""
 	var message = ""
 	var type = "info"
