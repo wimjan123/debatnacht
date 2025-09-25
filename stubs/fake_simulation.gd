@@ -12,10 +12,10 @@ func _init():
 
 ## Game State Management ##
 
-func initialize_game(scenario_id: String, rng_seed: int) -> GameState:
+func initialize_game(scenario_id: String, rng_seed: int) -> DataModels.GameState:
 	rng.seed = rng_seed
 
-	var game_state = GameState.new()
+	var game_state = DataModels.GameState.new()
 	game_state.active_scenario = scenario_id
 	game_state.rng_seed = rng_seed
 	game_state.player_party_id = "player_party"
@@ -32,8 +32,8 @@ func initialize_game(scenario_id: String, rng_seed: int) -> GameState:
 
 	return game_state
 
-func load_game(save_data: Dictionary) -> GameState:
-	var game_state = GameState.new()
+func load_game(save_data: Dictionary) -> DataModels.GameState:
+	var game_state = DataModels.GameState.new()
 	game_state.current_date = save_data.get("current_date", Time.get_date_string_from_system())
 	game_state.rng_seed = save_data.get("rng_seed", 12345)
 	rng.seed = game_state.rng_seed
@@ -50,7 +50,7 @@ func load_game(save_data: Dictionary) -> GameState:
 
 	return game_state
 
-func save_game(current_state: GameState) -> Dictionary:
+func save_game(current_state: DataModels.GameState) -> Dictionary:
 	return {
 		"version": current_state.save_version,
 		"current_date": current_state.current_date,
@@ -63,8 +63,8 @@ func save_game(current_state: GameState) -> Dictionary:
 
 ## Campaign Management ##
 
-func execute_campaign_action(action: CampaignAction, current_state: GameState) -> ActionResult:
-	var result = ActionResult.new()
+func execute_campaign_action(action: DataModels.CampaignAction, current_state: DataModels.GameState) -> DataModels.ActionResult:
+	var result = DataModels.ActionResult.new()
 	result.success = true
 	result.cost_paid = action.cost
 
@@ -89,28 +89,28 @@ func execute_campaign_action(action: CampaignAction, current_state: GameState) -
 
 	return result
 
-func get_available_actions(party_id: String, current_state: GameState) -> Array[CampaignAction]:
-	var actions: Array[CampaignAction] = []
+func get_available_actions(party_id: String, current_state: DataModels.GameState) -> Array[DataModels.CampaignAction]:
+	var actions: Array[DataModels.CampaignAction] = []
 
 	# Rally action
-	var rally = CampaignAction.new("rally", 5000, 4, "Rally in key region to boost local support")
+	var rally = DataModels.CampaignAction.new("rally", "key_region", 5000, 4, "Rally in key region to boost local support")
 	rally.expected_effects = {"polls": 1.5, "regional_support": 3.0}
 	actions.append(rally)
 
 	# TV Advertisement
-	var tv_ad = CampaignAction.new("advertisement", 15000, 2, "Television advertisement campaign")
+	var tv_ad = DataModels.CampaignAction.new("advertisement", "national", 15000, 2, "Television advertisement campaign")
 	tv_ad.expected_effects = {"polls": 2.0, "name_recognition": 5.0}
 	actions.append(tv_ad)
 
 	# Media Interview
-	var interview = CampaignAction.new("interview", 0, 3, "Media interview opportunity")
+	var interview = DataModels.CampaignAction.new("interview", "national", 0, 3, "Media interview opportunity")
 	interview.expected_effects = {"polls": 1.0, "media_sentiment": 2.0}
 	actions.append(interview)
 
 	return actions
 
-func calculate_current_polls(current_state: GameState) -> OpinionPoll:
-	var poll = OpinionPoll.new()
+func calculate_current_polls(current_state: DataModels.GameState) -> DataModels.OpinionPoll:
+	var poll = DataModels.OpinionPoll.new()
 	poll.poll_date = Time.get_date_string_from_system()
 	poll.sample_size = 1200
 	poll.margin_of_error = 2.8
@@ -132,7 +132,7 @@ func calculate_current_polls(current_state: GameState) -> OpinionPoll:
 
 ## Geographic Data ##
 
-func get_regional_data(filter_type: String, filter_value: String, current_state: GameState) -> Dictionary:
+func get_regional_data(filter_type: String, filter_value: String, current_state: DataModels.GameState) -> Dictionary:
 	var regional_data = {}
 
 	for region in current_state.regions:
@@ -148,8 +148,8 @@ func get_regional_data(filter_type: String, filter_value: String, current_state:
 
 	return regional_data
 
-func get_region_tooltip_data(region_id: String, current_state: GameState) -> RegionTooltipData:
-	var tooltip = RegionTooltipData.new()
+func get_region_tooltip_data(region_id: String, current_state: DataModels.GameState) -> DataModels.RegionTooltipData:
+	var tooltip = DataModels.RegionTooltipData.new()
 	tooltip.region_name = region_id.capitalize()
 	tooltip.turnout_prediction = rng.randf_range(0.70, 0.85)
 
@@ -175,8 +175,8 @@ func get_region_tooltip_data(region_id: String, current_state: GameState) -> Reg
 
 ## Media Events ##
 
-func generate_media_event(event_type: String, current_state: GameState) -> MediaEvent:
-	var event = MediaEvent.new()
+func generate_media_event(event_type: String, current_state: DataModels.GameState) -> DataModels.MediaEvent:
+	var event = DataModels.MediaEvent.new()
 	event.event_type = event_type
 	event.base_sentiment = rng.randf_range(-0.2, 0.2)
 
@@ -198,8 +198,8 @@ func generate_media_event(event_type: String, current_state: GameState) -> Media
 
 	return event
 
-func process_media_response(response: ResponseOption, question: MediaQuestion, current_state: GameState) -> MediaResponse:
-	var media_response = MediaResponse.new()
+func process_media_response(response: DataModels.ResponseOption, question: DataModels.MediaQuestion, current_state: DataModels.GameState) -> DataModels.MediaResponse:
+	var media_response = DataModels.MediaResponse.new()
 
 	# Calculate sentiment based on response tone and risk
 	var base_sentiment = rng.randf_range(-0.3, 0.4)
@@ -224,12 +224,12 @@ func process_media_response(response: ResponseOption, question: MediaQuestion, c
 
 ## Coalition Building ##
 
-func calculate_coalition_compatibility(party_a_id: String, party_b_id: String, current_state: GameState) -> CoalitionCompatibility:
-	var compatibility = CoalitionCompatibility.new()
+func calculate_coalition_compatibility(party_a_id: String, party_b_id: String, current_state: DataModels.GameState) -> DataModels.CoalitionCompatibility:
+	var compatibility = DataModels.CoalitionCompatibility.new()
 
 	# Find parties
-	var party_a: Party = null
-	var party_b: Party = null
+	var party_a: DataModels.Party = null
+	var party_b: DataModels.Party = null
 	for party in current_state.parties:
 		if party.id == party_a_id:
 			party_a = party
@@ -268,8 +268,8 @@ func calculate_coalition_compatibility(party_a_id: String, party_b_id: String, c
 
 	return compatibility
 
-func validate_coalition(party_ids: Array[String], current_state: GameState) -> CoalitionValidation:
-	var validation = CoalitionValidation.new()
+func validate_coalition(party_ids: Array[String], current_state: DataModels.GameState) -> DataModels.CoalitionValidation:
+	var validation = DataModels.CoalitionValidation.new()
 
 	var total_seats = 0
 	var coalition_parties = []
@@ -308,15 +308,15 @@ func validate_coalition(party_ids: Array[String], current_state: GameState) -> C
 
 ## Parliamentary Voting ##
 
-func generate_legislation(current_state: GameState) -> Legislation:
-	var legislation = Legislation.new()
+func generate_legislation(current_state: DataModels.GameState) -> DataModels.Legislation:
+	var legislation = DataModels.Legislation.new()
 
 	var bill_topics = [
 		"Climate Action Bill",
 		"Healthcare Reform Act",
 		"Education Funding Bill",
 		"Immigration Policy Reform",
-		"Tax Reform Legislation"
+		"Tax Reform DataModels.Legislation"
 	]
 
 	legislation.bill_title = bill_topics[rng.randi() % bill_topics.size()]
@@ -331,8 +331,8 @@ func generate_legislation(current_state: GameState) -> Legislation:
 
 	return legislation
 
-func calculate_voting_outcome(legislation: Legislation, current_state: GameState) -> VotingResult:
-	var result = VotingResult.new()
+func calculate_voting_outcome(legislation: DataModels.Legislation, current_state: DataModels.GameState) -> DataModels.VotingResult:
+	var result = DataModels.VotingResult.new()
 
 	# Calculate votes based on party positions and seat counts
 	for party in current_state.parties:
@@ -352,20 +352,20 @@ func calculate_voting_outcome(legislation: Legislation, current_state: GameState
 		# Generate explanations
 		match position:
 			"for":
-				result.vote_explanations[party.id] = "Party supports this legislation based on their platform"
+				result.vote_explanations[party.id] = "DataModels.Party supports this legislation based on their platform"
 			"against":
-				result.vote_explanations[party.id] = "Party opposes this legislation due to ideological differences"
+				result.vote_explanations[party.id] = "DataModels.Party opposes this legislation due to ideological differences"
 			"abstain":
-				result.vote_explanations[party.id] = "Party abstains pending further committee review"
+				result.vote_explanations[party.id] = "DataModels.Party abstains pending further committee review"
 
 	result.legislation_passed = result.votes_for > result.votes_against
 
 	return result
 
-## Election Simulation ##
+## DataModels.Election Simulation ##
 
-func simulate_election(current_state: GameState) -> Election:
-	var election = Election.new()
+func simulate_election(current_state: DataModels.GameState) -> DataModels.Election:
+	var election = DataModels.Election.new()
 	election.election_date = Time.get_date_string_from_system()
 	election.calculation_method = "D'Hondt"
 	election.turnout_rate = rng.randf_range(0.70, 0.85)
@@ -375,7 +375,7 @@ func simulate_election(current_state: GameState) -> Election:
 
 	for party_id in polls.party_standings.keys():
 		var poll_percentage = polls.party_standings[party_id]
-		var variance = rng.randf_range(-3.0, 3.0)  # Election day variance
+		var variance = rng.randf_range(-3.0, 3.0)  # DataModels.Election day variance
 		var final_percentage = max(0.0, poll_percentage + variance)
 
 		election.final_results[party_id] = final_percentage
@@ -391,8 +391,8 @@ func simulate_election(current_state: GameState) -> Election:
 
 	return election
 
-func analyze_election_outcome(election: Election, campaign_history: Array[CampaignAction]) -> ElectionAnalysis:
-	var analysis = ElectionAnalysis.new()
+func analyze_election_outcome(election: DataModels.Election, campaign_history: Array[DataModels.CampaignAction]) -> DataModels.ElectionAnalysis:
+	var analysis = DataModels.ElectionAnalysis.new()
 
 	# Analyze seat changes (simplified - would compare to previous election)
 	for party_id in election.seat_distribution.keys():
@@ -416,8 +416,8 @@ func analyze_election_outcome(election: Election, campaign_history: Array[Campai
 
 ## Explanation System ##
 
-func explain_metric(metric_type: String, metric_value: Variant, context: Dictionary) -> TooltipData:
-	var tooltip = TooltipData.new()
+func explain_metric(metric_type: String, metric_value: Variant, context: Dictionary) -> DataModels.TooltipData:
+	var tooltip = DataModels.TooltipData.new()
 
 	match metric_type:
 		"poll_percentage":
@@ -450,8 +450,8 @@ func explain_metric(metric_type: String, metric_value: Variant, context: Diction
 
 	return tooltip
 
-func get_detailed_explanation(calculation_type: String, inputs: Dictionary, result: Variant) -> ExplanationPanel:
-	var panel = ExplanationPanel.new()
+func get_detailed_explanation(calculation_type: String, inputs: Dictionary, result: Variant) -> DataModels.ExplanationPanel:
+	var panel = DataModels.ExplanationPanel.new()
 	panel.calculation_name = calculation_type
 	panel.confidence_level = "medium"
 
@@ -477,7 +477,7 @@ func get_detailed_explanation(calculation_type: String, inputs: Dictionary, resu
 				"4. Final stability score: %.2f" % result
 			]
 			panel.assumptions = [
-				"Party leaders maintain current positions",
+				"DataModels.Party leaders maintain current positions",
 				"No external political crises",
 				"Normal parliamentary procedures"
 			]
@@ -492,22 +492,22 @@ func get_detailed_explanation(calculation_type: String, inputs: Dictionary, resu
 
 ## Helper Methods ##
 
-func _create_sample_parties() -> Array[Party]:
-	var parties: Array[Party] = []
+func _create_sample_parties() -> Array[DataModels.Party]:
+	var parties: Array[DataModels.Party] = []
 
 	# Create diverse political spectrum
 	var party_data = [
-		{"id": "player_party", "name": "Your Party", "ideology": Vector2(0.0, 0.0), "seats": 25},
-		{"id": "center_party", "name": "Center Party", "ideology": Vector2(0.1, 0.0), "seats": 35},
+		{"id": "player_party", "name": "Your DataModels.Party", "ideology": Vector2(0.0, 0.0), "seats": 25},
+		{"id": "center_party", "name": "Center DataModels.Party", "ideology": Vector2(0.1, 0.0), "seats": 35},
 		{"id": "left_party", "name": "Social Democrats", "ideology": Vector2(-0.6, 0.3), "seats": 28},
-		{"id": "right_party", "name": "Conservative Party", "ideology": Vector2(0.7, -0.2), "seats": 22},
-		{"id": "green_party", "name": "Green Party", "ideology": Vector2(-0.3, 0.8), "seats": 15},
+		{"id": "right_party", "name": "Conservative DataModels.Party", "ideology": Vector2(0.7, -0.2), "seats": 22},
+		{"id": "green_party", "name": "Green DataModels.Party", "ideology": Vector2(-0.3, 0.8), "seats": 15},
 		{"id": "liberal_party", "name": "Liberal Democrats", "ideology": Vector2(0.4, 0.6), "seats": 18},
-		{"id": "populist_party", "name": "People's Party", "ideology": Vector2(0.2, -0.7), "seats": 7}
+		{"id": "populist_party", "name": "People's DataModels.Party", "ideology": Vector2(0.2, -0.7), "seats": 7}
 	]
 
 	for data in party_data:
-		var party = Party.new(data.id, data.name, data.ideology)
+		var party = DataModels.Party.new(data.id, data.name, data.ideology)
 		party.projected_seats = data.seats
 		party.current_polls = (data.seats / 150.0) * 100.0  # Convert seats to rough percentage
 		party.campaign_funds = rng.randi_range(75000, 200000)
@@ -515,8 +515,8 @@ func _create_sample_parties() -> Array[Party]:
 
 	return parties
 
-func _generate_initial_polls(parties: Array[Party]) -> OpinionPoll:
-	var poll = OpinionPoll.new()
+func _generate_initial_polls(parties: Array[DataModels.Party]) -> DataModels.OpinionPoll:
+	var poll = DataModels.OpinionPoll.new()
 
 	for party in parties:
 		poll.party_standings[party.id] = party.current_polls
@@ -527,8 +527,8 @@ func _generate_initial_polls(parties: Array[Party]) -> OpinionPoll:
 
 	return poll
 
-func _create_sample_regions() -> Array[GeographicRegion]:
-	var regions: Array[GeographicRegion] = []
+func _create_sample_regions() -> Array[DataModels.GeographicRegion]:
+	var regions: Array[DataModels.GeographicRegion] = []
 
 	# Dutch provinces
 	var province_names = [
@@ -538,8 +538,8 @@ func _create_sample_regions() -> Array[GeographicRegion]:
 	]
 
 	for province_name in province_names:
-		var region = GeographicRegion.new(province_name.to_lower().replace("-", "_"), province_name, "province")
-		region.population = rng.randi_range(200000, 3800000)  # Realistic Dutch province populations
+		var population = rng.randi_range(200000, 3800000)  # Realistic Dutch province populations
+		var region = DataModels.GeographicRegion.new(province_name.to_lower().replace("-", "_"), province_name, population, rng.randi_range(5, 25))
 		region.turnout_rate = rng.randf_range(0.72, 0.87)
 
 		# Add key issues for each region
@@ -551,8 +551,8 @@ func _create_sample_regions() -> Array[GeographicRegion]:
 
 	return regions
 
-func _generate_media_questions(event_type: String) -> Array[MediaQuestion]:
-	var questions: Array[MediaQuestion] = []
+func _generate_media_questions(event_type: String) -> Array[DataModels.MediaQuestion]:
+	var questions: Array[DataModels.MediaQuestion] = []
 
 	var question_pools = {
 		"tv_interview": [
@@ -575,7 +575,7 @@ func _generate_media_questions(event_type: String) -> Array[MediaQuestion]:
 	var pool = question_pools.get(event_type, question_pools.tv_interview)
 
 	for i in range(min(3, pool.size())):  # Generate 3 questions max
-		var question = MediaQuestion.new()
+		var question = DataModels.MediaQuestion.new()
 		question.question_text = pool[i]
 		question.topic_category = ["healthcare", "housing", "environment", "economy", "immigration"][i % 5]
 		question.difficulty_level = rng.randi_range(2, 4)
@@ -588,8 +588,8 @@ func _generate_media_questions(event_type: String) -> Array[MediaQuestion]:
 
 	return questions
 
-func _generate_response_options(topic: String) -> Array[ResponseOption]:
-	var options: Array[ResponseOption] = []
+func _generate_response_options(topic: String) -> Array[DataModels.ResponseOption]:
+	var options: Array[DataModels.ResponseOption] = []
 
 	var response_templates = [
 		{"tone": "diplomatic", "text": "We believe in a balanced approach to %s that considers all stakeholders", "risk": 0.2},
@@ -599,7 +599,7 @@ func _generate_response_options(topic: String) -> Array[ResponseOption]:
 	]
 
 	for template in response_templates:
-		var option = ResponseOption.new()
+		var option = DataModels.ResponseOption.new()
 		option.option_text = template.text % topic
 		option.tone = template.tone
 		option.risk_level = template.risk

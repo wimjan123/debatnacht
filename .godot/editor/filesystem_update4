@@ -1,13 +1,2 @@
-res://ui/scenes/main_menu/MainMenu.tscn
-res://ui/themes/default_theme.tres
-res://presentation/managers/accessibility_manager.gd
-res://presentation/managers/localization_manager.gd
-res://presentation/managers/logging_manager.gd
-res://presentation/managers/object_pool.gd
-res://presentation/managers/performance_monitor.gd
-res://presentation/managers/rng_validator.gd
-res://presentation/managers/save_load_manager.gd
-res://presentation/managers/scene_manager.gd
-res://presentation/managers/undo_redo_manager.gd
-res://presentation/state_managers/game_state_manager.gd
-res://presentation/state_managers/ui_state_manager.gd
+res://core_api/simulation_api.gd
+res://stubs/fake_simulation.gd
