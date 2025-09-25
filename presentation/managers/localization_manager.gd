@@ -1,4 +1,4 @@
-extends RefCounted
+extends Node
 
 # Localization manager for runtime language switching between Dutch and English
 # Implements constitutional requirement for Dutch/English accessibility

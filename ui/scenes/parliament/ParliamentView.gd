@@ -1,5 +1,4 @@
 extends Control
-class_name ParliamentViewScene
 
 # Parliamentary voting simulation scene controller
 # Handles voting interface, seat visualization, and legislative processes
@@ -36,23 +35,23 @@ class_name ParliamentViewScene
 @onready var help_button: Button = $MainContainer/ActionContainer/HelpButton
 
 # Parliamentary State
-var current_legislation: Legislation
+var current_legislation: DataModels.Legislation
 var current_vote_counts := {"for": 0, "against": 0, "abstain": 0}
 var player_vote_cast := false
 var voting_in_progress := false
 
 # Scene Dependencies
-var localization_manager: LocalizationManager
-var tooltip_manager: TooltipManager
-var notification_system: NotificationSystem
-var navigation_controller: NavigationController
+var localization_manager: Node
+var tooltip_manager: Node
+var notification_system: Node
+var navigation_controller: Node
 
 func _ready() -> void:
-	# Get singleton references
-	localization_manager = LocalizationManager.get_instance()
-	tooltip_manager = TooltipManager.get_instance()
-	notification_system = NotificationSystem.get_instance()
-	navigation_controller = NavigationController.get_instance()
+	# Get singleton references (autoloads)
+	localization_manager = LocalizationManager
+	tooltip_manager = get_node("/root/TooltipManager") if has_node("/root/TooltipManager") else null
+	notification_system = get_node("/root/NotificationSystem") if has_node("/root/NotificationSystem") else null
+	navigation_controller = get_node("/root/NavigationController") if has_node("/root/NavigationController") else null
 	
 	# Initialize parliament session
 	_initialize_parliament_session()
@@ -64,11 +63,11 @@ func _ready() -> void:
 func _initialize_parliament_session() -> void:
 	"""Initialize parliamentary session state and UI"""
 	# Update session status
-	session_status_label.text = localization_manager.get_text("parliament.session_active")
-	government_status_label.text = localization_manager.get_text("parliament.coalition_status")
+	session_status_label.text = localization_manager.get_localized_text("parliament.session_active")
+	government_status_label.text = localization_manager.get_localized_text("parliament.coalition_status")
 	
 	# Initialize voting interface
-	current_vote_title.text = localization_manager.get_text("parliament.no_active_vote")
+	current_vote_title.text = localization_manager.get_localized_text("parliament.no_active_vote")
 	_disable_voting_buttons()
 	
 	# Clear vote counts
@@ -82,10 +81,12 @@ func _setup_accessibility() -> void:
 	vote_against_button.focus_neighbor_right = abstain_button.get_path()
 	abstain_button.focus_neighbor_left = vote_against_button.get_path()
 	
-	# Screen reader descriptions
-	vote_for_button.add_theme_stylebox_override("focus", preload("res://ui/themes/accessibility_focus.tres"))
-	vote_against_button.add_theme_stylebox_override("focus", preload("res://ui/themes/accessibility_focus.tres"))
-	abstain_button.add_theme_stylebox_override("focus", preload("res://ui/themes/accessibility_focus.tres"))
+	# Screen reader descriptions (skip theme loading if files don't exist)
+	var accessibility_focus = load("res://ui/themes/accessibility_focus.tres")
+	if accessibility_focus:
+		vote_for_button.add_theme_stylebox_override("focus", accessibility_focus)
+		vote_against_button.add_theme_stylebox_override("focus", accessibility_focus)
+		abstain_button.add_theme_stylebox_override("focus", accessibility_focus)
 
 func _load_proposed_legislation() -> void:
 	"""Load and display current legislative proposals"""
@@ -107,49 +108,49 @@ func _load_proposed_legislation() -> void:
 	if proposed_bills.size() > 0:
 		_on_legislation_selected(proposed_bills[0])
 
-func _get_proposed_legislation() -> Array[Legislation]:
+func _get_proposed_legislation() -> Array[DataModels.Legislation]:
 	"""Retrieve proposed legislation from simulation API"""
-	var bills: Array[Legislation] = []
+	var bills: Array[DataModels.Legislation] = []
 	
 	# Stub implementation - would connect to FakeSimulation
-	var healthcare_bill := Legislation.new()
+	var healthcare_bill := DataModels.Legislation.new()
 	healthcare_bill.title = "Healthcare Reform Act 2024"
 	healthcare_bill.description = "Comprehensive healthcare system modernization"
 	healthcare_bill.sponsor_party = "VVD"
-	healthcare_bill.status = Legislation.Status.IN_DEBATE
+	healthcare_bill.status = DataModels.LegislationStatus.IN_DEBATE
 	bills.append(healthcare_bill)
 	
-	var climate_bill := Legislation.new()
+	var climate_bill := DataModels.Legislation.new()
 	climate_bill.title = "Climate Action Framework"
 	climate_bill.description = "National climate change mitigation strategy"
 	climate_bill.sponsor_party = "D66"
-	climate_bill.status = Legislation.Status.IN_COMMITTEE
+	climate_bill.status = DataModels.LegislationStatus.IN_COMMITTEE
 	bills.append(climate_bill)
 	
 	return bills
 
-func _on_legislation_selected(legislation: Legislation) -> void:
+func _on_legislation_selected(legislation: DataModels.Legislation) -> void:
 	"""Handle selection of legislation for review and voting"""
 	current_legislation = legislation
 	
 	# Update legislation info panel
 	legislation_title_label.text = legislation.title
 	legislation_description_label.text = legislation.description
-	sponsor_label.text = localization_manager.get_text("parliament.sponsored_by") + ": " + legislation.sponsor_party
+	sponsor_label.text = localization_manager.get_localized_text("parliament.sponsored_by") + ": " + legislation.sponsor_party
 	
 	# Check if voting is available
-	if legislation.status == Legislation.Status.IN_VOTE:
+	if legislation.status == DataModels.LegislationStatus.IN_VOTE:
 		_start_voting_session(legislation)
 	else:
-		current_vote_title.text = localization_manager.get_text("parliament.not_ready_for_vote")
+		current_vote_title.text = localization_manager.get_localized_text("parliament.not_ready_for_vote")
 		_disable_voting_buttons()
 
-func _start_voting_session(legislation: Legislation) -> void:
+func _start_voting_session(legislation: DataModels.Legislation) -> void:
 	"""Begin voting session for selected legislation"""
 	voting_in_progress = true
 	player_vote_cast = false
 	
-	current_vote_title.text = localization_manager.get_text("parliament.voting_on") + ": " + legislation.title
+	current_vote_title.text = localization_manager.get_localized_text("parliament.voting_on") + ": " + legislation.title
 	_enable_voting_buttons()
 	
 	# Initialize vote counts
@@ -185,7 +186,7 @@ func _simulate_party_votes() -> void:
 	
 	_update_vote_display()
 
-func _calculate_party_vote_position(party: Party, legislation: Legislation) -> String:
+func _calculate_party_vote_position(party: DataModels.Party, legislation: DataModels.Legislation) -> String:
 	"""Calculate how a party would vote based on ideology and legislation content"""
 	# Simplified ideology-based voting logic
 	var party_position = party.ideology_position
@@ -207,18 +208,18 @@ func _calculate_party_vote_position(party: Party, legislation: Legislation) -> S
 		else:
 			return "against"
 
-func _get_parliamentary_parties() -> Array[Party]:
+func _get_parliamentary_parties() -> Array[DataModels.Party]:
 	"""Get parties currently in parliament with seat counts"""
-	var parties: Array[Party] = []
+	var parties: Array[DataModels.Party] = []
 	
 	# Stub implementation - would connect to game state
-	var vvd := Party.new()
+	var vvd := DataModels.Party.new()
 	vvd.name = "VVD"
 	vvd.seats = 34
 	vvd.ideology_position = Vector2(0.6, -0.2)
 	parties.append(vvd)
 	
-	var pvda := Party.new()
+	var pvda := DataModels.Party.new()
 	pvda.name = "PvdA"
 	pvda.seats = 9
 	pvda.ideology_position = Vector2(-0.5, 0.3)
@@ -228,14 +229,14 @@ func _get_parliamentary_parties() -> Array[Party]:
 
 func _update_vote_display() -> void:
 	"""Update vote count display"""
-	for_count_label.text = localization_manager.get_text("parliament.for_votes") + ": " + str(current_vote_counts["for"])
-	against_count_label.text = localization_manager.get_text("parliament.against_votes") + ": " + str(current_vote_counts["against"])
-	abstain_count_label.text = localization_manager.get_text("parliament.abstain_votes") + ": " + str(current_vote_counts["abstain"])
+	for_count_label.text = localization_manager.get_localized_text("parliament.for_votes") + ": " + str(current_vote_counts["for"])
+	against_count_label.text = localization_manager.get_localized_text("parliament.against_votes") + ": " + str(current_vote_counts["against"])
+	abstain_count_label.text = localization_manager.get_localized_text("parliament.abstain_votes") + ": " + str(current_vote_counts["abstain"])
 	
 	# Update progress indicator
 	var total_votes = current_vote_counts["for"] + current_vote_counts["against"] + current_vote_counts["abstain"]
 	var total_seats = 150  # Dutch parliament seats
-	vote_progress_label.text = localization_manager.get_text("parliament.votes_cast") + ": " + str(total_votes) + "/" + str(total_seats)
+	vote_progress_label.text = localization_manager.get_localized_text("parliament.votes_cast") + ": " + str(total_votes) + "/" + str(total_seats)
 
 func _update_party_positions() -> void:
 	"""Update party position display for current legislation"""
@@ -250,26 +251,27 @@ func _update_party_positions() -> void:
 		position_item.text = party.name + ": " + stance
 		party_positions_list.add_child(position_item)
 
-func _get_party_stance_text(party: Party, legislation: Legislation) -> String:
+func _get_party_stance_text(party: DataModels.Party, legislation: DataModels.Legislation) -> String:
 	"""Get descriptive text for party's stance on legislation"""
 	if not legislation:
-		return localization_manager.get_text("parliament.no_position")
+		return localization_manager.get_localized_text("parliament.no_position")
 	
 	# Simplified stance based on ideology
 	var position = party.ideology_position.x
 	if position < -0.3:
-		return localization_manager.get_text("parliament.likely_oppose")
+		return localization_manager.get_localized_text("parliament.likely_oppose")
 	elif position > 0.3:
-		return localization_manager.get_text("parliament.likely_support")
+		return localization_manager.get_localized_text("parliament.likely_support")
 	else:
-		return localization_manager.get_text("parliament.undecided")
+		return localization_manager.get_localized_text("parliament.undecided")
 
 func _setup_tooltips() -> void:
 	"""Setup educational tooltips for parliamentary process"""
-	tooltip_manager.add_tooltip(vote_for_button, "tooltip.vote_for_explanation")
-	tooltip_manager.add_tooltip(vote_against_button, "tooltip.vote_against_explanation")
-	tooltip_manager.add_tooltip(abstain_button, "tooltip.abstain_explanation")
-	tooltip_manager.add_tooltip(seating_area, "tooltip.parliament_seating_explanation")
+	if tooltip_manager:
+		tooltip_manager.call("add_tooltip", vote_for_button, "tooltip.vote_for_explanation")
+		tooltip_manager.call("add_tooltip", vote_against_button, "tooltip.vote_against_explanation")
+		tooltip_manager.call("add_tooltip", abstain_button, "tooltip.abstain_explanation")
+		tooltip_manager.call("add_tooltip", seating_area, "tooltip.parliament_seating_explanation")
 
 # Signal Handlers
 func _on_vote_for_pressed() -> void:
@@ -278,7 +280,8 @@ func _on_vote_for_pressed() -> void:
 		return
 	
 	_cast_player_vote("for")
-	notification_system.show_notification("notification.vote_cast_for")
+	if notification_system:
+		notification_system.call("show_notification", "notification.vote_cast_for")
 
 func _on_vote_against_pressed() -> void:
 	"""Handle player voting AGAINST current legislation"""
@@ -286,7 +289,8 @@ func _on_vote_against_pressed() -> void:
 		return
 	
 	_cast_player_vote("against")
-	notification_system.show_notification("notification.vote_cast_against")
+	if notification_system:
+		notification_system.call("show_notification", "notification.vote_cast_against")
 
 func _on_abstain_pressed() -> void:
 	"""Handle player ABSTAINING from current vote"""
@@ -294,7 +298,8 @@ func _on_abstain_pressed() -> void:
 		return
 	
 	_cast_player_vote("abstain")
-	notification_system.show_notification("notification.vote_cast_abstain")
+	if notification_system:
+		notification_system.call("show_notification", "notification.vote_cast_abstain")
 
 func _cast_player_vote(vote_type: String) -> void:
 	"""Process player's vote and update display"""
@@ -327,40 +332,45 @@ func _process_vote_results() -> void:
 	
 	var result_message: String
 	if passed:
-		result_message = localization_manager.get_text("parliament.bill_passed")
+		result_message = localization_manager.get_localized_text("parliament.bill_passed")
 	else:
-		result_message = localization_manager.get_text("parliament.bill_failed")
+		result_message = localization_manager.get_localized_text("parliament.bill_failed")
 	
-	notification_system.show_notification(result_message + ": " + current_legislation.title)
+	if notification_system:
+		notification_system.call("show_notification", result_message + ": " + current_legislation.title)
 	
 	# Update legislation status
-	current_legislation.status = Legislation.Status.PASSED if passed else Legislation.Status.FAILED
+	current_legislation.status = DataModels.LegislationStatus.PASSED if passed else DataModels.LegislationStatus.FAILED
 	
 	# Add to voting history
 	_add_to_voting_history(current_legislation, passed)
 
-func _add_to_voting_history(legislation: Legislation, passed: bool) -> void:
+func _add_to_voting_history(legislation: DataModels.Legislation, passed: bool) -> void:
 	"""Add completed vote to voting history display"""
 	var history_item := Label.new()
-	var status_text = localization_manager.get_text("parliament.passed" if passed else "parliament.failed")
+	var status_text = localization_manager.get_localized_text("parliament.passed" if passed else "parliament.failed")
 	history_item.text = legislation.title + " - " + status_text
 	voting_history_list.add_child(history_item)
 
 func _on_back_button_pressed() -> void:
 	"""Handle back button navigation"""
-	navigation_controller.navigate_to_previous_scene()
+	if navigation_controller:
+		navigation_controller.call("navigate_to_previous_scene")
 
 func _on_propose_legislation_pressed() -> void:
 	"""Handle propose legislation button"""
 	# Would open legislation proposal interface
-	notification_system.show_notification("notification.feature_coming_soon")
+	if notification_system:
+		notification_system.call("show_notification", "notification.feature_coming_soon")
 
 func _on_view_debate_pressed() -> void:
 	"""Handle view debate button"""
 	# Would open debate visualization
-	notification_system.show_notification("notification.feature_coming_soon")
+	if notification_system:
+		notification_system.call("show_notification", "notification.feature_coming_soon")
 
 func _on_help_button_pressed() -> void:
 	"""Handle help button"""
 	# Would show parliamentary process help
-	notification_system.show_notification("notification.help_coming_soon")
+	if notification_system:
+		notification_system.call("show_notification", "notification.help_coming_soon")

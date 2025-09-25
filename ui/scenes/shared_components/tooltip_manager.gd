@@ -1,5 +1,4 @@
 extends Control
-class_name TooltipManager
 
 # TooltipManager component with explanation panels for constitutional transparency
 # Provides explanatory tooltips on all metrics as required by constitution
@@ -8,11 +7,11 @@ class_name TooltipManager
 @onready var tooltip_title: Label = $TooltipPanel/VBoxContainer/Title
 @onready var tooltip_content: RichTextLabel = $TooltipPanel/VBoxContainer/Content
 @onready var tooltip_factors: RichTextLabel = $TooltipPanel/VBoxContainer/Factors
-@onready var explanation_panel: Panel = $ExplanationPanel
-@onready var explanation_title: Label = $ExplanationPanel/VBoxContainer/Title
-@onready var explanation_steps: RichTextLabel = $ExplanationPanel/VBoxContainer/Steps
-@onready var explanation_assumptions: RichTextLabel = $ExplanationPanel/VBoxContainer/Assumptions
-@onready var close_button: Button = $ExplanationPanel/VBoxContainer/CloseButton
+var explanation_panel: Panel
+var explanation_title: Label
+var explanation_steps: RichTextLabel
+var explanation_assumptions: RichTextLabel
+var close_button: Button
 
 var current_target: Control = null
 var tooltip_timer: Timer
@@ -25,15 +24,24 @@ signal explanation_shown(calculation: String)
 signal explanation_closed()
 
 func _ready():
+	# Initialize node references with null safety
+	explanation_panel = get_node("ExplanationPanel") if has_node("ExplanationPanel") else null
+	explanation_title = get_node("ExplanationPanel/VBoxContainer/Title") if has_node("ExplanationPanel/VBoxContainer/Title") else null
+	explanation_steps = get_node("ExplanationPanel/VBoxContainer/Steps") if has_node("ExplanationPanel/VBoxContainer/Steps") else null
+	explanation_assumptions = get_node("ExplanationPanel/VBoxContainer/Assumptions") if has_node("ExplanationPanel/VBoxContainer/Assumptions") else null
+	close_button = get_node("ExplanationPanel/VBoxContainer/CloseButton") if has_node("ExplanationPanel/VBoxContainer/CloseButton") else null
+
 	# Setup tooltip panel
 	tooltip_panel.visible = false
 	tooltip_panel.modulate.a = 0.0
 	tooltip_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 	# Setup explanation panel
-	explanation_panel.visible = false
-	explanation_panel.modulate.a = 0.0
-	close_button.pressed.connect(_on_close_explanation)
+	if explanation_panel:
+		explanation_panel.visible = false
+		explanation_panel.modulate.a = 0.0
+	if close_button:
+		close_button.pressed.connect(_on_close_explanation)
 
 	# Setup timer
 	tooltip_timer = Timer.new()
@@ -42,7 +50,7 @@ func _ready():
 	tooltip_timer.timeout.connect(_show_tooltip_delayed)
 	add_child(tooltip_timer)
 
-func show_tooltip(target_element: Control, tooltip_data: TooltipData) -> void:
+func show_tooltip(target_element: Control, tooltip_data: DataModels.TooltipData) -> void:
 	"""Show explanatory tooltip for any UI element"""
 	if target_element == null or tooltip_data == null:
 		return
@@ -82,7 +90,7 @@ func show_tooltip(target_element: Control, tooltip_data: TooltipData) -> void:
 
 	tooltip_shown.emit(target_element)
 
-func show_explanation_panel(explanation: ExplanationPanel) -> void:
+func show_explanation_panel(explanation: DataModels.ExplanationPanel) -> void:
 	"""Show detailed 'why?' panel for complex calculations"""
 	if explanation == null:
 		return
@@ -91,16 +99,18 @@ func show_explanation_panel(explanation: ExplanationPanel) -> void:
 	hide_all_tooltips()
 
 	# Update explanation content
-	explanation_title.text = explanation.calculation_name
+	if explanation_title:
+		explanation_title.text = explanation.calculation_name
 
 	# Format step-by-step breakdown
-	var steps_text = "[b]Calculation steps:[/b]\n"
-	for i in range(explanation.step_by_step.size()):
-		steps_text += "%d. %s\n" % [i + 1, explanation.step_by_step[i]]
-	explanation_steps.text = steps_text
+	if explanation_steps:
+		var steps_text = "[b]Calculation steps:[/b]\n"
+		for i in range(explanation.step_by_step.size()):
+			steps_text += "%d. %s\n" % [i + 1, explanation.step_by_step[i]]
+		explanation_steps.text = steps_text
 
 	# Format assumptions
-	if explanation.assumptions.size() > 0:
+	if explanation_assumptions and explanation.assumptions.size() > 0:
 		var assumptions_text = "[b]Assumptions:[/b]\n"
 		for assumption in explanation.assumptions:
 			assumptions_text += "• " + assumption + "\n"
@@ -120,7 +130,7 @@ func hide_all_tooltips() -> void:
 	current_target = null
 	tooltip_hidden.emit()
 
-func register_tooltip_target(target: Control, tooltip_data: TooltipData) -> void:
+func register_tooltip_target(target: Control, tooltip_data: DataModels.TooltipData) -> void:
 	"""Register a control to show tooltips on hover"""
 	if target == null:
 		return
@@ -137,7 +147,7 @@ func register_tooltip_target(target: Control, tooltip_data: TooltipData) -> void
 	if not target.focus_exited.is_connected(_on_target_focus_exited):
 		target.focus_exited.connect(_on_target_focus_exited)
 
-func _on_target_mouse_entered(target: Control, tooltip_data: TooltipData) -> void:
+func _on_target_mouse_entered(target: Control, tooltip_data: DataModels.TooltipData) -> void:
 	tooltip_timer.start()
 	current_target = target
 
@@ -145,7 +155,7 @@ func _on_target_mouse_exited() -> void:
 	tooltip_timer.stop()
 	_fade_out_tooltip()
 
-func _on_target_focus_entered(target: Control, tooltip_data: TooltipData) -> void:
+func _on_target_focus_entered(target: Control, tooltip_data: DataModels.TooltipData) -> void:
 	# Show tooltip immediately for keyboard users
 	show_tooltip(target, tooltip_data)
 
@@ -159,10 +169,10 @@ func _show_tooltip_delayed() -> void:
 		if tooltip_data != null:
 			show_tooltip(current_target, tooltip_data)
 
-func _get_tooltip_data_for_target(target: Control) -> TooltipData:
+func _get_tooltip_data_for_target(target: Control) -> DataModels.TooltipData:
 	# This would normally be stored when registering the target
 	# For now, create default tooltip data
-	var data = TooltipData.new()
+	var data = DataModels.TooltipData.new()
 	data.title = target.name
 	data.explanation = "Information about " + target.name
 	data.contributing_factors = []
@@ -196,6 +206,8 @@ func _position_tooltip(target: Control) -> void:
 
 func _position_explanation_panel() -> void:
 	# Center explanation panel on screen
+	if not explanation_panel:
+		return
 	var viewport_size = get_viewport().get_visible_rect().size
 	var panel_size = explanation_panel.get_combined_minimum_size()
 
@@ -216,12 +228,13 @@ func _fade_out_tooltip() -> void:
 		tween.tween_callback(func(): tooltip_panel.visible = false)
 
 func _fade_in_explanation_panel() -> void:
-	explanation_panel.visible = true
-	var tween = create_tween()
-	tween.tween_property(explanation_panel, "modulate:a", 1.0, 0.3)
+	if explanation_panel:
+		explanation_panel.visible = true
+		var tween = create_tween()
+		tween.tween_property(explanation_panel, "modulate:a", 1.0, 0.3)
 
 func _fade_out_explanation_panel() -> void:
-	if explanation_panel.visible:
+	if explanation_panel and explanation_panel.visible:
 		var tween = create_tween()
 		tween.tween_property(explanation_panel, "modulate:a", 0.0, 0.2)
 		tween.tween_callback(func(): explanation_panel.visible = false)
@@ -232,9 +245,9 @@ func _on_close_explanation() -> void:
 
 # Constitutional compliance helpers
 
-func create_metric_tooltip(metric_type: String, value: Variant, context: Dictionary = {}) -> TooltipData:
+func create_metric_tooltip(metric_type: String, value: Variant, context: Dictionary = {}) -> DataModels.TooltipData:
 	"""Create tooltip data for constitutional transparency requirement"""
-	var data = TooltipData.new()
+	var data = DataModels.TooltipData.new()
 
 	match metric_type:
 		"poll_percentage":
@@ -268,9 +281,9 @@ func create_metric_tooltip(metric_type: String, value: Variant, context: Diction
 
 	return data
 
-func create_calculation_explanation(calc_type: String, inputs: Dictionary, result: Variant) -> ExplanationPanel:
+func create_calculation_explanation(calc_type: String, inputs: Dictionary, result: Variant) -> DataModels.ExplanationPanel:
 	"""Create detailed explanation panel for complex calculations"""
-	var panel = ExplanationPanel.new()
+	var panel = DataModels.ExplanationPanel.new()
 	panel.calculation_name = calc_type.capitalize()
 	panel.input_values = inputs
 

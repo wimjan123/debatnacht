@@ -167,14 +167,26 @@ class PolicyAgreement:
 	var compromise_level: float = 0.5  # how much each party compromised
 	var implementation_priority: int = 1  # 1-10, higher = more important
 
+enum LegislationStatus {
+	PROPOSED,
+	IN_COMMITTEE,
+	IN_DEBATE,
+	IN_VOTE,
+	PASSED,
+	FAILED
+}
+
 class Legislation:
 	extends RefCounted
 
 	var bill_id: String = ""
 	var title: String = ""
+	var description: String = ""
 	var policy_area: String = ""
+	var policy_category: String = ""
+	var sponsor_party: String = ""  # party_id
 	var proposed_by: String = ""  # party_id
-	var status: String = "proposed"  # proposed, committee, voting, passed, rejected
+	var status: LegislationStatus = LegislationStatus.PROPOSED
 	var support_level: Dictionary = {}  # party_id -> support_stance ("support", "oppose", "neutral")
 	var public_opinion: float = 0.5  # 0.0 to 1.0
 
@@ -295,12 +307,18 @@ class TooltipData:
 	var title: String = ""
 	var content: String = ""
 	var explanation: String = ""
+	var current_value: String = ""
+	var contributing_factors: Array[String] = []
+	var trend_direction: String = "stable"  # increasing, decreasing, stable
 
 class ExplanationPanel:
 	extends RefCounted
 
-	var title: String = ""
-	var sections: Array[Dictionary] = []
+	var calculation_name: String = ""
+	var input_values: Dictionary = {}
+	var step_by_step: Array[String] = []
+	var assumptions: Array[String] = []
+	var confidence_level: String = "medium"  # low, medium, high
 
 ## UI and System Types ##
 

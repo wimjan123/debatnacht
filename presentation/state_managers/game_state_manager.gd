@@ -29,17 +29,14 @@ signal load_completed(success: bool, game_state: DataModels.GameState)
 signal auto_save_triggered()
 
 func _ready() -> void:
-	# Initialize singleton
 	# Autoload initialization
-		process_mode = Node.PROCESS_MODE_ALWAYS
-		
-		# Initialize simulation API connection
-		_initialize_simulation_api()
-		
-		# Start auto-save timer
-		_setup_auto_save()
-	else:
-		queue_free()
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
+	# Initialize simulation API connection
+	_initialize_simulation_api()
+
+	# Start auto-save timer
+	_setup_auto_save()
 
 # No static singleton needed - Godot autoloads handle this
 
@@ -63,7 +60,7 @@ func initialize_new_game(scenario_config: Dictionary = {}) -> void:
 	print("GameStateManager: Initializing new game")
 	
 	# Create new game state
-	current_game_state = GameState.new()
+	current_game_state = DataModels.GameState.new()
 	
 	# Apply scenario configuration
 	if scenario_config.has("parties"):
@@ -173,7 +170,7 @@ func undo_last_action() -> bool:
 	var previous_snapshot = state_history.back()
 	if previous_snapshot:
 		# Restore previous state
-		current_game_state = GameState.new()
+		current_game_state = DataModels.GameState.new()
 		current_game_state.deserialize(previous_snapshot.state_data)
 		
 		# Update simulation API
@@ -264,7 +261,7 @@ func load_game(file_path: String = SAVE_FILE_PATH) -> bool:
 		return false
 	
 	# Deserialize game state
-	current_game_state = GameState.new()
+	current_game_state = DataModels.GameState.new()
 	var deserialize_success = current_game_state.deserialize(save_data.game_state)
 	
 	if not deserialize_success:

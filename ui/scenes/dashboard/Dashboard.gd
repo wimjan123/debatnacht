@@ -1,5 +1,4 @@
 extends Control
-class_name Dashboard
 
 # Dashboard scene connected to DashboardController for campaign management
 # Displays KPIs, available actions, polling data, and regional information
@@ -26,24 +25,24 @@ class_name Dashboard
 @onready var regional_grid: GridContainer = $MainContainer/CentralPanel/ContentArea/ContentStack/RegionalContent/RegionalGrid
 
 var dashboard_controller: DashboardController
-var tooltip_manager: TooltipManager
-var notification_system: NotificationSystem
-var accessibility_manager: AccessibilityManager
-var navigation_controller: NavigationController
+var tooltip_manager: Node
+var notification_system: Node
+var accessibility_manager: Node
+var navigation_controller: Node
 
 var current_view_mode: String = "overview"
 var kpi_cards: Dictionary = {}
 var tutorial_mode: bool = false
 
-signal action_selected(action: CampaignAction)
+signal action_selected(action: DataModels.CampaignAction)
 signal region_selected(region_name: String)
-signal media_event_clicked(event: MediaEvent)
+signal media_event_clicked(event: DataModels.MediaEvent)
 
 func _ready():
 	# Get managers
 	tooltip_manager = get_node("/root/TooltipManager") if has_node("/root/TooltipManager") else null
 	notification_system = get_node("/root/NotificationSystem") if has_node("/root/NotificationSystem") else null
-	accessibility_manager = get_node("/root/AccessibilityManager") if has_node("/root/AccessibilityManager") else null
+	accessibility_manager = AccessibilityManager
 	navigation_controller = get_node("/root/NavigationController") if has_node("/root/NavigationController") else null
 
 	# Initialize controller
