@@ -10,14 +10,16 @@ class_name SimulationAPI
 # @param scenario_id: String - predefined scenario identifier
 # @param rng_seed: int - deterministic seed for reproducible results
 # @return DataModels.GameState - initial game state object
-func initialize_game(scenario_id: String, rng_seed: int) -> DataModels.DataModels.GameState:
+func initialize_game(scenario_id: String, rng_seed: int) -> DataModels.GameState:
 	assert(false, "Must implement initialize_game")
+	return null
 
 # Load existing game from save data
 # @param save_data: Dictionary - validated save file content
 # @return DataModels.GameState - restored game state
 func load_game(save_data: Dictionary) -> DataModels.GameState:
 	assert(false, "Must implement load_game")
+	return null
 
 # Save current game state to dictionary
 # @param current_state: DataModels.GameState - current session state
@@ -34,6 +36,7 @@ func save_game(current_state: DataModels.GameState) -> Dictionary:
 # @return DataModels.ActionResult - outcome with state changes and explanations
 func execute_campaign_action(action: DataModels.CampaignAction, current_state: DataModels.GameState) -> DataModels.ActionResult:
 	assert(false, "Must implement execute_campaign_action")
+	return null
 
 # Get available campaign actions for current game state
 # @param party_id: String - acting party identifier
@@ -48,6 +51,7 @@ func get_available_actions(party_id: String, current_state: DataModels.GameState
 # @return DataModels.OpinionPoll - current standings with demographic breakdown
 func calculate_current_polls(current_state: DataModels.GameState) -> DataModels.OpinionPoll:
 	assert(false, "Must implement calculate_current_polls")
+	return null
 
 ## Geographic Data ##
 
@@ -63,9 +67,10 @@ func get_regional_data(filter_type: String, filter_value: String, current_state:
 # Get detailed tooltip information for specific region
 # @param region_id: String - target region identifier
 # @param current_state: DataModels.GameState - current game context
-# @return DataModels.RegionDataModels.TooltipData - support levels, issues, demographics
-func get_region_tooltip_data(region_id: String, current_state: DataModels.GameState) -> DataModels.RegionDataModels.TooltipData:
+# @return DataModels.RegionTooltipData - support levels, issues, demographics
+func get_region_tooltip_data(region_id: String, current_state: DataModels.GameState) -> DataModels.RegionTooltipData:
 	assert(false, "Must implement get_region_tooltip_data")
+	return null
 
 ## Media Events ##
 
@@ -75,6 +80,7 @@ func get_region_tooltip_data(region_id: String, current_state: DataModels.GameSt
 # @return DataModels.MediaEvent - event with questions and expected audience
 func generate_media_event(event_type: String, current_state: DataModels.GameState) -> DataModels.MediaEvent:
 	assert(false, "Must implement generate_media_event")
+	return null
 
 # Process player response and calculate audience reaction
 # @param response: DataModels.ResponseOption - player's chosen answer
@@ -83,6 +89,7 @@ func generate_media_event(event_type: String, current_state: DataModels.GameStat
 # @return DataModels.MediaResponse - sentiment change and explanation
 func process_media_response(response: DataModels.ResponseOption, question: DataModels.MediaQuestion, current_state: DataModels.GameState) -> DataModels.MediaResponse:
 	assert(false, "Must implement process_media_response")
+	return null
 
 ## Coalition Building ##
 
@@ -93,6 +100,7 @@ func process_media_response(response: DataModels.ResponseOption, question: DataM
 # @return DataModels.CoalitionCompatibility - score, conflicts, and explanation
 func calculate_coalition_compatibility(party_a_id: String, party_b_id: String, current_state: DataModels.GameState) -> DataModels.CoalitionCompatibility:
 	assert(false, "Must implement calculate_coalition_compatibility")
+	return null
 
 # Validate potential coalition and calculate stability
 # @param party_ids: Array[String] - proposed coalition members
@@ -100,6 +108,7 @@ func calculate_coalition_compatibility(party_a_id: String, party_b_id: String, c
 # @return DataModels.CoalitionValidation - feasibility, seat count, stability score
 func validate_coalition(party_ids: Array[String], current_state: DataModels.GameState) -> DataModels.CoalitionValidation:
 	assert(false, "Must implement validate_coalition")
+	return null
 
 ## Parliamentary Voting ##
 
@@ -108,6 +117,7 @@ func validate_coalition(party_ids: Array[String], current_state: DataModels.Game
 # @return DataModels.Legislation - bill with predicted party positions
 func generate_legislation(current_state: DataModels.GameState) -> DataModels.Legislation:
 	assert(false, "Must implement generate_legislation")
+	return null
 
 # Calculate voting outcome based on party whips and member positions
 # @param legislation: DataModels.Legislation - bill being voted on
@@ -115,6 +125,7 @@ func generate_legislation(current_state: DataModels.GameState) -> DataModels.Leg
 # @return DataModels.VotingResult - final tally with explanations for each party's vote
 func calculate_voting_outcome(legislation: DataModels.Legislation, current_state: DataModels.GameState) -> DataModels.VotingResult:
 	assert(false, "Must implement calculate_voting_outcome")
+	return null
 
 ## DataModels.Election Simulation ##
 
@@ -123,13 +134,15 @@ func calculate_voting_outcome(legislation: DataModels.Legislation, current_state
 # @return DataModels.Election - results with seat distribution and regional breakdown
 func simulate_election(current_state: DataModels.GameState) -> DataModels.Election:
 	assert(false, "Must implement simulate_election")
+	return null
 
 # Generate post-election analysis explaining results
 # @param election: DataModels.Election - completed election results
 # @param campaign_history: Array[DataModels.CampaignAction] - player's campaign actions
-# @return DataModels.DataModels.ElectionAnalysis - "why you won/lost" breakdown with contributing factors
-func analyze_election_outcome(election: DataModels.Election, campaign_history: Array[DataModels.CampaignAction]) -> DataModels.DataModels.ElectionAnalysis:
+# @return DataModels.ElectionAnalysis - "why you won/lost" breakdown with contributing factors
+func analyze_election_outcome(election: DataModels.Election, campaign_history: Array[DataModels.CampaignAction]) -> DataModels.ElectionAnalysis:
 	assert(false, "Must implement analyze_election_outcome")
+	return null
 
 ## Explanation System ##
 
@@ -140,6 +153,7 @@ func analyze_election_outcome(election: DataModels.Election, campaign_history: A
 # @return DataModels.TooltipData - explanation text with contributing factors
 func explain_metric(metric_type: String, metric_value: Variant, context: Dictionary) -> DataModels.TooltipData:
 	assert(false, "Must implement explain_metric")
+	return null
 
 # Get detailed "why?" panel content for complex calculations
 # @param calculation_type: String - what calculation to explain
@@ -148,3 +162,4 @@ func explain_metric(metric_type: String, metric_value: Variant, context: Diction
 # @return DataModels.ExplanationPanel - detailed breakdown with mathematical reasoning
 func get_detailed_explanation(calculation_type: String, inputs: Dictionary, result: Variant) -> DataModels.ExplanationPanel:
 	assert(false, "Must implement get_detailed_explanation")
+	return null
